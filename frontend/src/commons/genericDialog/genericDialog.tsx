@@ -13,9 +13,9 @@ interface Props {
     setOpen: React.Dispatch<React.SetStateAction<boolean>>;
     submitText: string;
     dialogTitle: string;
-    // handleSubmit: UseFormHandleSubmit<FieldValues, undefined>;
-    // reset: UseFormReset<FieldValues>;
-    methods: UseFormReturn<FieldValues, any, undefined>
+    handleSubmit: UseFormHandleSubmit<FieldValues, undefined>;
+    reset: UseFormReset<FieldValues>;
+    // methods: UseFormReturn<FieldValues, any, undefined>
     children: JSX.Element;
     submitAction: () => void;
 };
@@ -26,9 +26,9 @@ const GenericDialog: React.FC<Props> = ({
     submitText,
     dialogTitle,
     submitAction,
-    methods,
-    // handleSubmit,
-    // reset,
+    // methods,
+    handleSubmit,
+    reset,
     children
 }) => {
     const classes = useStyles()
@@ -39,8 +39,8 @@ const GenericDialog: React.FC<Props> = ({
     };
 
     const closeDialog = () => {
-        methods.reset();
-        // reset();
+        // methods.reset();
+        reset();
         setOpen(false);
     };
 
@@ -57,9 +57,9 @@ const GenericDialog: React.FC<Props> = ({
                     {dialogTitle}
                 </DialogTitle>
 
-                <FormProvider {...methods}>
+                {/* <FormProvider {...methods}> */}
                     <form
-                        onSubmit={methods.handleSubmit(onSubmitHandler)}
+                        onSubmit={handleSubmit(onSubmitHandler)}
                         className={classes.content}
                     >
                         <DialogContent >
@@ -78,7 +78,7 @@ const GenericDialog: React.FC<Props> = ({
                             </Button>
                         </DialogActions>
                     </form>
-                </FormProvider>
+                {/* </FormProvider> */}
             </Dialog>
         </div>
     );

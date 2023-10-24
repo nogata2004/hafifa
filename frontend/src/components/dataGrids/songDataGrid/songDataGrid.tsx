@@ -48,8 +48,8 @@ const SongDataGrid: React.FC = () => {
     const [mutationCreateSong] = useMutation(CREATE_SONG);
     const { songs, setSongs } = useContext(AllSongsContext);
 
-    // const { register, handleSubmit, formState: { errors }, reset } = useForm({
-        const methods = useForm({
+    const { register, handleSubmit, formState: { errors }, reset } = useForm({
+        // const methods = useForm({
         resolver: yupResolver(songsSchema),
         // defaultValues: {
         //     name: '',
@@ -129,24 +129,24 @@ const SongDataGrid: React.FC = () => {
                 setOpen={setOpen}
                 submitText={SUBMIT_BUTTON_TEXT}
                 dialogTitle={DIALOG_TITLE}
-                // handleSubmit={handleSubmit}
-                // reset={reset}
-                methods={methods}
+                handleSubmit={handleSubmit}
+                reset={reset}
+                // methods={methods}
                 submitAction={addSong}
             >
                 <div>
                     {/* <FormProvider {...methods}> */}
-                        <GenericTextField
-                            currentInput={nameInput}
-                            setCurretnInput={setNameInput}
-                            fieldTitle={NAME}
-                            // errorsMasssege={methods.errors.name?.message}
-                            // register={register}
-                            // errorsMasssege={errors.name?.message}
-                            fieldName={'name'}
-                        />
+                    <GenericTextField
+                        currentInput={nameInput}
+                        setCurretnInput={setNameInput}
+                        fieldTitle={NAME}
+                        // errorsMasssege={methods.errors.name?.message}
+                        register={register}
+                        errorsMasssege={errors.name?.message}
+                        fieldName={'name'}
+                    />
 
-                        {/* <GenericAutocomplete
+                    <GenericAutocomplete
                             setInput={setArtistInput}
                             fieldTitle={ARTIST}
                             register={register}
@@ -163,7 +163,7 @@ const SongDataGrid: React.FC = () => {
                             register={register}
                             errorsMasssege={errors.duration?.message}
                             fieldName={'duration'}
-                        /> */}
+                        />
                     {/* </FormProvider> */}
                 </div>
             </GenericDialog>

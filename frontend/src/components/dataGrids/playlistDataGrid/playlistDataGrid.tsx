@@ -49,10 +49,10 @@ const PlaylistDataGrid: React.FC = () => {
 
     const { register, handleSubmit, formState: { errors }, reset } = useForm({
         resolver: yupResolver(playlistsSchema),
-        defaultValues: {
-            name: '',
-            songsName: ''
-        }
+        // defaultValues: {
+        //     name: '',
+        //     songsName: ''
+        // }
     });
 
     const actionAddPlaylist = () => {
