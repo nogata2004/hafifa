@@ -51,11 +51,11 @@ const SongDataGrid: React.FC = () => {
     // const { register, handleSubmit, formState: { errors }, reset } = useForm({
         const methods = useForm({
         resolver: yupResolver(songsSchema),
-        defaultValues: {
-            name: '',
-            artistName: '',
-            duration: ''
-        }
+        // defaultValues: {
+        //     name: '',
+        //     artistName: '',
+        //     duration: ''
+        // }
     });
 
     useQuery(GET_ALL_ARTISTS, {
@@ -129,16 +129,18 @@ const SongDataGrid: React.FC = () => {
                 setOpen={setOpen}
                 submitText={SUBMIT_BUTTON_TEXT}
                 dialogTitle={DIALOG_TITLE}
-                handleSubmit={handleSubmit}
-                reset={reset}
+                // handleSubmit={handleSubmit}
+                // reset={reset}
+                methods={methods}
                 submitAction={addSong}
             >
                 <div>
-                    <FormProvider {...methods}>
+                    {/* <FormProvider {...methods}> */}
                         <GenericTextField
                             currentInput={nameInput}
                             setCurretnInput={setNameInput}
                             fieldTitle={NAME}
+                            // errorsMasssege={methods.errors.name?.message}
                             // register={register}
                             // errorsMasssege={errors.name?.message}
                             fieldName={'name'}
@@ -162,7 +164,7 @@ const SongDataGrid: React.FC = () => {
                             errorsMasssege={errors.duration?.message}
                             fieldName={'duration'}
                         /> */}
-                    </FormProvider>
+                    {/* </FormProvider> */}
                 </div>
             </GenericDialog>
         </div>

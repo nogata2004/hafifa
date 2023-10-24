@@ -3,8 +3,8 @@ import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogTitle from '@mui/material/DialogTitle';
-import {  DialogContent } from '@mui/material';
-import { FieldValues, UseFormHandleSubmit, UseFormReset } from 'react-hook-form';
+import { DialogContent } from '@mui/material';
+import { FieldValues, FormProvider, UseFormHandleSubmit, UseFormReset, UseFormReturn } from 'react-hook-form';
 
 import useStyles from './genericDialogStyle';
 
@@ -13,13 +13,24 @@ interface Props {
     setOpen: React.Dispatch<React.SetStateAction<boolean>>;
     submitText: string;
     dialogTitle: string;
-    handleSubmit: UseFormHandleSubmit<FieldValues, undefined>;
-    reset: UseFormReset<FieldValues>;
+    // handleSubmit: UseFormHandleSubmit<FieldValues, undefined>;
+    // reset: UseFormReset<FieldValues>;
+    methods: UseFormReturn<FieldValues, any, undefined>
     children: JSX.Element;
     submitAction: () => void;
 };
 
-const GenericDialog: React.FC<Props> = ({ open, setOpen, submitText, dialogTitle, submitAction, handleSubmit, reset, children }) => {
+const GenericDialog: React.FC<Props> = ({
+    open,
+    setOpen,
+    submitText,
+    dialogTitle,
+    submitAction,
+    methods,
+    // handleSubmit,
+    // reset,
+    children
+}) => {
     const classes = useStyles()
 
     const onSubmitHandler = () => {
@@ -28,7 +39,8 @@ const GenericDialog: React.FC<Props> = ({ open, setOpen, submitText, dialogTitle
     };
 
     const closeDialog = () => {
-        reset();
+        methods.reset();
+        // reset();
         setOpen(false);
     };
 
@@ -45,26 +57,28 @@ const GenericDialog: React.FC<Props> = ({ open, setOpen, submitText, dialogTitle
                     {dialogTitle}
                 </DialogTitle>
 
-                <form
-                    onSubmit={handleSubmit(onSubmitHandler)}
-                    className={classes.content}
-                >
-                    <DialogContent >
-                        {children}
-                    </DialogContent>
-
-                    <DialogActions
-                        className={classes.dialogAction}
+                <FormProvider {...methods}>
+                    <form
+                        onSubmit={methods.handleSubmit(onSubmitHandler)}
+                        className={classes.content}
                     >
-                        <Button
-                            type='submit'
-                            onSubmit={submitAction}
-                            className={classes.actionButton}
+                        <DialogContent >
+                            {children}
+                        </DialogContent>
+
+                        <DialogActions
+                            className={classes.dialogAction}
                         >
-                            {submitText}
-                        </Button>
-                    </DialogActions>
-                </form>
+                            <Button
+                                type='submit'
+                                onSubmit={submitAction}
+                                className={classes.actionButton}
+                            >
+                                {submitText}
+                            </Button>
+                        </DialogActions>
+                    </form>
+                </FormProvider>
             </Dialog>
         </div>
     );

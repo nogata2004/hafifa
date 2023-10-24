@@ -32,17 +32,21 @@ const GenericTextField: React.FC<Props> = ({
             {/* <Controller
                 render={{ field }}
             > */}
-            <TextField
-                // {...field}
-                name={fieldName}
-                className={classes.inputText}
-                variant='standard'
-                // defaultValue={currentInput}
-                // {...register(fieldName)}
-                onChange={(event) => { setCurretnInput(event.target.value) }}
-                InputProps={{ disableUnderline: true }}
-            >
-            </TextField>
+            <Controller name={'d'} render={(params) => (
+                <TextField
+                    // {...field}
+                    error={!!params.fieldState.error}                  
+                    name={fieldName}
+                    className={classes.inputText}
+                    variant='standard'
+                    // defaultValue={currentInput}
+                    // {...register(fieldName)}
+                    onChange={(event) => { setCurretnInput(event.target.value) }}
+                    InputProps={{ disableUnderline: true }}
+                >
+                </TextField>
+            )} />
+
             {/* </Controller> */}
 
             <Typography className={classes.errorMassege}>
