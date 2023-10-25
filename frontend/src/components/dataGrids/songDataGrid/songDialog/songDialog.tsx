@@ -13,12 +13,13 @@ import Artist from '../../../../types/artist';
 import { GET_ALL_ARTISTS } from '../../../db/artists/query';
 import { CREATE_SONG } from '../../../db/songs/mutation';
 import Song from '../../../../types/song';
+import { Button } from '@mui/material';
 // import { ADD_SONG_SUB } from '../../db/songs/subscription';
-
 
 
 const SUBMIT_BUTTON_TEXT = 'צור שיר';
 const DIALOG_TITLE = 'יצירת שיר';
+const BUTTON_TEXT = '+צור שיר';
 
 const NAME = 'שם';
 const ARTIST = 'זמר';
@@ -35,13 +36,13 @@ const songsSchema = yup.object({
 });
 
 interface Props {
-    open: boolean;
-    setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+    // open: boolean;
+    // setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const SongDialog: React.FC<Props> = ({ open, setOpen }) => {
+const SongDialog: React.FC<Props> = ({}) => {
     const classes = useStyles();
-    // const [open, setOpen] = React.useState<boolean>(false);
+    const [open, setOpen] = React.useState<boolean>(false);
     const [nameInput, setNameInput] = React.useState<string>('');
     const [artistInput, setArtistInput] = React.useState<string | null | string[]>(null);
     const [durationInput, setDurationInput] = React.useState<string>('');
@@ -99,6 +100,13 @@ const SongDialog: React.FC<Props> = ({ open, setOpen }) => {
 
     return (
         <div className={classes.body}>
+            <Button
+                onClick={() => setOpen(true)}
+                className={classes.openDialog}
+            >
+                {BUTTON_TEXT}
+            </Button>
+
             <GenericDialog
                 open={open}
                 setOpen={setOpen}

@@ -4,7 +4,7 @@ import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogTitle from '@mui/material/DialogTitle';
 import { DialogContent } from '@mui/material';
-import { FieldValues, FormProvider, UseFormHandleSubmit, UseFormReset, UseFormReturn } from 'react-hook-form';
+import { FieldValues, UseFormHandleSubmit, UseFormReset, UseFormReturn } from 'react-hook-form';
 
 import useStyles from './genericDialogStyle';
 
@@ -15,7 +15,6 @@ interface Props {
     dialogTitle: string;
     handleSubmit: UseFormHandleSubmit<FieldValues, undefined>;
     reset: UseFormReset<FieldValues>;
-    // methods: UseFormReturn<FieldValues, any, undefined>
     children: JSX.Element;
     submitAction: () => void;
 };
@@ -26,7 +25,6 @@ const GenericDialog: React.FC<Props> = ({
     submitText,
     dialogTitle,
     submitAction,
-    // methods,
     handleSubmit,
     reset,
     children
@@ -39,7 +37,6 @@ const GenericDialog: React.FC<Props> = ({
     };
 
     const closeDialog = () => {
-        // methods.reset();
         reset();
         setOpen(false);
     };
@@ -57,7 +54,6 @@ const GenericDialog: React.FC<Props> = ({
                     {dialogTitle}
                 </DialogTitle>
 
-                {/* <FormProvider {...methods}> */}
                     <form
                         onSubmit={handleSubmit(onSubmitHandler)}
                         className={classes.content}
@@ -78,7 +74,6 @@ const GenericDialog: React.FC<Props> = ({
                             </Button>
                         </DialogActions>
                     </form>
-                {/* </FormProvider> */}
             </Dialog>
         </div>
     );
