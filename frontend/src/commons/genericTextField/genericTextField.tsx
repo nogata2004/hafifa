@@ -8,8 +8,8 @@ interface Props {
     currentInput: string;
     setCurretnInput: React.Dispatch<React.SetStateAction<string>>;
     fieldTitle: string;
-    // register: UseFormRegister<FieldValues>;
-    // errorsMasssege: string | FieldError | Merge<FieldError, FieldErrorsImpl<any>> | undefined;
+    register: UseFormRegister<FieldValues>;
+    errorsMasssege: string | FieldError | Merge<FieldError, FieldErrorsImpl<any>> | undefined;
     fieldName: string;
 };
 
@@ -17,8 +17,8 @@ const GenericTextField: React.FC<Props> = ({
     currentInput,
     setCurretnInput,
     fieldTitle,
-    // register,
-    // errorsMasssege,
+    register,
+    errorsMasssege,
     fieldName
 }) => {
     const classes = useStyles();
@@ -32,21 +32,23 @@ const GenericTextField: React.FC<Props> = ({
             {/* <Controller
                 render={{ field }}
             > */}
-            <TextField
-                // {...field}
-                name={fieldName}
-                className={classes.inputText}
-                variant='standard'
-                // defaultValue={currentInput}
-                // {...register(fieldName)}
-                onChange={(event) => { setCurretnInput(event.target.value) }}
-                InputProps={{ disableUnderline: true }}
-            >
-            </TextField>
-            {/* </Controller> */}
+            {/* <Controller name={'d'} render={(params) => ( */}
+                <TextField
+                    // {...field}
+                    // error={params.fieldState.}                  
+                    // name={fieldName}
+                    className={classes.inputText}
+                    variant='standard'
+                    defaultValue={currentInput}
+                    {...register(fieldName)}
+                    onChange={(event) => { setCurretnInput(event.target.value) }}
+                    InputProps={{ disableUnderline: true }}
+                >
+                </TextField>
+            {/* )} /> */}
 
             <Typography className={classes.errorMassege}>
-                {/* {errorsMasssege} */}
+                {errorsMasssege}
             </Typography>
         </div>
     );

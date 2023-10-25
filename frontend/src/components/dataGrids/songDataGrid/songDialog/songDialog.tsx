@@ -2,10 +2,11 @@ import React, { useContext, useState } from 'react';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
-import { useMutation, useQuery, useSubscription } from '@apollo/client';
+import { useMutation, useQuery } from '@apollo/client';
+import { Button } from '@mui/material';
 
 import GenericDialog from '../../../../commons/genericDialog/genericDialog';
-import useStyles from '../../playlistDataGrid/playlistDataGridStyle';
+import useStyles from '../../playlistDataGrid/playlistDialog/playlistDialogStyle';
 import { AllSongsContext } from '../../../db/context';
 import GenericTextField from '../../../../commons/genericTextField/genericTextField';
 import GenericAutocomplete from '../../../../commons/genericAutocomplete/genericAutocomplete';
@@ -16,14 +17,12 @@ import Song from '../../../../types/song';
 // import { ADD_SONG_SUB } from '../../db/songs/subscription';
 
 
-
 const SUBMIT_BUTTON_TEXT = 'צור שיר';
 const DIALOG_TITLE = 'יצירת שיר';
-
+const BUTTON_TEXT = '+צור שיר';
 const NAME = 'שם';
 const ARTIST = 'זמר';
 const DURATION = 'משך שיר';
-
 const REQUIRED_ERROR = 'שדה הכרחי';
 const TYPE_NAME_ERROR = 'שדה הכרחי מורכב מאותיות בלבד';
 const TYPE_DURATION_ERROR = 'שדה הכרחי חייב להיות בפורמט: mm:ss';
@@ -34,20 +33,15 @@ const songsSchema = yup.object({
     duration: yup.string().matches(/[0-5][0-9]:[0-5][0-9]/, TYPE_DURATION_ERROR).required(REQUIRED_ERROR)
 });
 
-interface Props {
-    open: boolean;
-    setOpen: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
-const SongDialog: React.FC<Props> = ({ open, setOpen }) => {
+const SongDialog: React.FC = () => {
     const classes = useStyles();
-    // const [open, setOpen] = React.useState<boolean>(false);
+    const [open, setOpen] = React.useState<boolean>(false);
     const [nameInput, setNameInput] = React.useState<string>('');
     const [artistInput, setArtistInput] = React.useState<string | null | string[]>(null);
     const [durationInput, setDurationInput] = React.useState<string>('');
     const [artists, setArtists] = useState<Artist[]>([]);
     const [mutationCreateSong] = useMutation(CREATE_SONG);
-    const { songs, setSongs } = useContext(AllSongsContext);
+    const { setSongs } = useContext(AllSongsContext);
 
     const { register, handleSubmit, formState: { errors }, reset } = useForm({
         resolver: yupResolver(songsSchema)
@@ -98,7 +92,15 @@ const SongDialog: React.FC<Props> = ({ open, setOpen }) => {
     // )
 
     return (
-        <div className={classes.body}>
+        <div>
+
+            <Button
+                onClick={() => setOpen(true)}
+                className={classes.openDialog}
+            >
+                {BUTTON_TEXT}
+            </Button>
+
             <GenericDialog
                 open={open}
                 setOpen={setOpen}
@@ -141,4 +143,5 @@ const SongDialog: React.FC<Props> = ({ open, setOpen }) => {
         </div>
     );
 };
+
 export default SongDialog;
