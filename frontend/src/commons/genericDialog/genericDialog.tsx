@@ -3,8 +3,8 @@ import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogTitle from '@mui/material/DialogTitle';
-import {  DialogContent } from '@mui/material';
-import { FieldValues, UseFormHandleSubmit, UseFormReset } from 'react-hook-form';
+import { DialogContent } from '@mui/material';
+import { FieldValues, UseFormHandleSubmit, UseFormReset, UseFormReturn } from 'react-hook-form';
 
 import useStyles from './genericDialogStyle';
 
@@ -19,7 +19,16 @@ interface Props {
     submitAction: () => void;
 };
 
-const GenericDialog: React.FC<Props> = ({ open, setOpen, submitText, dialogTitle, submitAction, handleSubmit, reset, children }) => {
+const GenericDialog: React.FC<Props> = ({
+    open,
+    setOpen,
+    submitText,
+    dialogTitle,
+    submitAction,
+    handleSubmit,
+    reset,
+    children
+}) => {
     const classes = useStyles()
 
     const onSubmitHandler = () => {
@@ -45,26 +54,26 @@ const GenericDialog: React.FC<Props> = ({ open, setOpen, submitText, dialogTitle
                     {dialogTitle}
                 </DialogTitle>
 
-                <form
-                    onSubmit={handleSubmit(onSubmitHandler)}
-                    className={classes.content}
-                >
-                    <DialogContent >
-                        {children}
-                    </DialogContent>
-
-                    <DialogActions
-                        className={classes.dialogAction}
+                    <form
+                        onSubmit={handleSubmit(onSubmitHandler)}
+                        className={classes.content}
                     >
-                        <Button
-                            type='submit'
-                            onSubmit={submitAction}
-                            className={classes.actionButton}
+                        <DialogContent >
+                            {children}
+                        </DialogContent>
+
+                        <DialogActions
+                            className={classes.dialogAction}
                         >
-                            {submitText}
-                        </Button>
-                    </DialogActions>
-                </form>
+                            <Button
+                                type='submit'
+                                onSubmit={submitAction}
+                                className={classes.actionButton}
+                            >
+                                {submitText}
+                            </Button>
+                        </DialogActions>
+                    </form>
             </Dialog>
         </div>
     );
