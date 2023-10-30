@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { GridRowId, GridRowSelectionModel } from '@mui/x-data-grid-pro';
+import { GridRowId } from '@mui/x-data-grid-pro';
 
 import { RootState } from './store';
 import Song from '../types/song';

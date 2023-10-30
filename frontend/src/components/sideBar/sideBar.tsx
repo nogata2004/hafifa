@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Typography } from '@mui/material';
+import { ListItemButton, Typography } from '@mui/material';
 
 import useStyles from './sideBarStyle';
 import spoofyLogo from '../../pictures/spoofyLogo.png';
@@ -10,14 +10,12 @@ import { useAppSelector, useAppDispatch } from '../../redux/hooks';
 const LOGO_TEXT = 'spoofy';
 
 const SideBar: React.FC = () => {
-    const [selectedMode, setSelectedMode] = React.useState<Mode>(Mode.song);
     const dispatch = useAppDispatch();
-    const currentMode = useAppSelector((state: { mode: { value: Mode }; }) => state.mode.value);
-    const classes = useStyles({ currentMode, selectedMode });
+    const currentMode = useAppSelector((state: { mode: { value: Mode } }) => state.mode.value);
+    const classes = useStyles();
 
     const changeCurrentMode = (selectedMode: Mode) => {
         dispatch(changeCurrentModeByValue(selectedMode));
-        setSelectedMode(selectedMode);
     };
 
     return (
@@ -35,14 +33,17 @@ const SideBar: React.FC = () => {
 
             <div className={classes.sideBar}>
                 {Object.entries(Mode).map((mode) => (
-                    <Button
+                    <ListItemButton
                         key={mode[0]}
                         id={mode[0]}
+                        selected={currentMode === mode[1]}
                         onClick={() => changeCurrentMode(mode[1])}
-                        className={currentMode === mode[1] ? classes.chosenOptionButton : classes.optionsButton}>
+                        className={classes.optionButton}
+                    >
                         {mode[1]}
-                    </Button>
-                ))}
+                    </ListItemButton>
+                )
+                )}
             </div>
         </div>
     );

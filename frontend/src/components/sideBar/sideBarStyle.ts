@@ -30,29 +30,19 @@ const useStyles = makeStyles({
         justifyContent: 'flex-start',
     },
 
-    optionsButton: {
-        '&.MuiButton-root': {
-            fontSize: '25px',
-            padding: 0,
-            marginBottom: '25px',
+    optionButton: {
+        '&.MuiListItemButton-root': {
+            fontSize: '25px',        
+            justifyContent: 'center',
+            marginBottom: '25px',        
+            fontFamily: 'sans-serif',
             borderRadius: '5px',
             backgroundColor: 'rgb(191, 177, 177)',
             color: 'rgb(250, 250, 250)',
-        },
-        textAlign: 'center',
-        width: '230px',
-    },
-
-    chosenOptionButton: {
-        '&.MuiButton-root': {
-            fontSize: '25px',
-            padding: 0,
-            marginBottom: '25px',
-            borderRadius: '5px',
-            backgroundColor: 'rgb(74, 191, 117)',
-            color: 'rgb(250, 250, 250)',
-        },
-        textAlign: 'center',
+            '&.Mui-selected': {
+                backgroundColor: 'rgb(74, 191, 117)'
+            }
+        },            
         width: '230px',
     },
 })

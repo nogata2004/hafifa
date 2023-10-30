@@ -1,9 +1,5 @@
 import { makeStyles } from '@mui/styles';
 
-interface Props {
-    includePlaylist: boolean | null;
-};
-
 const useStyles = makeStyles<boolean | undefined>({
     tableButton: {
         '&.MuiIconButton-root': {
