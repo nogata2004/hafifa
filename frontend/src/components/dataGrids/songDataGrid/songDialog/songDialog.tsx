@@ -14,7 +14,6 @@ import Artist from '../../../../types/artist';
 import { GET_ALL_ARTISTS } from '../../../db/artists/query';
 import { CREATE_SONG } from '../../../db/songs/mutation';
 import Song from '../../../../types/song';
-// import { ADD_SONG_SUB } from '../../db/songs/subscription';
 
 
 const SUBMIT_BUTTON_TEXT = 'צור שיר';
@@ -54,7 +53,7 @@ const SongDialog: React.FC = () => {
         }
     });
 
-    const changeDurationInput = () => {
+    const changeDurationInput = (durationInput: string) => {
         const durationMinutes: number = Number(durationInput.split(':')[0]);
         const durationSeconds: number = Number(durationInput.split(':')[1]);
         return durationMinutes * 60 + durationSeconds;
@@ -65,7 +64,7 @@ const SongDialog: React.FC = () => {
             variables: {
                 name: nameInput,
                 artistId: artists.find(artist => (artist.name === artistInput))?.id,
-                duration: changeDurationInput()
+                duration: changeDurationInput(durationInput)
             },
             onCompleted(data) {
                 const dataSong = data.createSong.song;
@@ -84,16 +83,8 @@ const SongDialog: React.FC = () => {
         })
     };
 
-    // useSubscription(ADD_SONG_SUB, {
-    //     onSubscriptionData(data) {
-    //         console.log(data)
-    //     }
-    // },
-    // )
-
     return (
         <div>
-
             <Button
                 onClick={() => setOpen(true)}
                 className={classes.openDialog}

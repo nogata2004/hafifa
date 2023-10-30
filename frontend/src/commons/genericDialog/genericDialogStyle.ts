@@ -75,14 +75,15 @@ const useStyles = makeStyles({
         },
         '&.MuiButton-root': {
             backgroundColor: 'rgb(72, 139, 42)',
-            borderRadius: '20px',
-        },
+            borderRadius: '20px'
+        }
     },
 
     dialogAction: {
-        '&.css-hlj6pa-MuiDialogActions-root': {
-            justifyContent: 'center'
-        },
+        '&.css-knqc4i-MuiDialogActions-root': {
+            display: 'flex',
+            justifyContent: 'center',
+        }
     },
 
     autocomplete: {

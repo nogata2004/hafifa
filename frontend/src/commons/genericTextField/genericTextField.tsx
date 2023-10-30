@@ -8,18 +8,18 @@ interface Props {
     currentInput: string;
     setCurretnInput: React.Dispatch<React.SetStateAction<string>>;
     fieldTitle: string;
+    fieldName: string;
     register: UseFormRegister<FieldValues>;
     errorsMasssege: string | FieldError | Merge<FieldError, FieldErrorsImpl<any>> | undefined;
-    fieldName: string;
 };
 
 const GenericTextField: React.FC<Props> = ({
     currentInput,
     setCurretnInput,
     fieldTitle,
+    fieldName,
     register,
     errorsMasssege,
-    fieldName
 }) => {
     const classes = useStyles();
 
