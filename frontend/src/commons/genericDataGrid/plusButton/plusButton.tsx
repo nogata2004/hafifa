@@ -18,11 +18,11 @@ interface Props {
 };
 
 const PlusButton: React.FC<Props> = ({ songId, songName }) => {
-    const classes = useStyles();
     const [open, setOpen] = React.useState<boolean>(false);
     const { playlists } = useContext(AllPlaylistsContext);
     const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(null);
-    const [includePlaylist, setIncludePlaylist] = React.useState<boolean | null>(null);
+    const [includePlaylist, setIncludePlaylist] = React.useState<boolean | undefined>(undefined);
+    const classes = useStyles(includePlaylist);
 
     const plusClicked = (event: React.MouseEvent<HTMLButtonElement>) => {
         event.stopPropagation();
@@ -32,7 +32,7 @@ const PlusButton: React.FC<Props> = ({ songId, songName }) => {
 
     const handleClose = () => {
         setOpen(false);
-        setIncludePlaylist(null);
+        setIncludePlaylist(undefined);
     };
 
     return (
@@ -58,12 +58,7 @@ const PlusButton: React.FC<Props> = ({ songId, songName }) => {
                     vertical: 'bottom',
                     horizontal: 'right',
                 }}
-                className={includePlaylist ?
-                    classes.popoverTrue :
-                    includePlaylist === false ?
-                        classes.popoverFalse :
-                        classes.popover
-                }
+                className={classes.popover}
             >
                 <Typography
                     className={classes.popoverTitle}
@@ -84,14 +79,12 @@ const PlusButton: React.FC<Props> = ({ songId, songName }) => {
                 ))}
 
                 <Typography
-                    // className={classes.popoverTitle}
+                    className={classes.addedMassege}
                 >
-                    {includePlaylist
-                        ?
-                        `${SONG_TEXT} ${songName} ${ERROR_TEXT}`
-                        :
-                        includePlaylist === false &&
-                        `${SONG_TEXT} ${songName} ${COMPLETE_TEXT}`
+                    {includePlaylist === true
+                        ? `${SONG_TEXT} ${songName} ${ERROR_TEXT}`
+                        : includePlaylist === false &&
+                         `${SONG_TEXT} ${songName} ${COMPLETE_TEXT}`
                     }
                 </Typography>
             </Popover>

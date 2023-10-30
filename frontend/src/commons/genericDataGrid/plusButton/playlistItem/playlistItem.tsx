@@ -11,7 +11,7 @@ import Playlist from '../../../../types/playlist';
 interface Props {
     songId: string;
     currentPlaylist: Playlist;
-    setIncludePlaylist: React.Dispatch<React.SetStateAction<boolean | null>>;
+    setIncludePlaylist: React.Dispatch<React.SetStateAction<boolean | undefined>>;
 };
 
 const PlaylistItem: React.FC<Props> = ({ songId, currentPlaylist, setIncludePlaylist }) => {
