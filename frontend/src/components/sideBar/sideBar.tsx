@@ -4,18 +4,23 @@ import { ListItemButton, Typography } from '@mui/material';
 import useStyles from './sideBarStyle';
 import spoofyLogo from '../../pictures/spoofyLogo.png';
 import Mode from '../../types/mode';
-import { changeCurrentModeByValue } from '../../redux/ModeSlice';
-import { useAppSelector, useAppDispatch } from '../../redux/hooks';
 
 const LOGO_TEXT = 'spoofy';
 
-const SideBar: React.FC = () => {
-    const dispatch = useAppDispatch();
-    const currentMode = useAppSelector((state: { mode: { value: Mode } }) => state.mode.value);
+interface Props {
+    currentMode: Mode;
+    setCurrentMode: React.Dispatch<React.SetStateAction<Mode>>;
+};
+
+const SideBar: React.FC<Props> = ({ currentMode, setCurrentMode }) => {
     const classes = useStyles();
 
     const changeCurrentMode = (selectedMode: Mode) => {
-        dispatch(changeCurrentModeByValue(selectedMode));
+        if (currentMode === selectedMode) {
+            setCurrentMode(Mode.none)
+        } else {
+            setCurrentMode(selectedMode);
+        }
     };
 
     return (
@@ -32,7 +37,7 @@ const SideBar: React.FC = () => {
             </div>
 
             <div className={classes.sideBar}>
-                {Object.entries(Mode).map((mode) => (
+                {Object.entries(Mode).filter((mode) => mode[1] !== Mode.none).map((mode) => (
                     <ListItemButton
                         key={mode[0]}
                         id={mode[0]}

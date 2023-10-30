@@ -17,20 +17,29 @@ import User from '../../types/user';
 import { GET_PLAYLISTS_BY_USER } from '../../components/db/playlists/query';
 import Playlist from '../../types/playlist';
 
+interface SongId {
+    songId: string
+};
 
 const MainPage: React.FC = () => {
     const currentSong = useAppSelector((state: { song: { value: Song | undefined }; }) => state.song.value);
-    const currentMode = useAppSelector((state: { mode: { value: Mode }; }) => state.mode.value);
     const currentUser = useAppSelector((state: { user: { value: User | undefined }; }) => state.user.value);
     const classes = useStyles();
     const [songs, setSongs] = useState<Song[]>([]);
     const [playlists, setPlaylists] = useState<Playlist[]>([]);
+    const [currentMode, setCurrentMode] = React.useState<Mode>(Mode.song);
 
     useQuery(GET_ALL_SONGS, {
         variables: { "userId": currentUser?.id },
         onCompleted: (data) => {
             const allSongs = data.allSongs.nodes;
-            allSongs.map((song: { id: string; name: string; duration: number; artistByArtistId: { id: string; name: string; }; favoritesBySongId: { totalCount: number; }; }) => {
+            allSongs.map((song: {
+                id: string;
+                name: string;
+                duration: number;
+                artistByArtistId: { id: string; name: string; };
+                favoritesBySongId: { totalCount: number; };
+            }) => {
                 const newSong: Song = {
                     id: song.id,
                     name: song.name,
@@ -50,7 +59,11 @@ const MainPage: React.FC = () => {
         variables: { userId: currentUser?.id },
         onCompleted: (data) => {
             const allPlaylists = data.allPlaylists.nodes;
-            allPlaylists.map((playlist: { id: any; name: any; playlistSongsByPlaylistId: { nodes: any[]; }; }) => {
+            allPlaylists.map((playlist: {
+                id: string;
+                name: string;
+                playlistSongsByPlaylistId: { nodes: SongId[] };
+            }) => {
                 const newPlaylist: Playlist = {
                     id: playlist.id,
                     name: playlist.name,
@@ -74,7 +87,10 @@ const MainPage: React.FC = () => {
                             {currentMode === Mode.favorite && <FavoriteDataGrid />}
                         </div>
 
-                        <SideBar />
+                        <SideBar
+                            currentMode={currentMode}
+                            setCurrentMode={setCurrentMode}
+                        />
                     </div>
 
                     {currentSong && <ViewSong />}
