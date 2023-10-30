@@ -8,7 +8,7 @@ import slideRight from '../../pictures/slideRight.png';
 import stopButton from '../../pictures/stopButton.png';
 import playButton from '../../pictures/playButton.png';
 import durationFormat from '../../functions/dorationFormat';
-import { changeCurrentSelectionModel, changeCurrentSongByValue } from '../../redux/SongSlice';
+import { changeCurrentSongByValue } from '../../redux/SongSlice';
 import { AllSongsContext } from '../db/context';
 import Song from '../../types/song';
 
@@ -29,14 +29,12 @@ const ViewSong: React.FC = () => {
         const currentSongIndex = songs.indexOf(currentSong!);
         const nextSong: Song = songs[currentSongIndex + 1];
         dispatch(changeCurrentSongByValue(nextSong));
-        dispatch(changeCurrentSelectionModel([nextSong.id]));
     };
 
     const moveBack = () => {
         const currentSongIndex = songs.indexOf(currentSong!);
         const nextSong: Song = songs[currentSongIndex - 1];
         dispatch(changeCurrentSongByValue(nextSong));
-        dispatch(changeCurrentSelectionModel([nextSong.id]));
     };
 
     useEffect(() => {

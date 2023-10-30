@@ -1,10 +1,10 @@
 import React, { useContext, useState } from 'react';
-import { DataGridPro, GridColDef, GridRowParams, GridRowSelectionModel, LicenseInfo } from '@mui/x-data-grid-pro';
+import { DataGridPro, GridColDef, GridRowParams, LicenseInfo } from '@mui/x-data-grid-pro';
 
 import useStyles from './genericDataGridStyle';
 import Song from '../../types/song';
 import { useAppSelector, useAppDispatch } from '../../redux/hooks';
-import { changeCurrentSelectionModel, changeCurrentSongByValue, resetCurrentSong } from '../../redux/SongSlice';
+import { changeCurrentSongByValue, resetCurrentSong } from '../../redux/SongSlice';
 import durationFormat from '../../functions/dorationFormat';
 import FavoriteButton from './favoriteButton/favoriteButton';
 import { AllSongsContext } from '../../components/db/context';
@@ -24,31 +24,18 @@ interface Row {
 };
 
 const GenericDataTable: React.FC<Props> = ({ filterSongs }) => {
-    const currentSong = useAppSelector((state) => state.song.value);
-    const selectionModel = useAppSelector((state) => state.song.selectionModel);
-    const [selectedSongId, setSelectedSongId] = useState<number>(-1);
-    const dispatch = useAppDispatch();
     const classes = useStyles();
+    const currentSong = useAppSelector((state) => state.song.value);
+    const dispatch = useAppDispatch();
     const { songs } = useContext(AllSongsContext);
 
     LicenseInfo.setLicenseKey(
         '6239d8e4e4e446a3d208d638ff7603bdT1JERVI6Um9tLVRlc3QsRVhQSVJZPTIyMjMwNjEyMDAwMDAsS0VZVkVSU0lPTj0x'
     );
 
-    const changeSelectionModel = (newSelectionModel: GridRowSelectionModel) => {
-        if (selectedSongId === newSelectionModel[0]) {
-            dispatch(resetCurrentSong());
-            setSelectedSongId(-1);
-        }
-        else {
-            dispatch(changeCurrentSelectionModel(newSelectionModel));
-        };
-    };
-
     const changeCurrentSong = (params: GridRowParams) => {
-        setSelectedSongId(params.row.id);
-        if (currentSong?.id === params.id) {
-            dispatch(resetCurrentSong);
+        if (currentSong?.id === params.row.id) {
+            dispatch(resetCurrentSong());
         }
         else {
             const selectedSong: Song | undefined = songs.find((song) => song.id === params.id);
@@ -130,8 +117,7 @@ const GenericDataTable: React.FC<Props> = ({ filterSongs }) => {
             columns={columns}
             hideFooter
             rowHeight={60}
-            onRowSelectionModelChange={(newSelectionModel) => { changeSelectionModel(newSelectionModel) }}
-            rowSelectionModel={selectionModel}
+            rowSelectionModel={currentSong ? currentSong.id : -1}
             onRowClick={(params) => changeCurrentSong(params)}
         />
     );

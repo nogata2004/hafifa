@@ -30,7 +30,6 @@ const GenericTextField: React.FC<Props> = ({
             </Typography>
 
             <TextField
-                // error={params.fieldState.}                  
                 className={classes.inputText}
                 variant='standard'
                 defaultValue={currentInput}
