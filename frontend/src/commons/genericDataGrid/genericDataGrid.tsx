@@ -70,7 +70,6 @@ const GenericDataTable: React.FC<Props> = ({ filterSongs }) => {
             headerName: '',
             width: 10,
             type: 'actions',
-            headerClassName: classes.favoriteSeil,
             editable: false,
             renderCell: (params) => {
                 return (
@@ -86,7 +85,6 @@ const GenericDataTable: React.FC<Props> = ({ filterSongs }) => {
             headerName: '',
             width: 10,
             type: 'actions',
-            headerClassName: classes.favoriteSeil,
             editable: false,
             renderCell: (params) => {
                 return (

@@ -27,18 +27,29 @@ const useStyles = makeStyles({
         '&.MuiDataGrid-root .MuiDataGrid-columnHeader:focus': {
             outline: 'none'
         },
+        '& .css-axafay-MuiDataGrid-virtualScroller': {
+            overflow: 'auto',
+            '&::-webkit-scrollbar': {
+                width: '0.4em'
+            },
+            '&::-webkit-scrollbar-track': {
+                '-webkit-box-shadow': 'inset 0 0 6px rgba(0,0,0,0.00)'
+            },
+            '&::-webkit-scrollbar-thumb': {
+                backgroundColor: 'rgba(250,250,250,.5)',
+                outline: '1px solid slategrey',
+                borderRadius: '5px'
+            },
+        },
+        '&.::-webkit-scrollbar': {
+            display: 'none'
+        },
         marginBottom: '30px',
     },
 
     header: {
         borderLeft: '1px solid'
     },
-
-    favoriteSeil: {
-        '&:focus-within': {
-            outline: "none !important"
-        }
-    }
 });
 
 export default useStyles;
