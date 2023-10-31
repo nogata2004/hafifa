@@ -23,6 +23,9 @@ const useStyles = makeStyles({
             marginRight: '10px',
 
         },
+        '&.MuiButton-root:hover': {
+            backgroundColor: 'rgb(191, 90, 74)',
+        },
         width: 'fit-content',
         height: 'min-content',
         display: 'flex',
@@ -40,6 +43,9 @@ const useStyles = makeStyles({
             backgroundColor: 'rgb(130, 130, 124)',
             borderRadius: '15px',
             marginRight: '10px',
+        },
+        '&.MuiButton-root:hover': {
+            backgroundColor: 'rgb(130, 130, 124)',
         },
         width: 'fit-content',
         height: 'min-content',

@@ -32,17 +32,23 @@ const useStyles = makeStyles({
 
     optionButton: {
         '&.MuiListItemButton-root': {
-            fontSize: '25px',        
+            fontSize: '25px',
             justifyContent: 'center',
-            marginBottom: '25px',        
+            marginBottom: '25px',
             fontFamily: 'sans-serif',
             borderRadius: '5px',
             backgroundColor: 'rgb(191, 177, 177)',
             color: 'rgb(250, 250, 250)',
             '&.Mui-selected': {
                 backgroundColor: 'rgb(74, 191, 117)'
-            }
-        },            
+            },
+            '&.Mui-selected:hover': {
+                backgroundColor: 'rgb(74, 191, 117)'
+            },
+        },
+        '&.MuiListItemButton-root:hover': {
+            backgroundColor: 'rgb(191, 177, 177)',
+        },
         width: '230px',
     },
 })
