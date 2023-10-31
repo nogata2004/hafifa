@@ -47,7 +47,7 @@ const DeleteUser: React.FC = () => {
                 open={open}
                 keepMounted
                 onClose={() => setOpen(false)}
-                aria-describedby="alert-dialog-delete"
+                className={classes.body}
             >
                 <DialogTitle >
                     {DIALOG_TEXT}

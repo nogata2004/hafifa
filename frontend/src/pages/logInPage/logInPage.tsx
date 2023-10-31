@@ -8,7 +8,6 @@ import { GET_ALL_USERS } from '../../components/db/users/query';
 import User from '../../types/user';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { changeCurrentUserByValue } from '../../redux/UserSlice';
-import { changeCurrentModeByValue } from '../../redux/ModeSlice';
 import mode from '../../types/mode';
 
 
@@ -36,7 +35,6 @@ const LogInPage: React.FC = () => {
 
     const changeCurrentUser = (selectedUser: User) => {
         dispatch(changeCurrentUserByValue(selectedUser));
-        dispatch(changeCurrentModeByValue(mode.song))
     };
 
     return (

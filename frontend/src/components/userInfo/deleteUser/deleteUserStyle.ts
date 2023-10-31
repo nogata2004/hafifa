@@ -2,9 +2,11 @@ import { makeStyles } from '@mui/styles';
 
 const useStyles = makeStyles({
     body: {
-        backgroundColor: 'rgb(112, 106, 106)',
         display: 'flex',
         flexDirection: 'column',
+        '& .css-1t1j96h-MuiPaper-root-MuiDialog-paper': {
+            borderRadius: '10px'
+        }
     },
 
     deleteUserButton: {
@@ -28,14 +30,14 @@ const useStyles = makeStyles({
 
     cancelButton: {
         '&.MuiButton-text': {
-            color: 'rgb(191, 90, 74)',
+            color: 'rgb(250, 250, 250)',
             fontSize: '15px',
             padding: 0,
             paddingLeft: '30px',
             paddingRight: '30px',
         },
         '&.MuiButton-root': {
-            backgroundColor: 'rgb(250, 250, 250)',
+            backgroundColor: 'rgb(130, 130, 124)',
             borderRadius: '15px',
             marginRight: '10px',
         },
@@ -45,8 +47,9 @@ const useStyles = makeStyles({
     },
 
     buttons: {
-        display: 'flex',
-        flexDirection: 'row',
+        '&.css-knqc4i-MuiDialogActions-root': {
+            justifyContent: 'center'
+        }
     }
 })
 export default useStyles;

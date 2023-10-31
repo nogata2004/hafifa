@@ -5,7 +5,6 @@ import useStyles from './userInfoStyle';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import DeleteUser from './deleteUser/deleteUser';
 import { changeCurrentUserByValue } from '../../redux/UserSlice';
-import { changeCurrentModeByValue } from '../../redux/ModeSlice';
 import Mode from '../../types/mode';
 import { resetCurrentSong } from '../../redux/SongSlice';
 
@@ -21,7 +20,6 @@ const UserInfo: React.FC = () => {
 
     const moveToMainPage = () => {
         dispatch(changeCurrentUserByValue(undefined));
-        dispatch(changeCurrentModeByValue(Mode.song));
         dispatch(resetCurrentSong());
         navigate('/');
     };
