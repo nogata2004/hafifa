@@ -4,39 +4,30 @@ import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogTitle from '@mui/material/DialogTitle';
 import { DialogContent } from '@mui/material';
-import { FieldValues, FormProvider, UseFormHandleSubmit, UseFormReset, UseFormReturn } from 'react-hook-form';
+import { FieldValues, FormProvider, UseFormReturn } from 'react-hook-form';
 
 import useStyles from './genericDialogStyle';
 
 interface Props {
     open: boolean;
-    // setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+    setOpen: React.Dispatch<React.SetStateAction<boolean>>;
     submitText: string;
     dialogTitle: string;
     methods: UseFormReturn<any, any, undefined>
-    // handleSubmit: UseFormHandleSubmit<FieldValues, undefined>;
-    // reset: UseFormReset<FieldValues>;
     children: JSX.Element;
     submitAction: (data: FieldValues) => void;
 };
 
 const GenericDialog: React.FC<Props> = ({
     open,
-    // setOpen,
+    setOpen,
     submitText,
     dialogTitle,
     submitAction,
     methods,
-    // handleSubmit,
-    // reset,
     children
 }) => {
     const classes = useStyles()
-
-    const onSubmitHandler = () => {
-        // submitAction();
-        // closeDialog();
-    };
 
     // const closeDialog = () => {
     //     reset();
@@ -48,8 +39,7 @@ const GenericDialog: React.FC<Props> = ({
             <Dialog
                 open={open}
                 keepMounted
-                // onClose={closeDialog}
-                aria-describedby="alert-dialog-new-song"
+                onClose={() => { setOpen(false) }}
                 className={classes.body}
             >
                 <DialogTitle className={classes.title}>

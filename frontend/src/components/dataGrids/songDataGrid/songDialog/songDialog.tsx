@@ -35,9 +35,6 @@ const songsSchema = yup.object({
 const SongDialog: React.FC = () => {
     const classes = useStyles();
     const [open, setOpen] = React.useState<boolean>(false);
-    // const [nameInput, setNameInput] = React.useState<string>('');
-    // const [artistInput, setArtistInput] = React.useState<string | null | string[]>(null);
-    // const [durationInput, setDurationInput] = React.useState<string>('');
     const [artists, setArtists] = useState<Artist[]>([]);
     const [mutationCreateSong] = useMutation(CREATE_SONG);
     const { setSongs } = useContext(AllSongsContext);
@@ -48,7 +45,6 @@ const SongDialog: React.FC = () => {
         duration: ''
     };
 
-    // const { register, handleSubmit, formState: { errors }, reset } = useForm({
     const methods = useForm({
         resolver: yupResolver(songsSchema),
         defaultValues: defaultValues
@@ -68,6 +64,7 @@ const SongDialog: React.FC = () => {
     };
 
     const addSong = (data: FieldValues) => {
+        console.log(data)
         mutationCreateSong({
             variables: {
                 name: data.name,
@@ -103,29 +100,21 @@ const SongDialog: React.FC = () => {
 
             <GenericDialog
                 open={open}
-                // setOpen={setOpen}
+                setOpen={setOpen}
                 submitText={SUBMIT_BUTTON_TEXT}
                 dialogTitle={DIALOG_TITLE}
                 methods={methods}
-                // handleSubmit={handleSubmit}
-                // reset={reset}
                 submitAction={addSong}
             >
                 <div>
                     <GenericTextField
-                        // currentInput={nameInput}
-                        // setCurretnInput={setNameInput}
                         fieldTitle={NAME}
-
-                        // register={register}
                         errorsMasssege={methods.formState.errors.name?.message}
                         fieldName={'name'}
                     />
 
                     <GenericAutocomplete
-                        // setInput={setArtistInput}
                         fieldTitle={ARTIST}
-                        // register={register}
                         errorsMasssege={methods.formState.errors.artistName?.message}
                         options={artists.map((artist) => { return artist.name })}
                         isMulitple={false}
@@ -133,10 +122,7 @@ const SongDialog: React.FC = () => {
                     />
 
                     <GenericTextField
-                        // currentInput={durationInput}
-                        // setCurretnInput={setDurationInput}
                         fieldTitle={DURATION}
-                        // register={register}
                         errorsMasssege={methods.formState.errors.duration?.message}
                         fieldName={'duration'}
                     />
