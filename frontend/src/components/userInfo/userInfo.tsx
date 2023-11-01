@@ -5,7 +5,6 @@ import useStyles from './userInfoStyle';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import DeleteUser from './deleteUser/deleteUser';
 import { changeCurrentUserByValue } from '../../redux/UserSlice';
-import Mode from '../../types/mode';
 import { resetCurrentSong } from '../../redux/SongSlice';
 
 

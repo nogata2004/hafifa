@@ -16,7 +16,7 @@ const TYPE_NAME_ERROR = 'שדה הכרחי מורכב מאותיות בלבד';
 
 const playlistsSchema = yup.object({
     name: yup.string().matches(/^[a-z, א-ת]+$/, TYPE_NAME_ERROR).required(REQUIRED_ERROR),
-    songsName: yup.array().of(yup.string()).min(0)
+    inputSongs: yup.array().of(yup.object()).min(0)
 });
 
 const PlaylistDataGrid: React.FC = () => {
@@ -25,10 +25,9 @@ const PlaylistDataGrid: React.FC = () => {
 
     const defaultValues = {
         name: '',
-        songsName: [],
+        inputSongs: [],
     };
 
-    // const { register, handleSubmit, formState: { errors }, reset } = useForm({
     const methods = useForm({
         resolver: yupResolver(playlistsSchema),
         defaultValues: defaultValues

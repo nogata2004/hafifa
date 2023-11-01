@@ -27,6 +27,7 @@ const GenericAutocomplete: React.FC<Props> = ({ fieldTitle, options, isMulitple,
                     name={fieldName}
                     render={({ field: { onChange, ...field } }) => (
                         <Autocomplete
+                            {...field}
                             className={classes.autocomplete}
                             multiple={isMulitple}
                             options={options}
@@ -34,7 +35,6 @@ const GenericAutocomplete: React.FC<Props> = ({ fieldTitle, options, isMulitple,
                             getOptionLabel={(option: any) => option.name ? option.name : ''}
                             isOptionEqualToValue={(option: any, value: any) =>
                                 option.name === value.name}
-                            {...field}
                             renderInput={(params) =>
                                 <TextField
                                     {...params}

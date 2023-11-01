@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { useMutation } from '@apollo/client';
 import { IconButton } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
-import { FieldErrors, FieldValues, UseFormHandleSubmit, UseFormRegister, UseFormReset, UseFormReturn } from 'react-hook-form';
+import { FieldValues, UseFormReturn } from 'react-hook-form';
 import React from 'react';
 
 import useStyles from './editPlaylistDialogStyle';
@@ -14,6 +14,7 @@ import { EDIT_PLAYLIST } from '../../../../db/playlists/mutation';
 import GenericAutocomplete from '../../../../../commons/genericAutocomplete/genericAutocomplete';
 import GenericTextField from '../../../../../commons/genericTextField/genericTextField';
 import { ADD_SONG_TO_PLAYLIST, DELETE_PLAYLIST_SONG } from '../../../../db/playlistSong/mutation';
+import Song from '../../../../../types/song';
 
 const NAME = 'שם';
 const SONGS = 'שירים';
@@ -31,22 +32,20 @@ const EditPlaylistDialog: React.FC<Props> = ({ currentPlaylist, methods }) => {
     const [mutationEditPlaylist] = useMutation(EDIT_PLAYLIST);
     const [mutationAddSongToPlaylist] = useMutation(ADD_SONG_TO_PLAYLIST);
     const [mutationDeleteSongPlaylist] = useMutation(DELETE_PLAYLIST_SONG);
-    const [nameInput, setNameInput] = React.useState<string>('');
-    const [songsInput, setSongsInput] = React.useState<string[] | string | null>([]);
     const { songs } = useContext(AllSongsContext);
     const { setPlaylists } = useContext(AllPlaylistsContext);
 
-    const actionEditPlaylist = () => {
-        if (currentPlaylist.name !== nameInput) {
+    const actionEditPlaylist = (data: FieldValues) => {
+        if (currentPlaylist.name !== data.name) {
             mutationEditPlaylist({
                 variables: {
                     id: currentPlaylist.id,
-                    name: nameInput
+                    name: data.name
                 },
                 onCompleted() {
                     setPlaylists!(prev => prev.map((playlist) => {
                         if (playlist.id === currentPlaylist.id) {
-                            return { ...playlist, name: nameInput }
+                            return { ...playlist, name: data.name }
                         }
                         return playlist;
                     }));
@@ -54,13 +53,10 @@ const EditPlaylistDialog: React.FC<Props> = ({ currentPlaylist, methods }) => {
             })
         };
 
-        if (typeof (songsInput) != 'string' && songsInput !== null) {
-            if (currentPlaylist.songsID !== songsInput) {
-                const songsId: string[] = songsInput.map((songName) => {
-                    return songs.find(song => (song.name === songName))!.id
-                });
-
-                songsId.map((songId) => {
+        // if (typeof (data.name ) != 'string' && songsInput !== null) {
+            const songsId: string[] = data.inputSongs.map((song: Song) => song.id);
+            if (currentPlaylist.songsID !== songsId) {
+                songsId.map((songId: string) => {
                     if (!currentPlaylist.songsID.includes(songId!)) {
                         mutationAddSongToPlaylist({
                             variables: {
@@ -84,24 +80,16 @@ const EditPlaylistDialog: React.FC<Props> = ({ currentPlaylist, methods }) => {
 
                 setPlaylists!(prev => prev.map((playlist) => {
                     if (playlist.id === currentPlaylist.id) {
-                        return { ...playlist, songsID: songsId }
+                        return { ...playlist, songsId}
                     }
                     return playlist;
                 }));
             }
-        };
-    };
-
-    const IdToName = (songsId: string[]) => {
-        return songsId.map((songId) => {
-            return songs.find((song) => { song.id === songId })!.name
-        });
+        // };
     };
 
     const openDialog = () => {
         setOpen(true);
-        setNameInput(currentPlaylist.name)
-        setSongsInput(IdToName(currentPlaylist.songsID))
     }
 
     return (
@@ -129,10 +117,10 @@ const EditPlaylistDialog: React.FC<Props> = ({ currentPlaylist, methods }) => {
 
                     <GenericAutocomplete
                         fieldTitle={SONGS}
-                        errorsMasssege={methods.formState.errors.songsName?.message}
-                        options={songs.map((song) => { return song.name })}
+                        errorsMasssege={methods.formState.errors.inputSongs?.message}
+                        options={songs}
                         isMulitple={true}
-                        fieldName={'songsName'}
+                        fieldName={'inputSongs'}
                     />
                 </div>
             </GenericDialog>

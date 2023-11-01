@@ -47,7 +47,13 @@ const ViewSong: React.FC = () => {
     }, [isPlay]);
 
     useEffect(() => {
-        currentSeconds === currentSong!.duration && moveForward();
+        if (currentSeconds === currentSong!.duration) {
+            if (songs.indexOf(currentSong!) === songs.length - 1) {
+                setIsPlay(false);
+            } else {
+                moveForward();
+            };
+        };
     }, [currentSeconds]);
 
     useEffect(() => {
@@ -80,7 +86,7 @@ const ViewSong: React.FC = () => {
 
                     <Button
                         onClick={moveForward}
-                        disabled={songs.indexOf((currentSong!)) === songs.length -1}
+                        disabled={songs.indexOf((currentSong!)) === songs.length - 1}
                     >
                         <img
 

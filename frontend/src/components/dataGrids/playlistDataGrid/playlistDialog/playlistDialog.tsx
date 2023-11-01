@@ -1,13 +1,12 @@
 import React, { useContext } from 'react';
 import { Button } from '@mui/material';
 import { useMutation } from '@apollo/client';
-import { FieldErrors, FieldValues, UseFormHandleSubmit, UseFormRegister, UseFormReset, UseFormReturn } from 'react-hook-form';
+import { FieldValues, UseFormReturn } from 'react-hook-form';
 
 import useStyles from './playlistDialogStyle';
 import GenericDialog from '../../../../commons/genericDialog/genericDialog';
 import Playlist from '../../../../types/playlist';
 import { useAppSelector } from '../../../../redux/hooks';
-// import User from '../../../../types/user';
 import { CREATE_PLAYLIST } from '../../../db/playlists/mutation';
 import GenericTextField from '../../../../commons/genericTextField/genericTextField';
 import { AllPlaylistsContext, AllSongsContext } from '../../../db/context';
@@ -50,8 +49,8 @@ const PlaylistDialog: React.FC<Props> = ({ methods }) => {
                 };
                 setPlaylists!(prev => [...prev, newPlaylist]);
 
-                if (typeof (data.songsName) != 'string') {
-                    data.songsName.map((songName: string) => {
+                if (typeof (data.songs) != 'string') {
+                    data.inputSongs.map((songName: string) => {
                         mutationAddSongToPlaylist({
                             variables: {
                                 playlistId: dataPlaylist.id,
@@ -101,10 +100,10 @@ const PlaylistDialog: React.FC<Props> = ({ methods }) => {
 
                     <GenericAutocomplete
                         fieldTitle={SONGS}
-                        errorsMasssege={methods.formState.errors.artistName?.message}
-                        options={songs.map((song) => { return song.name })}
+                        errorsMasssege={methods.formState.errors.inputSongs?.message}
+                        options={songs}
                         isMulitple={true}
-                        fieldName={'songsName'}
+                        fieldName={'inputSongs'}
                     />
                 </div>
             </GenericDialog>

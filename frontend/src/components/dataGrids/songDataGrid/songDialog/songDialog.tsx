@@ -29,7 +29,9 @@ const TYPE_DURATION_ERROR = 'שדה הכרחי חייב להיות בפורמט:
 const songsSchema = yup.object({
     name: yup.string().matches(/^[a-z, א-ת]+$/, TYPE_NAME_ERROR).required(REQUIRED_ERROR),
     artist: yup.object().required(REQUIRED_ERROR),
-    duration: yup.string().matches(/[0-5][0-9]:[0-5][0-9]/, TYPE_DURATION_ERROR).required(REQUIRED_ERROR)
+    duration: yup.string().matches(/[0-5][0-9]:[0-5][0-9]/, TYPE_DURATION_ERROR)
+        .required(REQUIRED_ERROR)
+        .max(5, TYPE_DURATION_ERROR)
 });
 
 const SongDialog: React.FC = () => {
