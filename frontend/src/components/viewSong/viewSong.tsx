@@ -112,6 +112,7 @@ const ViewSong: React.FC = () => {
                     min={0}
                     max={currentSong!.duration}
                     value={currentSeconds}
+                    onChange={(_, value) => {setCurrentSeconds(Number(value))}}
                     size='small'
                     defaultValue={currentSong!.duration}
                     aria-label='small'
