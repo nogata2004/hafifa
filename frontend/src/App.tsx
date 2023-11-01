@@ -6,7 +6,7 @@ import LogInPage from './pages/logInPage/logInPage';
 import MainPage from './pages/mainPage/mainPage';
 
 const App: React.FC = () => {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0) //unused
 
   return (
     <BrowserRouter>

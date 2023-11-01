@@ -7,7 +7,7 @@ import { AllSongsContext } from '../../db/context';
 import SongDialog from './songDialog/songDialog';
 
 
-const TITLE_TEXT = 'רשימת שירים';
+const TITLE_TEXT = 'רשימת שירים'; // just title
 
 const SongDataGrid: React.FC = () => {
     const classes = useStyles();

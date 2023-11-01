@@ -17,12 +17,12 @@ import User from '../../types/user';
 import { GET_PLAYLISTS_BY_USER } from '../../components/db/playlists/query';
 import Playlist from '../../types/playlist';
 
-interface SongId {
+interface SongId { // remove
     songId: string
 };
 
 const MainPage: React.FC = () => {
-    const currentSong = useAppSelector((state: { song: { value: Song | undefined }; }) => state.song.value);
+    const currentSong = useAppSelector((state: { song: { value: Song | undefined }; }) => state.song.value); // remove state typing
     const currentUser = useAppSelector((state: { user: { value: User | undefined }; }) => state.user.value);
     const classes = useStyles();
     const [songs, setSongs] = useState<Song[]>([]);
@@ -30,9 +30,9 @@ const MainPage: React.FC = () => {
     const [currentMode, setCurrentMode] = React.useState<Mode>(Mode.song);
 
     useQuery(GET_ALL_SONGS, {
-        variables: { "userId": currentUser?.id },
+        variables: { "userId": currentUser?.id }, // ', in any case shouldnt be tring
         onCompleted: (data) => {
-            const allSongs = data.allSongs.nodes;
+            const allSongs = data.allSongs.nodes; // better to type allSongs // create interface DBSong
             allSongs.map((song: {
                 id: string;
                 name: string;
@@ -48,9 +48,9 @@ const MainPage: React.FC = () => {
                         id: song.artistByArtistId.id,
                         name: song.artistByArtistId.name
                     },
-                    isFavorite: song.favoritesBySongId.totalCount === 1
+                    isFavorite: song.favoritesBySongId.totalCount === 1 // david
                 }
-                setSongs(prev => [...prev, newSong])
+                setSongs(prev => [...prev, newSong]) // this needs to be outside of iterator (the map)
             })
         }
     });
@@ -58,8 +58,8 @@ const MainPage: React.FC = () => {
     useQuery(GET_PLAYLISTS_BY_USER, {
         variables: { userId: currentUser?.id },
         onCompleted: (data) => {
-            const allPlaylists = data.allPlaylists.nodes;
-            allPlaylists.map((playlist: {
+            const allPlaylists = data.allPlaylists.nodes; // define type here
+            allPlaylists.map((playlist: { // kanal interface
                 id: string;
                 name: string;
                 playlistSongsByPlaylistId: { nodes: SongId[] };
@@ -67,22 +67,22 @@ const MainPage: React.FC = () => {
                 const newPlaylist: Playlist = {
                     id: playlist.id,
                     name: playlist.name,
-                    songsID: playlist.playlistSongsByPlaylistId.nodes.map(songs => { return songs.songId })
+                    songsID: playlist.playlistSongsByPlaylistId.nodes.map(songs => { return songs.songId }) // remove the brackets and return
                 }
-                setPlaylists(prev => [...prev, newPlaylist])
+                setPlaylists(prev => [...prev, newPlaylist]) // kanal 
             })
         }
     });
 
     return (
-        <AllSongsContext.Provider value={{ songs, setSongs }}>
+        <AllSongsContext.Provider value={{ songs, setSongs }}> // combine
             <AllPlaylistsContext.Provider value={{ playlists, setPlaylists }}>
                 <div className={classes.body}>
                     <div className={classes.mainPart}>
                         <UserInfo />
 
                         <div className={classes.table}>
-                            {currentMode === Mode.song && <SongDataGrid />}
+                            {currentMode === Mode.song && <SongDataGrid />} // routes // make a mapper ie: tableMapper[currentMode]
                             {currentMode === Mode.playlist && <PlaylistDataGrid />}
                             {currentMode === Mode.favorite && <FavoriteDataGrid />}
                         </div>
@@ -93,7 +93,7 @@ const MainPage: React.FC = () => {
                         />
                     </div>
 
-                    {currentSong && <ViewSong />}
+                    {currentSong && <ViewSong />} // better use !!
                 </div>
             </AllPlaylistsContext.Provider>
         </AllSongsContext.Provider>

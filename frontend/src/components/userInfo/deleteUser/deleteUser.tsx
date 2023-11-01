@@ -22,7 +22,7 @@ const DeleteUser: React.FC = () => {
     const [open, setOpen] = React.useState<boolean>(false);
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const [mutationFunction] = useMutation(DELETE_USER);
+    const [mutationFunction] = useMutation(DELETE_USER); // rename
     const currentUser = useAppSelector((state) => state.user.value);
 
     const deleteUser = () => {
@@ -32,7 +32,7 @@ const DeleteUser: React.FC = () => {
             },
         })
         dispatch(changeCurrentUserByValue(undefined));
-        navigate('/');
+        navigate('/'); // route
     };
 
     return (
@@ -45,7 +45,7 @@ const DeleteUser: React.FC = () => {
 
             <Dialog
                 open={open}
-                keepMounted
+                keepMounted // remove
                 onClose={() => setOpen(false)}
                 className={classes.body}
             >

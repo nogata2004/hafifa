@@ -13,9 +13,9 @@ import { AllSongsContext } from '../db/context';
 import Song from '../../types/song';
 
 
-const ViewSong: React.FC = () => {
-    const [currentSeconds, setCurrentSeconds] = React.useState<number>(0);
-    const [isPlay, setIsPlay] = React.useState<boolean>(true);
+const ViewSong: React.FC = () => { // divide code to customHooks.
+    const [currentSeconds, setCurrentSeconds] = React.useState<number>(0); // react. delete
+    const [isPlay, setIsPlay] = React.useState<boolean>(true); // same
     const classes = useStyles();
     const currentSong = useAppSelector((state) => state.song.value);
     const dispatch = useAppDispatch();
@@ -25,8 +25,8 @@ const ViewSong: React.FC = () => {
         isPlay ? setIsPlay(false) : setIsPlay(true);
     };
 
-    const moveForward = () => {
-        const currentSongIndex = songs.indexOf(currentSong!);
+    const moveForward = () => { // combine these functions to something nice
+        const currentSongIndex = songs.indexOf(currentSong!); // u can put this outside the function
         const nextSong: Song = songs[currentSongIndex + 1];
         dispatch(changeCurrentSongByValue(nextSong));
     };
@@ -61,7 +61,7 @@ const ViewSong: React.FC = () => {
     }, [currentSong]);
 
 
-    return (
+    return ( // Divide comp into several new ones
         <div className={classes.body}>
             <div className={classes.appPart}>
                 <div className={classes.controls}>
@@ -89,7 +89,6 @@ const ViewSong: React.FC = () => {
                         disabled={songs.indexOf((currentSong!)) === songs.length - 1}
                     >
                         <img
-
                             className={classes.slidesStopButtons}
                             src={slideRight}
                         />

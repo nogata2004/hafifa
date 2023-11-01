@@ -43,7 +43,9 @@ const GenericDataTable: React.FC<Props> = ({ filterSongs }) => {
         };
     };
 
-    const columns: GridColDef[] = [
+    // const { columns, rows } = useNogaTable(classes)
+ 
+    const columns: GridColDef[] = [ // make customhook useTable that returns column and rows
         {
             field: 'name',
             width: 350,
@@ -115,7 +117,7 @@ const GenericDataTable: React.FC<Props> = ({ filterSongs }) => {
             columns={columns}
             hideFooter
             rowHeight={60}
-            rowSelectionModel={currentSong ? currentSong.id : -1}
+            rowSelectionModel={currentSong ? currentSong.id : -1} // !!, use undefined instead of -1
             onRowClick={(params) => changeCurrentSong(params)}
         />
     );

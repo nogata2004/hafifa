@@ -17,7 +17,7 @@ export const userSlice = createSlice({
     reducers: {
         changeCurrentUserByValue: (state, inputUser: PayloadAction<User | undefined>) => {
             state.value = inputUser.payload;
-        }
+        } // Choose if u want to add logout, or remove the songslice second action.
     }
 });
 

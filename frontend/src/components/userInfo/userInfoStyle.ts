@@ -9,7 +9,7 @@ const useStyles = makeStyles({
         display: 'flex',
         flexDirection: 'column',
         padding: '5px',
-        height: 'min-content'
+        height: 'min-content' // check
     },
 
     helloUser: {
@@ -32,7 +32,7 @@ const useStyles = makeStyles({
             fontSize: '15px',
             padding: 0,
             paddingLeft: '30px',
-            paddingRight: '30px',
+            paddingRight: '30px', // use shorthand variation '0 30px'
         },
         '&.MuiButton-root': {
             backgroundColor: 'rgb(130, 130, 124)',
@@ -42,7 +42,7 @@ const useStyles = makeStyles({
             backgroundColor: 'rgb(130, 130, 124)',
         },
         width: 'fit-content',
-        height: 'min-content',
+        height: 'min-content', // check
         display: 'flex',
     },
 })

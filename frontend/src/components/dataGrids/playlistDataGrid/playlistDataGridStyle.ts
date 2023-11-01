@@ -5,7 +5,7 @@ const useStyles = makeStyles({
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
-        maxHeight: '550px',
+        maxHeight: '550px', // % // why max ? 
         textAlign: 'center',
         gap: '15px',
         alignItems: 'center',

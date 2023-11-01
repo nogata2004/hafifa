@@ -17,16 +17,16 @@ const UserInfo: React.FC = () => {
     const currentUser = useAppSelector((state) => state.user.value);
     const dispatch = useAppDispatch();
 
-    const moveToMainPage = () => {
+    const moveToMainPage = () => { // move to login page*
         dispatch(changeCurrentUserByValue(undefined));
         dispatch(resetCurrentSong());
-        navigate('/');
+        navigate('/'); // '/' put in route obj
     };
 
     return (
         <div className={classes.body}>
             <Typography className={classes.helloUser}>
-                {currentUser?.firstName} {currentUser?.lastName} {HELLO}
+                {currentUser?.firstName} {currentUser?.lastName} {HELLO} {/* remove question marks */}
             </Typography>
 
             <div className={classes.buttons}>

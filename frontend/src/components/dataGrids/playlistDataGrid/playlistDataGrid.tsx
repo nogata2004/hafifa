@@ -12,9 +12,9 @@ import PlaylistDialog from './playlistDialog/playlistDialog';
 
 const TITLE_TEXT = 'רשימת פלייליסטים';
 const REQUIRED_ERROR = 'שדה הכרחי';
-const TYPE_NAME_ERROR = 'שדה הכרחי מורכב מאותיות בלבד';
+const TYPE_NAME_ERROR = 'שדה הכרחי מורכב מאותיות בלבד'; // see below
 
-const playlistsSchema = yup.object({
+const playlistsSchema = yup.object({ // make validationSchema file. 
     name: yup.string().matches(/^[a-z, א-ת]+$/, TYPE_NAME_ERROR).required(REQUIRED_ERROR),
     inputSongs: yup.array().of(yup.object()).min(0)
 });

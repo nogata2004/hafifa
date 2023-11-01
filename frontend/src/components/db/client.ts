@@ -2,8 +2,8 @@ import { ApolloClient, DefaultOptions, HttpLink, InMemoryCache } from "@apollo/c
 
 const defaultOptions: DefaultOptions = {
     watchQuery: {
-        fetchPolicy: 'no-cache',
-        errorPolicy: 'ignore'
+        fetchPolicy: 'no-cache', // apollo fetchpolicy
+        errorPolicy: 'ignore' // apollo errorpolicy
     },
     query: {
         fetchPolicy: 'no-cache',

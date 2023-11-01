@@ -16,11 +16,12 @@ interface Props {
 
 const FavoriteButton: React.FC<Props> = ({ isFavorite, songId }) => {
     const classes = useStyles();
-    const currentUser = useAppSelector((state: { user: { value: any; }; }) => state.user.value);
+    const currentUser = useAppSelector((state: { user: { value: any; }; }) => state.user.value); // state typing
     const [mutationAddFavorite] = useMutation(ADD_FAVORITE);
     const [mutationDeleteFavorite] = useMutation(DELETE_FAVORITE);
     const { setSongs } = useContext(AllSongsContext);
 
+    //custom hoko
     const removeFavorite = (event: { stopPropagation: () => void; }) => {
         event.stopPropagation();
         mutationDeleteFavorite({

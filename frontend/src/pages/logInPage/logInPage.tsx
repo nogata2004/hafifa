@@ -8,11 +8,11 @@ import { GET_ALL_USERS } from '../../components/db/users/query';
 import User from '../../types/user';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { changeCurrentUserByValue } from '../../redux/UserSlice';
-import mode from '../../types/mode';
+import mode from '../../types/mode'; //unused
 
 
 const TITLE = 'spoofy';
-const SELECT_TITLE = 'בחר משתמש להתחברות';
+const SELECT_TITLE = 'בחר משתמש להתחברות'; // select-label
 const BUTTON = 'התחבר';
 
 const LogInPage: React.FC = () => {
@@ -30,7 +30,7 @@ const LogInPage: React.FC = () => {
     });
 
     const moveToMainPage = () => {
-        currentUser && navigate('/spoofy');
+        currentUser && navigate('/spoofy'); // make routes const (object)
     };
 
     const changeCurrentUser = (selectedUser: User) => {
@@ -42,9 +42,9 @@ const LogInPage: React.FC = () => {
             <Typography className={classes.spoofyText}>
                 {TITLE}
             </Typography>
-
-            <FormControl>
-                <InputLabel
+            // unnecssary?
+            <FormControl> 
+                <InputLabel // same here? check label
                     focused={false}
                     className={classes.inputLabel}>
                     {SELECT_TITLE}
@@ -53,11 +53,12 @@ const LogInPage: React.FC = () => {
                 <Select
                     className={classes.selectConect}
                     defaultValue={''}
+                    //label
                 >
                     {users.map((user) => (
                         <MenuItem
                             key={user.id}
-                            id={user.id}
+                            id={user.id} // unnecssary
                             value={user.id}
                             onClick={() => changeCurrentUser(user)}>
                             {user.firstName}
@@ -68,7 +69,7 @@ const LogInPage: React.FC = () => {
 
             <Button
                 onClick={moveToMainPage}
-                className={classes.buttonConect}
+                className={classes.buttonConect} // typo
             >
                 {BUTTON}
             </Button>

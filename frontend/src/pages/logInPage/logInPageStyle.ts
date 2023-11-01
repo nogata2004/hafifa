@@ -4,8 +4,8 @@ const useStyles = makeStyles({
     body: {
         height: '98vh',
         boxSizing: 'border-box',
-        margin: 0,
-        padding: 0,
+        margin: 0, // unnecesarry?
+        padding: 0, // unnecesary?
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
@@ -36,14 +36,14 @@ const useStyles = makeStyles({
         },
         '& .css-hfutr2-MuiSvgIcon-root-MuiSelect-icon': {
             color: 'rgb(250, 250, 250)',
-            direction: 'ltr',
-            position: 'initial',
+            direction: 'ltr', // ?
+            position: 'initial', // ?
             fontSize: '50px'
         },
         '& .css-bpeome-MuiSvgIcon-root-MuiSelect-icon': {
             color: 'rgb(250, 250, 250)',
-            direction: 'ltr',
-            position: 'initial',
+            direction: 'ltr', // ?
+            position: 'initial', // ?
             fontSize: '50px'
         },
         width: '350px',
@@ -51,7 +51,7 @@ const useStyles = makeStyles({
 
     inputLabel: {
         '&.css-14s5rfu-MuiFormLabel-root-MuiInputLabel-root': {
-            position: 'absulute',
+            position: 'absulute', // typo, remove? 
             fontSize: '26px',
             color: 'rgb(250, 250, 250)',
             textAlign: 'center',

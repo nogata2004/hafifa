@@ -9,7 +9,7 @@ interface Props {
     fieldTitle: string;
     options: object[];
     isMulitple: boolean;
-    errorsMasssege: string | FieldError | Merge<FieldError, FieldErrorsImpl<any>> | undefined;
+    errorsMasssege: string | FieldError | Merge<FieldError, FieldErrorsImpl<any>> | undefined; // typo
     fieldName: string;
 };
 

@@ -1,5 +1,6 @@
 import { gql } from "@apollo/client";
 
+//mymutation
 export const ADD_SONG_TO_PLAYLIST = gql`
 mutation MyMutation($playlistId: UUID!, $songId: UUID!) {
     createPlaylistSong(

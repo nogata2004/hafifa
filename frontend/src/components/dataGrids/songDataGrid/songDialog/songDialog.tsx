@@ -26,6 +26,7 @@ const REQUIRED_ERROR = 'שדה הכרחי';
 const TYPE_NAME_ERROR = 'שדה הכרחי מורכב מאותיות בלבד';
 const TYPE_DURATION_ERROR = 'שדה הכרחי חייב להיות בפורמט: mm:ss';
 
+// export to songDialogValidationSchema
 const songsSchema = yup.object({
     name: yup.string().matches(/^[a-z, א-ת]+$/, TYPE_NAME_ERROR).required(REQUIRED_ERROR),
     artist: yup.object().required(REQUIRED_ERROR),
@@ -34,7 +35,7 @@ const songsSchema = yup.object({
         .max(5, TYPE_DURATION_ERROR)
 });
 
-const SongDialog: React.FC = () => {
+const SongDialog: React.FC = () => { // custom hook
     const classes = useStyles();
     const [open, setOpen] = React.useState<boolean>(false);
     const [artists, setArtists] = useState<Artist[]>([]);
@@ -59,7 +60,7 @@ const SongDialog: React.FC = () => {
         }
     });
 
-    const changeDurationInput = (durationInput: string) => {
+    const changeDurationInput = (durationInput: string) => { // check if u can get a better type // there are datetime fns to translate time
         const durationMinutes: number = Number(durationInput.split(':')[0]);
         const durationSeconds: number = Number(durationInput.split(':')[1]);
         return durationMinutes * 60 + durationSeconds;
@@ -73,7 +74,7 @@ const SongDialog: React.FC = () => {
                 duration: changeDurationInput(data.duration)
             },
             onCompleted(data) {
-                const dataSong = data.createSong.song;
+                const dataSong = data.createSong.song; // typing haser
                 const newSong: Song = {
                     id: dataSong.id,
                     name: dataSong.name,
@@ -112,7 +113,7 @@ const SongDialog: React.FC = () => {
                     <GenericTextField
                         fieldTitle={NAME}
                         errorsMasssege={methods.formState.errors.name?.message}
-                        fieldName={'name'}
+                        fieldName={'name'} // remove brackets // these need to be variables, that are equal to the default values keys.
                     />
 
                     <GenericAutocomplete

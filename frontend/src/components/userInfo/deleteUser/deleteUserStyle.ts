@@ -4,7 +4,7 @@ const useStyles = makeStyles({
     body: {
         display: 'flex',
         flexDirection: 'column',
-        '& .css-1t1j96h-MuiPaper-root-MuiDialog-paper': {
+        '& .css-1t1j96h-MuiPaper-root-MuiDialog-paper': { // try to change the selector
             borderRadius: '10px'
         }
     },
@@ -13,7 +13,7 @@ const useStyles = makeStyles({
         '&.MuiButton-text': {
             color: 'rgb(250, 250, 250)',
             fontSize: '15px',
-            padding: 0,
+            padding: 0, // shorthand padding syntax '0 30px'
             paddingLeft: '30px',
             paddingRight: '30px',
         },
@@ -27,7 +27,7 @@ const useStyles = makeStyles({
             backgroundColor: 'rgb(191, 90, 74)',
         },
         width: 'fit-content',
-        height: 'min-content',
+        height: 'min-content', // .
         display: 'flex',
     },
 
@@ -35,7 +35,7 @@ const useStyles = makeStyles({
         '&.MuiButton-text': {
             color: 'rgb(250, 250, 250)',
             fontSize: '15px',
-            padding: 0,
+            padding: 0, // .
             paddingLeft: '30px',
             paddingRight: '30px',
         },
@@ -48,12 +48,12 @@ const useStyles = makeStyles({
             backgroundColor: 'rgb(130, 130, 124)',
         },
         width: 'fit-content',
-        height: 'min-content',
+        height: 'min-content', // .
         display: 'flex',
     },
 
     buttons: {
-        '&.css-knqc4i-MuiDialogActions-root': {
+        '&.css-knqc4i-MuiDialogActions-root': { // seletor
             justifyContent: 'center'
         }
     }

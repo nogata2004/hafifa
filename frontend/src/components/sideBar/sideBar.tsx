@@ -17,7 +17,7 @@ const SideBar: React.FC<Props> = ({ currentMode, setCurrentMode }) => {
 
     const changeCurrentMode = (selectedMode: Mode) => {
         if (currentMode === selectedMode) {
-            setCurrentMode(Mode.none)
+            setCurrentMode(Mode.none) // replace with undefined
         } else {
             setCurrentMode(selectedMode);
         }
@@ -37,10 +37,10 @@ const SideBar: React.FC<Props> = ({ currentMode, setCurrentMode }) => {
             </div>
 
             <div className={classes.sideBar}>
-                {Object.entries(Mode).filter((mode) => mode[1] !== Mode.none).map((mode) => (
+                {Object.entries(Mode).filter((mode) => mode[1] !== Mode.none).map((mode) => ( // remove filter after chaning modes enum
                     <ListItemButton
-                        key={mode[0]}
-                        id={mode[0]}
+                        key={mode[0]} // remove usage of key. also remove object entries, and remove filter
+                        id={mode[0]} // remove usage of key
                         selected={currentMode === mode[1]}
                         onClick={() => changeCurrentMode(mode[1])}
                         className={classes.optionButton}
