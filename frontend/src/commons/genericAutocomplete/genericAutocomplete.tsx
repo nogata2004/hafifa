@@ -7,7 +7,7 @@ import useStyles from './genericAutocompleteStyle';
 
 interface Props {
     fieldTitle: string;
-    options: string[];
+    options: object[];
     isMulitple: boolean;
     errorsMasssege: string | FieldError | Merge<FieldError, FieldErrorsImpl<any>> | undefined;
     fieldName: string;
@@ -25,16 +25,19 @@ const GenericAutocomplete: React.FC<Props> = ({ fieldTitle, options, isMulitple,
 
                 <Controller
                     name={fieldName}
-                    render={({ field }) => (
+                    render={({ field: { onChange, ...field } }) => (
                         <Autocomplete
                             className={classes.autocomplete}
                             multiple={isMulitple}
                             options={options}
+                            onChange={(_, value) => onChange(value)}
+                            getOptionLabel={(option: any) => option.name ? option.name : ''}
+                            isOptionEqualToValue={(option: any, value: any) =>
+                                option.name === value.name}
                             {...field}
                             renderInput={(params) =>
                                 <TextField
                                     {...params}
-                                    
                                 />
                             }
                         />

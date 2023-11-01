@@ -16,19 +16,22 @@ const TYPE_NAME_ERROR = 'שדה הכרחי מורכב מאותיות בלבד';
 
 const playlistsSchema = yup.object({
     name: yup.string().matches(/^[a-z, א-ת]+$/, TYPE_NAME_ERROR).required(REQUIRED_ERROR),
-    songsName: yup.string()
+    songsName: yup.array().of(yup.string()).min(0)
 });
 
 const PlaylistDataGrid: React.FC = () => {
     const classes = useStyles();
     const { playlists } = useContext(AllPlaylistsContext);
 
-    const { register, handleSubmit, formState: { errors }, reset } = useForm({
+    const defaultValues = {
+        name: '',
+        songsName: [],
+    };
+
+    // const { register, handleSubmit, formState: { errors }, reset } = useForm({
+    const methods = useForm({
         resolver: yupResolver(playlistsSchema),
-        // defaultValues: {
-        //     name: '',
-        //     songsName: ''
-        // }
+        defaultValues: defaultValues
     });
 
 
@@ -42,21 +45,15 @@ const PlaylistDataGrid: React.FC = () => {
                 {playlists.map((playlist) => (
                     <div key={playlist.id}>
                         <ViewPlaylist
+                            methods={methods}
                             currentPlaylist={playlist}
-                            handleSubmit={handleSubmit}
-                            reset={reset}
-                            register={register}
-                            errors={errors}
                         />
                     </div>
                 ))}
             </div>
 
             <PlaylistDialog
-                handleSubmit={handleSubmit}
-                register={register}
-                reset={reset}
-                errors={errors}
+                methods={methods}
             />
         </div>
     );

@@ -1,13 +1,13 @@
 import React, { useContext } from 'react';
 import { Button } from '@mui/material';
 import { useMutation } from '@apollo/client';
-import { FieldErrors, FieldValues, UseFormHandleSubmit, UseFormRegister, UseFormReset } from 'react-hook-form';
+import { FieldErrors, FieldValues, UseFormHandleSubmit, UseFormRegister, UseFormReset, UseFormReturn } from 'react-hook-form';
 
 import useStyles from './playlistDialogStyle';
 import GenericDialog from '../../../../commons/genericDialog/genericDialog';
 import Playlist from '../../../../types/playlist';
 import { useAppSelector } from '../../../../redux/hooks';
-import User from '../../../../types/user';
+// import User from '../../../../types/user';
 import { CREATE_PLAYLIST } from '../../../db/playlists/mutation';
 import GenericTextField from '../../../../commons/genericTextField/genericTextField';
 import { AllPlaylistsContext, AllSongsContext } from '../../../db/context';
@@ -22,27 +22,23 @@ const SUBMIT_BUTTON_TEXT = 'צור פלייליסט';
 const DIALOG_TITLE = 'יצירת פלייליסט';
 
 interface Props {
-    handleSubmit: UseFormHandleSubmit<FieldValues, undefined>
-    reset: UseFormReset<FieldValues>;
-    register: UseFormRegister<FieldValues>;
-    errors: FieldErrors<FieldValues>
+    methods: UseFormReturn<any, any, undefined>;
 };
 
-const PlaylistDialog: React.FC<Props> = ({handleSubmit, reset, register, errors }) => {
+const PlaylistDialog: React.FC<Props> = ({ methods }) => {
     const classes = useStyles();
-    const currentUser = useAppSelector((state: { user: { value: User | undefined } }) => state.user.value);
+    const currentUser = useAppSelector((state) => state.user.value);
+
     const [open, setOpen] = React.useState<boolean>(false);
     const [mutationCreatePlaylist] = useMutation(CREATE_PLAYLIST);
     const [mutationAddSongToPlaylist] = useMutation(ADD_SONG_TO_PLAYLIST);
-    const [nameInput, setNameInput] = React.useState<string>('');
-    const [songsInput, setSongsInput] = React.useState<string | string[] | null>([]);
     const { songs } = useContext(AllSongsContext);
     const { setPlaylists } = useContext(AllPlaylistsContext);
 
-    const actionAddPlaylist = () => {
+    const actionAddPlaylist = (data: FieldValues) => {
         mutationCreatePlaylist({
             variables: {
-                name: nameInput,
+                name: data.name,
                 userId: currentUser!.id
             },
             onCompleted(data) {
@@ -54,8 +50,8 @@ const PlaylistDialog: React.FC<Props> = ({handleSubmit, reset, register, errors 
                 };
                 setPlaylists!(prev => [...prev, newPlaylist]);
 
-                if (typeof (songsInput) != 'string') {
-                    songsInput?.map((songName: string) => {
+                if (typeof (data.songsName) != 'string') {
+                    data.songsName.map((songName: string) => {
                         mutationAddSongToPlaylist({
                             variables: {
                                 playlistId: dataPlaylist.id,
@@ -93,25 +89,19 @@ const PlaylistDialog: React.FC<Props> = ({handleSubmit, reset, register, errors 
                 setOpen={setOpen}
                 submitText={SUBMIT_BUTTON_TEXT}
                 dialogTitle={DIALOG_TITLE}
-                handleSubmit={handleSubmit}
-                reset={reset}
+                methods={methods}
                 submitAction={actionAddPlaylist}
             >
                 <div>
                     <GenericTextField
-                        currentInput={nameInput}
-                        setCurretnInput={setNameInput}
                         fieldTitle={NAME}
-                        register={register}
-                        errorsMasssege={errors.name?.message}
+                        errorsMasssege={methods.formState.errors.name?.message}
                         fieldName={'name'}
                     />
 
                     <GenericAutocomplete
-                        setInput={setSongsInput}
                         fieldTitle={SONGS}
-                        register={register}
-                        errorsMasssege={errors.songsName?.message}
+                        errorsMasssege={methods.formState.errors.artistName?.message}
                         options={songs.map((song) => { return song.name })}
                         isMulitple={true}
                         fieldName={'songsName'}

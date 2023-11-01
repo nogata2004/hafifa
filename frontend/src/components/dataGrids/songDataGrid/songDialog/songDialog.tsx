@@ -28,7 +28,7 @@ const TYPE_DURATION_ERROR = 'שדה הכרחי חייב להיות בפורמט:
 
 const songsSchema = yup.object({
     name: yup.string().matches(/^[a-z, א-ת]+$/, TYPE_NAME_ERROR).required(REQUIRED_ERROR),
-    artistName: yup.string().required(REQUIRED_ERROR),
+    artist: yup.object().required(REQUIRED_ERROR),
     duration: yup.string().matches(/[0-5][0-9]:[0-5][0-9]/, TYPE_DURATION_ERROR).required(REQUIRED_ERROR)
 });
 
@@ -41,7 +41,7 @@ const SongDialog: React.FC = () => {
 
     const defaultValues = {
         name: '',
-        artistName: '',
+        artist: null,
         duration: ''
     };
 
@@ -64,11 +64,10 @@ const SongDialog: React.FC = () => {
     };
 
     const addSong = (data: FieldValues) => {
-        console.log(data)
         mutationCreateSong({
             variables: {
                 name: data.name,
-                artistId: artists.find(artist => (artist.name === data.artistName))?.id,
+                artistId: data.artist.id,
                 duration: changeDurationInput(data.duration)
             },
             onCompleted(data) {
@@ -85,6 +84,7 @@ const SongDialog: React.FC = () => {
                 }
                 setSongs!(prev => [...prev, newSong])
                 setOpen(false);
+                methods.reset();
             }
         })
     };
@@ -115,10 +115,10 @@ const SongDialog: React.FC = () => {
 
                     <GenericAutocomplete
                         fieldTitle={ARTIST}
-                        errorsMasssege={methods.formState.errors.artistName?.message}
-                        options={artists.map((artist) => { return artist.name })}
+                        errorsMasssege={methods.formState.errors.artist?.message}
+                        options={artists}
                         isMulitple={false}
-                        fieldName={'artistName'}
+                        fieldName={'artist'}
                     />
 
                     <GenericTextField

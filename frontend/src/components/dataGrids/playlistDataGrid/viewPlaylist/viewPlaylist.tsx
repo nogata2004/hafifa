@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import { Typography } from '@mui/material';
-import { FieldErrors, FieldValues, UseFormHandleSubmit, UseFormRegister, UseFormReset } from 'react-hook-form';
+import { FieldErrors, FieldValues, UseFormHandleSubmit, UseFormRegister, UseFormReset, UseFormReturn } from 'react-hook-form';
 import React from 'react';
 
 import useStyles from './viewPlaylistStyle';
@@ -11,14 +11,11 @@ import EditPlaylistDialog from './editPlaylistDialog/editPlaylistDialog';
 
 
 interface Props {
+    methods: UseFormReturn<any, any, undefined>;
     currentPlaylist: Playlist;
-    handleSubmit: UseFormHandleSubmit<FieldValues, undefined>;
-    reset: UseFormReset<FieldValues>;
-    register: UseFormRegister<FieldValues>;
-    errors: FieldErrors<FieldValues>;
 };
 
-const ViewPlaylist: React.FC<Props> = ({ currentPlaylist, handleSubmit, reset, register, errors }) => {
+const ViewPlaylist: React.FC<Props> = ({ methods, currentPlaylist }) => {
     const classes = useStyles();
     const { songs } = useContext(AllSongsContext);
 
@@ -27,10 +24,7 @@ const ViewPlaylist: React.FC<Props> = ({ currentPlaylist, handleSubmit, reset, r
             <div className={classes.title}>
                 <EditPlaylistDialog
                     currentPlaylist={currentPlaylist}
-                    handleSubmit={handleSubmit}
-                    reset={reset}
-                    register={register}
-                    errors={errors}
+                    methods={methods}
                 />
 
                 <Typography className={classes.playlistTitle}>

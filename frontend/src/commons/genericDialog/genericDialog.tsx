@@ -29,17 +29,17 @@ const GenericDialog: React.FC<Props> = ({
 }) => {
     const classes = useStyles()
 
-    // const closeDialog = () => {
-    //     reset();
-    //     setOpen(false);
-    // };
+    const closeDialog = () => {
+        methods.reset();
+        setOpen(false);
+    };
 
     return (
         <div >
             <Dialog
                 open={open}
                 keepMounted
-                onClose={() => { setOpen(false) }}
+                onClose={closeDialog}
                 className={classes.body}
             >
                 <DialogTitle className={classes.title}>
