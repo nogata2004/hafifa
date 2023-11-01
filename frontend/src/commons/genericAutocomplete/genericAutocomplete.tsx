@@ -1,23 +1,22 @@
 import React, { useState } from 'react';
 import { Autocomplete, TextField, Typography } from '@mui/material';
-import { FieldError, FieldErrors, FieldErrorsImpl, FieldValues, Merge, UseFormRegister } from 'react-hook-form';
+import { Controller, FieldError, FieldErrors, FieldErrorsImpl, FieldValues, Merge, UseFormRegister, useFormContext } from 'react-hook-form';
 
 import useStyles from './genericAutocompleteStyle';
 
 
 interface Props {
-    // setListInput?: React.Dispatch<React.SetStateAction<string[]>>;
-    setInput: React.Dispatch<React.SetStateAction<string[] | string | null>>;
+    // setInput: React.Dispatch<React.SetStateAction<string[] | string | null>>;
     fieldTitle: string;
     options: string[];
     isMulitple: boolean;
-    register: UseFormRegister<FieldValues>;
+    // register: UseFormRegister<FieldValues>;
     errorsMasssege: string | FieldError | Merge<FieldError, FieldErrorsImpl<any>> | undefined;
     fieldName: string;
 };
 
 
-const GenericAutocomplete: React.FC<Props> = ({ setInput, fieldTitle, options, isMulitple, register, errorsMasssege, fieldName }) => {
+const GenericAutocomplete: React.FC<Props> = ({ fieldTitle, options, isMulitple, errorsMasssege, fieldName }) => {
     const classes = useStyles();
 
     return (
@@ -27,18 +26,24 @@ const GenericAutocomplete: React.FC<Props> = ({ setInput, fieldTitle, options, i
                     {fieldTitle}
                 </Typography>
 
-                <Autocomplete
-                    className={classes.autocomplete}
-                    // disablePortal
-                    multiple={isMulitple}
-                    onChange={(event, value) => setInput(value)}
-                    options={options}
-                    renderInput={(params) =>
-                        <TextField
-                            {...register(fieldName)}
-                            {...params}
+                <Controller
+                    render={({ field }) => (
+                        <Autocomplete
+                            className={classes.autocomplete}
+                            multiple={isMulitple}
+                            // onChange={(event, value) => setInput(value)}
+                            options={options}
+                            // value={isMulitple === true ? options : null}
+                            renderInput={(params) =>
+                                <TextField
+                                    // {...register(fieldName)}
+                                    {...params}
+                                />
+                            }
                         />
-                    }
+                    )}
+                    name={fieldName}
+                    // control={control}
                 />
 
                 <Typography className={classes.errorMassege}>

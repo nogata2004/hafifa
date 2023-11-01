@@ -4,49 +4,51 @@ import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogTitle from '@mui/material/DialogTitle';
 import { DialogContent } from '@mui/material';
-import { FieldValues, UseFormHandleSubmit, UseFormReset, UseFormReturn } from 'react-hook-form';
+import { FieldValues, FormProvider, UseFormHandleSubmit, UseFormReset, UseFormReturn } from 'react-hook-form';
 
 import useStyles from './genericDialogStyle';
 
 interface Props {
     open: boolean;
-    setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+    // setOpen: React.Dispatch<React.SetStateAction<boolean>>;
     submitText: string;
     dialogTitle: string;
-    handleSubmit: UseFormHandleSubmit<FieldValues, undefined>;
-    reset: UseFormReset<FieldValues>;
+    methods: UseFormReturn<any, any, undefined>
+    // handleSubmit: UseFormHandleSubmit<FieldValues, undefined>;
+    // reset: UseFormReset<FieldValues>;
     children: JSX.Element;
-    submitAction: () => void;
+    submitAction: (data: FieldValues) => void;
 };
 
 const GenericDialog: React.FC<Props> = ({
     open,
-    setOpen,
+    // setOpen,
     submitText,
     dialogTitle,
     submitAction,
-    handleSubmit,
-    reset,
+    methods,
+    // handleSubmit,
+    // reset,
     children
 }) => {
     const classes = useStyles()
 
     const onSubmitHandler = () => {
-        submitAction();
-        closeDialog();
+        // submitAction();
+        // closeDialog();
     };
 
-    const closeDialog = () => {
-        reset();
-        setOpen(false);
-    };
+    // const closeDialog = () => {
+    //     reset();
+    //     setOpen(false);
+    // };
 
     return (
         <div >
             <Dialog
                 open={open}
                 keepMounted
-                onClose={closeDialog}
+                // onClose={closeDialog}
                 aria-describedby="alert-dialog-new-song"
                 className={classes.body}
             >
@@ -54,8 +56,9 @@ const GenericDialog: React.FC<Props> = ({
                     {dialogTitle}
                 </DialogTitle>
 
+                <FormProvider {...methods}>
                     <form
-                        onSubmit={handleSubmit(onSubmitHandler)}
+                        onSubmit={methods.handleSubmit(submitAction)}
                         className={classes.content}
                     >
                         <DialogContent >
@@ -67,13 +70,13 @@ const GenericDialog: React.FC<Props> = ({
                         >
                             <Button
                                 type='submit'
-                                onSubmit={submitAction}
                                 className={classes.actionButton}
                             >
                                 {submitText}
                             </Button>
                         </DialogActions>
                     </form>
+                </FormProvider>
             </Dialog>
         </div>
     );

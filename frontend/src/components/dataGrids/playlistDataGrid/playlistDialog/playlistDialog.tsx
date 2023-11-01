@@ -30,7 +30,7 @@ interface Props {
 
 const PlaylistDialog: React.FC<Props> = ({handleSubmit, reset, register, errors }) => {
     const classes = useStyles();
-    const currentUser = useAppSelector((state: { user: { value: User | undefined }; }) => state.user.value);
+    const currentUser = useAppSelector((state: { user: { value: User | undefined } }) => state.user.value);
     const [open, setOpen] = React.useState<boolean>(false);
     const [mutationCreatePlaylist] = useMutation(CREATE_PLAYLIST);
     const [mutationAddSongToPlaylist] = useMutation(ADD_SONG_TO_PLAYLIST);

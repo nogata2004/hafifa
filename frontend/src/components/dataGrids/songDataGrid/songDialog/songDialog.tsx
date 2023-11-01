@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useForm } from 'react-hook-form';
+import { FieldValues, useForm } from 'react-hook-form';
 import { useMutation, useQuery } from '@apollo/client';
 import { Button } from '@mui/material';
 
@@ -35,15 +35,23 @@ const songsSchema = yup.object({
 const SongDialog: React.FC = () => {
     const classes = useStyles();
     const [open, setOpen] = React.useState<boolean>(false);
-    const [nameInput, setNameInput] = React.useState<string>('');
-    const [artistInput, setArtistInput] = React.useState<string | null | string[]>(null);
-    const [durationInput, setDurationInput] = React.useState<string>('');
+    // const [nameInput, setNameInput] = React.useState<string>('');
+    // const [artistInput, setArtistInput] = React.useState<string | null | string[]>(null);
+    // const [durationInput, setDurationInput] = React.useState<string>('');
     const [artists, setArtists] = useState<Artist[]>([]);
     const [mutationCreateSong] = useMutation(CREATE_SONG);
     const { setSongs } = useContext(AllSongsContext);
 
-    const { register, handleSubmit, formState: { errors }, reset } = useForm({
-        resolver: yupResolver(songsSchema)
+    const defaultValues = {
+        name: '',
+        artistName: '',
+        duration: ''
+    };
+
+    // const { register, handleSubmit, formState: { errors }, reset } = useForm({
+    const methods = useForm({
+        resolver: yupResolver(songsSchema),
+        defaultValues: defaultValues
     });
 
     useQuery(GET_ALL_ARTISTS, {
@@ -59,12 +67,12 @@ const SongDialog: React.FC = () => {
         return durationMinutes * 60 + durationSeconds;
     };
 
-    const addSong = () => {
+    const addSong = (data: FieldValues) => {
         mutationCreateSong({
             variables: {
-                name: nameInput,
-                artistId: artists.find(artist => (artist.name === artistInput))?.id,
-                duration: changeDurationInput(durationInput)
+                name: data.name,
+                artistId: artists.find(artist => (artist.name === data.artistName))?.id,
+                duration: changeDurationInput(data.duration)
             },
             onCompleted(data) {
                 const dataSong = data.createSong.song;
@@ -79,6 +87,7 @@ const SongDialog: React.FC = () => {
                     isFavorite: false
                 }
                 setSongs!(prev => [...prev, newSong])
+                setOpen(false);
             }
         })
     };
@@ -94,39 +103,41 @@ const SongDialog: React.FC = () => {
 
             <GenericDialog
                 open={open}
-                setOpen={setOpen}
+                // setOpen={setOpen}
                 submitText={SUBMIT_BUTTON_TEXT}
                 dialogTitle={DIALOG_TITLE}
-                handleSubmit={handleSubmit}
-                reset={reset}
+                methods={methods}
+                // handleSubmit={handleSubmit}
+                // reset={reset}
                 submitAction={addSong}
             >
                 <div>
                     <GenericTextField
-                        currentInput={nameInput}
-                        setCurretnInput={setNameInput}
+                        // currentInput={nameInput}
+                        // setCurretnInput={setNameInput}
                         fieldTitle={NAME}
-                        register={register}
-                        errorsMasssege={errors.name?.message}
+
+                        // register={register}
+                        errorsMasssege={methods.formState.errors.name?.message}
                         fieldName={'name'}
                     />
 
                     <GenericAutocomplete
-                        setInput={setArtistInput}
+                        // setInput={setArtistInput}
                         fieldTitle={ARTIST}
-                        register={register}
-                        errorsMasssege={errors.artistName?.message}
+                        // register={register}
+                        errorsMasssege={methods.formState.errors.artistName?.message}
                         options={artists.map((artist) => { return artist.name })}
                         isMulitple={false}
                         fieldName={'artistName'}
                     />
 
                     <GenericTextField
-                        currentInput={durationInput}
-                        setCurretnInput={setDurationInput}
+                        // currentInput={durationInput}
+                        // setCurretnInput={setDurationInput}
                         fieldTitle={DURATION}
-                        register={register}
-                        errorsMasssege={errors.duration?.message}
+                        // register={register}
+                        errorsMasssege={methods.formState.errors.duration?.message}
                         fieldName={'duration'}
                     />
                 </div>

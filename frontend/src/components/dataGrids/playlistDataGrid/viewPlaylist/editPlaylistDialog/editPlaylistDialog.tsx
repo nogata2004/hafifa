@@ -34,7 +34,7 @@ const EditPlaylistDialog: React.FC<Props> = ({ currentPlaylist, handleSubmit, re
     const [mutationEditPlaylist] = useMutation(EDIT_PLAYLIST);
     const [mutationAddSongToPlaylist] = useMutation(ADD_SONG_TO_PLAYLIST);
     const [mutationDeleteSongPlaylist] = useMutation(DELETE_PLAYLIST_SONG);
-    const [nameInput, setNameInput] = React.useState<string>(currentPlaylist.name);
+    const [nameInput, setNameInput] = React.useState<string>('');
     const [songsInput, setSongsInput] = React.useState<string[] | string | null>([]);
     const { songs } = useContext(AllSongsContext);
     const { setPlaylists } = useContext(AllPlaylistsContext);
@@ -95,10 +95,22 @@ const EditPlaylistDialog: React.FC<Props> = ({ currentPlaylist, handleSubmit, re
         };
     };
 
+    const IdToName = (songsId: string[]) => {
+        return songsId.map((songId) => {
+            return songs.find((song) => { song.id === songId })!.name
+        });
+    };
+
+    const openDialog = () => {
+        setOpen(true);
+        setNameInput(currentPlaylist.name)
+        setSongsInput(IdToName(currentPlaylist.songsID))
+    }
+
     return (
         <div>
             <IconButton
-                onClick={() => setOpen(true)}
+                onClick={openDialog}
             >
                 <EditIcon className={classes.editButton} />
             </IconButton>
