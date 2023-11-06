@@ -4,7 +4,7 @@ import { useMutation } from '@apollo/client';
 
 import useStyles from './playlistItemStyle';
 import { ADD_SONG_TO_PLAYLIST } from '../../../../components/db/playlistSong/mutation';
-import { AllPlaylistsContext } from '../../../../components/db/context';
+import { AllSpoofyContext } from '../../../../components/db/context';
 import Playlist from '../../../../types/playlist';
 
 
@@ -17,7 +17,7 @@ interface Props {
 const PlaylistItem: React.FC<Props> = ({ songId, currentPlaylist, setIncludePlaylist }) => {
     const classes = useStyles();
     const [mutationAddSongToPlaylist] = useMutation(ADD_SONG_TO_PLAYLIST);
-    const { playlists, setPlaylists } = useContext(AllPlaylistsContext);
+    const { playlists, setPlaylists } = useContext(AllSpoofyContext);
 
     const addToPlaylist = (playlistId: string) => {
         playlists.map((playlist) => {
@@ -33,7 +33,7 @@ const PlaylistItem: React.FC<Props> = ({ songId, currentPlaylist, setIncludePlay
                         },
                         onCompleted(data) {
                             const dataPlaylistSong = data.createPlaylistSong.playlistSong;
-                            setPlaylists!(prev => prev.map((playlist) => {
+                            setPlaylists(prev => prev.map((playlist) => {
                                 if (playlist.id === playlistId) {
                                     playlist.songsID.push(dataPlaylistSong.songId);
                                     return playlist;

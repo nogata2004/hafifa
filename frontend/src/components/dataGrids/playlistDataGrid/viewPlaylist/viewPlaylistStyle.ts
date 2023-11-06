@@ -2,7 +2,7 @@ import { makeStyles } from '@mui/styles';
 
 const useStyles = makeStyles({
     playlistTitle: {
-        "&.MuiTypography-root": {
+        '&.MuiTypography-root': {
             fontSize: '25px',
             textAlign: 'right',
             marginRight: '20px',

@@ -5,14 +5,14 @@ const useStyles = makeStyles({
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
-        maxHeight: '550px',
+        maxHeight: '65vh', // % // why max ? - done
         textAlign: 'center',
         gap: '15px',
         alignItems: 'center',
     },
 
     title: {
-        "&.MuiTypography-root": {
+        '&.MuiTypography-root': {
             fontSize: '50px',
             textAlign: 'center',
         },

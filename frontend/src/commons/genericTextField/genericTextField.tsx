@@ -8,7 +8,7 @@ import useStyles from './genericTextFieldStyle';
 interface Props {
     fieldTitle: string;
     fieldName: string;
-    errorsMasssege: string | FieldError | Merge<FieldError, FieldErrorsImpl<any>> | undefined;
+    errorsMasssege: string | FieldError | Merge<FieldError, FieldErrorsImpl<any>> | undefined; //typo
 };
 
 const GenericTextField: React.FC<Props> = ({ fieldTitle, fieldName, errorsMasssege }) => {

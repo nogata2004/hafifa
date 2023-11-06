@@ -8,7 +8,7 @@ const useStyles = makeStyles({
     },
 
     spoofyText: {
-        "&.MuiTypography-root": {
+        '&.MuiTypography-root': {
             fontSize: '50px',
             padding: 0,
             margin: 0
@@ -16,7 +16,7 @@ const useStyles = makeStyles({
         fontFamily: 'Tahoma',
         color: 'rgb(250, 250, 250)',
         textAlign: 'end',
-        height: 'min-content'
+        height: 'fit-content'
     },
 
     spoofyPic: {

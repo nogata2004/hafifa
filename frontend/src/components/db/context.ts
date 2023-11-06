@@ -1,6 +1,11 @@
-import { Context, createContext } from "react";
-import AllSongsContext from "../../types/allSongsContext";
-import AllPlaylistsContext from "../../types/allPlaylistsContext";
+import { Context, createContext } from 'react';
+import AllSpoofyContext from '../../types/allSpoofyContext'; // '' - done
 
-export const AllSongsContext: Context<AllSongsContext> = createContext<AllSongsContext>({ songs: [] });
-export const AllPlaylistsContext: Context<AllPlaylistsContext> = createContext<AllPlaylistsContext>({ playlists: [] });
+export const AllSpoofyContext: Context<AllSpoofyContext> = createContext<AllSpoofyContext>(
+    {
+        songs: [],
+        setSongs: () => undefined,
+        playlists: [],
+        setPlaylists: () => undefined
+    }
+); // check if u can instantiate setSongs - done

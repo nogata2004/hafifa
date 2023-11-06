@@ -4,8 +4,8 @@ import { RootState } from './store';
 import Song from '../types/song';
 
 
-interface SongState {
-    value: Song | undefined,
+interface SongState { // shouldnt be an interface if its just an object with one field - to do
+    value: Song | undefined
 };
 
 const initialState: SongState = {
@@ -16,7 +16,7 @@ export const songSlice = createSlice({
     name: 'currentSong',
     initialState,
     reducers: {
-        changeCurrentSongByValue: (state, inputSong: PayloadAction<Song | undefined>) => {
+        changeCurrentSongByValue: (state, inputSong: PayloadAction<Song>) => { // byValue // remove undefined, see also in user - to do
             state.value = inputSong.payload;
         },
         resetCurrentSong: (state) => {

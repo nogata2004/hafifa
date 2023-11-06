@@ -1,7 +1,8 @@
-import { gql } from "@apollo/client";
+import { gql } from '@apollo/client';
 
+// change myMutation
 export const ADD_FAVORITE = gql`
-mutation MyMutation($songId: UUID!, $userId: UUID!) {
+mutation MyMutation($songId: UUID!, $userId: UUID!) { 
     createFavorite(input: {favorite: {userId: $userId, songId: $songId}}) {
       favorite {
         songId

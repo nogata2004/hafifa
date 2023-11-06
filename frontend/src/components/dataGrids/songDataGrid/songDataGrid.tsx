@@ -3,29 +3,24 @@ import { Typography } from '@mui/material';
 
 import GenericDataTable from '../../../commons/genericDataGrid/genericDataGrid';
 import useStyles from '../playlistDataGrid/playlistDataGridStyle';
-import { AllSongsContext } from '../../db/context';
+import { AllSpoofyContext } from '../../db/context';
 import SongDialog from './songDialog/songDialog';
 
-
-const TITLE_TEXT = 'רשימת שירים';
+const TITLE = 'רשימת שירים'; // just title - done
 
 const SongDataGrid: React.FC = () => {
-    const classes = useStyles();
-    const { songs } = useContext(AllSongsContext);
+  const classes = useStyles();
+  const { songs } = useContext(AllSpoofyContext);
 
-    return (
-        <div className={classes.body}>
-            <Typography className={classes.title}>
-                {TITLE_TEXT}
-            </Typography>
+  return (
+    <div className={classes.body}>
+      <Typography className={classes.title}>{TITLE}</Typography>
 
-            <GenericDataTable
-                filterSongs={songs}
-            />
+      <GenericDataTable filterSongs={songs} />
 
-            <SongDialog />
-        </div>
-    );
+      <SongDialog />
+    </div>
+  );
 };
 
 export default SongDataGrid;

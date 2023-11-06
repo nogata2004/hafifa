@@ -14,8 +14,6 @@ const useStyles = makeStyles({
             borderRadius: '15px',
         },
         display: 'flex',
-        // alignItems: 'center',
-        // justifyContent: 'start',
     },
 });
 

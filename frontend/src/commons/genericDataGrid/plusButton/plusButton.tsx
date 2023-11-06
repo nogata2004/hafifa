@@ -3,7 +3,7 @@ import { IconButton, Popover, Typography } from '@mui/material';
 import { Add, } from '@mui/icons-material';
 
 import useStyles from './plusButtonStyle';
-import { AllPlaylistsContext } from '../../../components/db/context';
+import { AllSpoofyContext } from '../../../components/db/context';
 import PlaylistItem from './playlistItem/playlistItem';
 
 
@@ -19,7 +19,7 @@ interface Props {
 
 const PlusButton: React.FC<Props> = ({ songId, songName }) => {
     const [open, setOpen] = React.useState<boolean>(false);
-    const { playlists } = useContext(AllPlaylistsContext);
+    const { playlists } = useContext(AllSpoofyContext);
     const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(null);
     const [includePlaylist, setIncludePlaylist] = React.useState<boolean | undefined>(undefined);
     const classes = useStyles(includePlaylist);
@@ -49,7 +49,7 @@ const PlusButton: React.FC<Props> = ({ songId, songName }) => {
                 keepMounted
                 anchorEl={anchorEl}
                 onClose={handleClose}
-                aria-describedby="alert-dialog-new-song"
+                aria-describedby='alert-dialog-new-song'
                 transformOrigin={{
                     vertical: 'top',
                     horizontal: 'right',

@@ -57,7 +57,7 @@ const useStyles = makeStyles({
     },
 
     fieldTitle: {
-        "&.MuiTypography-root": {
+        '&.MuiTypography-root': {
             fontSize: '25px',
         },
         color: 'rgb(250, 250, 250)',

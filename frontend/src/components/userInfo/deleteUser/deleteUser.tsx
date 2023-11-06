@@ -8,68 +8,64 @@ import { useMutation } from '@apollo/client';
 import { useDispatch } from 'react-redux';
 
 import useStyles from './deleteUserStyle';
-import { changeCurrentUserByValue } from '../../../redux/UserSlice';
+import { resetCurrentUser } from '../../../redux/UserSlice';
 import { DELETE_USER } from '../../db/users/mutation';
 import { useAppSelector } from '../../../redux/hooks';
-
+import { lOG_IN_PAGE_LABEL, routesMapper } from '../../../routes/routes';
 
 const DELETE_USER_TEXT = 'מחק חשבון';
 const CANCEL = 'ביטול';
 const DIALOG_TEXT = '?אתה בטוח שברצונך למחוק את המשתמש הנוכחי';
 
 const DeleteUser: React.FC = () => {
-    const classes = useStyles();
-    const [open, setOpen] = React.useState<boolean>(false);
-    const navigate = useNavigate();
-    const dispatch = useDispatch();
-    const [mutationFunction] = useMutation(DELETE_USER);
-    const currentUser = useAppSelector((state) => state.user.value);
+  const classes = useStyles();
+  const [open, setOpen] = React.useState<boolean>(false);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [mutationDeleteUser] = useMutation(DELETE_USER); // rename - done
+  const currentUser = useAppSelector((state) => state.user.value);
 
-    const deleteUser = () => {
-        mutationFunction({
-            variables: {
-                id: currentUser!.id,
-            },
-        })
-        dispatch(changeCurrentUserByValue(undefined));
-        navigate('/');
-    };
+  const deleteUser = () => {
+    mutationDeleteUser({
+      variables: {
+        id: currentUser!.id,
+      },
+    });
+    dispatch(resetCurrentUser());
+    navigate(routesMapper[lOG_IN_PAGE_LABEL]); // route - done
+  };
 
-    return (
-        <div>
-            <Button
-                onClick={() => setOpen(true)}
-                className={classes.deleteUserButton}>
-                {DELETE_USER_TEXT}
-            </Button>
+  return (
+    <div>
+      <Button
+        onClick={() => setOpen(true)}
+        className={classes.deleteUserButton}
+      >
+        {DELETE_USER_TEXT}
+      </Button>
 
-            <Dialog
-                open={open}
-                keepMounted
-                onClose={() => setOpen(false)}
-                className={classes.body}
-            >
-                <DialogTitle >
-                    {DIALOG_TEXT}
-                </DialogTitle>
+      <Dialog
+        open={open}
+        onClose={() => setOpen(false)}
+        className={classes.body}
+      >
+        <DialogTitle>{DIALOG_TEXT}</DialogTitle>
 
-                <DialogActions className={classes.buttons}>
-                    <Button
-                        className={classes.cancelButton}
-                        onClick={() => setOpen(false)}>
-                        {CANCEL}
-                    </Button>
+        <DialogActions className={classes.buttons}>
+          <Button
+            className={classes.cancelButton}
+            onClick={() => setOpen(false)}
+          >
+            {CANCEL}
+          </Button>
 
-                    <Button
-                        className={classes.deleteUserButton}
-                        onClick={deleteUser}>
-                        {DELETE_USER_TEXT}
-                    </Button>
-                </DialogActions>
-            </Dialog>
-        </div>
-    );
+          <Button className={classes.deleteUserButton} onClick={deleteUser}>
+            {DELETE_USER_TEXT}
+          </Button>
+        </DialogActions>
+      </Dialog>
+    </div>
+  );
 };
 
 export default DeleteUser;
-

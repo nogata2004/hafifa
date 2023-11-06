@@ -3,19 +3,19 @@ import { Typography } from '@mui/material';
 
 import GenericDataTable from '../../../commons/genericDataGrid/genericDataGrid';
 import useStyles from '../playlistDataGrid/playlistDataGridStyle';
-import { AllSongsContext } from '../../db/context';
+import { AllSpoofyContext } from '../../db/context';
 
 
-const TITLE_TEXT = 'רשימת מועדפים';
+const TITLE = 'רשימת מועדפים';
 
-const favoriteDataGrid: React.FC = () => {
+const FavoriteDataGrid: React.FC = () => {
     const classes = useStyles();
-    const { songs } = useContext(AllSongsContext);
+    const { songs } = useContext(AllSpoofyContext);
 
     return (
         <div className={classes.body}>
             <Typography className={classes.title}>
-                {TITLE_TEXT}
+                {TITLE}
             </Typography>
 
             <GenericDataTable
@@ -25,4 +25,4 @@ const favoriteDataGrid: React.FC = () => {
     );
 };
 
-export default favoriteDataGrid;
+export default FavoriteDataGrid;

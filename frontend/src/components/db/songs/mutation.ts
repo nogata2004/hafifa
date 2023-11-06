@@ -1,5 +1,6 @@
-import { gql } from "@apollo/client";
+import { gql } from '@apollo/client';
 
+//mymutation
 export const CREATE_SONG = gql`
 mutation MyMutation($artistId: UUID! , $duration: Int!, $name: String!) {
     createSong(

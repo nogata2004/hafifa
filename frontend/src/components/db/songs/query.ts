@@ -1,5 +1,6 @@
-import { gql } from "@apollo/client";
+import { gql } from '@apollo/client';
 
+//myquery
 export const GET_ALL_SONGS = gql`
 query MyQuery($userId: UUID!) {
   allSongs {

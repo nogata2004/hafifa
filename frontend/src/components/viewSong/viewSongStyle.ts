@@ -37,7 +37,7 @@ const useStyles = makeStyles({
     },
 
     userName: {
-        "&.MuiTypography-root": {
+        '&.MuiTypography-root': {
             fontSize: '20px',
             textAlign: 'end'
         },
@@ -45,7 +45,7 @@ const useStyles = makeStyles({
     },
 
     songName: {
-        "&.MuiTypography-root": {
+        '&.MuiTypography-root': {
             fontSize: '15px',
             textAlign: 'end'
         },
@@ -53,7 +53,7 @@ const useStyles = makeStyles({
     },
 
     line: {
-        "&.MuiSlider-root": {
+        '&.MuiSlider-root': {
             color: 'rgb(250, 250, 250)',
         }
     },
