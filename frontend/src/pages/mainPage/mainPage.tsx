@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import useStyles from './mainPageStyle';
 import UserInfo from '../../components/userInfo/userInfo';
@@ -9,6 +9,8 @@ import SideBar from '../../components/sideBar/sideBar';
 import Playlist from '../../types/playlist';
 import { useAppSelector } from '../../redux/hooks';
 import { useMainPage } from './useMainPage';
+import { useNavigate } from 'react-router-dom';
+import { lOG_IN_PAGE_LABEL, routesMapper } from '../../routes/routes';
 
 interface Props {
   children?: JSX.Element;
@@ -16,31 +18,40 @@ interface Props {
 
 const MainPage: React.FC<Props> = ({ children }) => {
   const currentSong = useAppSelector((state) => state.song.value); // remove state typing - done
+  const currentUser = useAppSelector((state) => state.user.value);
   const classes = useStyles();
+  const navigate = useNavigate();
   const [songs, setSongs] = useState<Song[]>([]);
   const [playlists, setPlaylists] = useState<Playlist[]>([]);
-  useMainPage({ songs, setSongs, playlists, setPlaylists });
+  useMainPage({
+    setSongs,
+    setPlaylists,
+  });
 
   return (
     <AllSpoofyContext.Provider
       value={{ songs, setSongs, playlists, setPlaylists }}
     >
       {/* combine context - done */}
-      <div className={classes.body}>
-        <div className={classes.mainPart}>
-          <UserInfo />
+      {!currentUser ? (
+        navigate(routesMapper[lOG_IN_PAGE_LABEL])
+      ) : (
+        <div className={classes.body}>
+          <div className={classes.mainPart}>
+            <UserInfo />
 
-          <div className={classes.table}>
-            {children}
-            {/* // routes // make a mapper ie: tableMapper[currentMode] - done */}
+            <div className={classes.table}>
+              {children}
+              {/* // routes // make a mapper ie: tableMapper[currentMode] - done */}
+            </div>
+
+            <SideBar />
           </div>
 
-          <SideBar />
+          {!!currentSong && <ViewSong />}
+          {/* better use !! -done */}
         </div>
-
-        {!!currentSong && <ViewSong />}
-        {/* better use !! -done */}
-      </div>
+      )}
     </AllSpoofyContext.Provider>
   );
 };

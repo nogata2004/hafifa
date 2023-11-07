@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useQuery } from '@apollo/client';
 import { Button, Select, MenuItem, Typography } from '@mui/material';
 
@@ -7,7 +7,10 @@ import { useNavigate } from 'react-router-dom';
 import { GET_ALL_USERS } from '../../components/db/users/query';
 import User from '../../types/user';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
-import { changeCurrentUserByValue } from '../../redux/UserSlice';
+import {
+  changeCurrentUserByValue,
+  resetCurrentUser,
+} from '../../redux/UserSlice';
 import { SONG_TABLE_LABEL, routesMapper } from '../../routes/routes';
 
 const TITLE = 'spoofy';
@@ -20,6 +23,13 @@ const LogInPage: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const currentUser = useAppSelector((state) => state.user.value);
+
+  useEffect(() => {
+    console.log(currentUser);
+    if (!!currentUser) {
+      dispatch(resetCurrentUser());
+    }
+  }, []);
 
   useQuery(GET_ALL_USERS, {
     onCompleted: (data: { allUsers: { nodes: User[] } }) => {
