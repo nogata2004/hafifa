@@ -2,7 +2,7 @@ import { gql } from '@apollo/client';
 
 //myquery
 export const SUB_INSERT_PLAYLIST_SONG = gql`
-  subscription MySubscription {
+  subscription subInsertPlaylistSong {
     listen(topic: "insertlaylistSongsTable") {
       relatedNode {
         ... on PlaylistSong {
@@ -16,7 +16,7 @@ export const SUB_INSERT_PLAYLIST_SONG = gql`
 `;
 
 export const SUB_DELETE_PLAYLIST_SONG = gql`
-  subscription MySubscription {
+  subscription subDeletePlaylistSong {
     listen(topic: "deletePlaylistSongsTable") {
       relatedNode {
         ... on PlaylistSong {

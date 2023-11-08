@@ -1,8 +1,7 @@
 import { gql } from '@apollo/client';
 
-//myquery
 export const SUB_UPDATE_PLAYLIST = gql`
-  subscription MySubscription {
+  subscription subUpdatePlaylist {
     listen(topic: "updatePlaylistsTable") {
       relatedNode {
         ... on Playlist {

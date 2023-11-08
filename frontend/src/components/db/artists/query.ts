@@ -1,8 +1,8 @@
 import { gql } from '@apollo/client';
 
-// myquery
+// myquery - done
 export const GET_ALL_ARTISTS = gql`
-query MyQuery {
+  query getAllArtists {
     allArtists {
       nodes {
         id
@@ -10,4 +10,4 @@ query MyQuery {
       }
     }
   }
-`
+`;

@@ -1,8 +1,7 @@
 import { gql } from '@apollo/client';
 
-// mysub
 export const ADD_SONG_SUB = gql`
-subscription MySubscription {
+  subscription addSongSub {
     listen(topic: "notify_new_song") {
       relatedNode {
         ... on Song {
@@ -14,4 +13,4 @@ subscription MySubscription {
       }
     }
   }
-`
+`;

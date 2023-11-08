@@ -1,8 +1,7 @@
 import { gql } from '@apollo/client';
 
-//mquery
 export const GET_ALL_USERS = gql`
-query MyQuery {
+  query getAllUsers {
     allUsers {
       nodes {
         id
@@ -11,4 +10,4 @@ query MyQuery {
       }
     }
   }
-`
+`;
