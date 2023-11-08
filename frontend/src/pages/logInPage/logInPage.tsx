@@ -25,7 +25,6 @@ const LogInPage: React.FC = () => {
   const currentUser = useAppSelector((state) => state.user.value);
 
   useEffect(() => {
-    console.log(currentUser);
     if (!!currentUser) {
       dispatch(resetCurrentUser());
     }

@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import { Typography } from '@mui/material';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
+import { useSubscription } from '@apollo/client';
 
 import useStyles from './playlistDataGridStyle';
 import ViewPlaylist from './viewPlaylist/viewPlaylist';
@@ -9,12 +10,13 @@ import { AllSpoofyContext } from '../../db/context';
 import PlaylistDialog from './playlistDialog/playlistDialog';
 import { playlistDialogValidationSchema } from './playlistSchema';
 import Playlist from '../../../types/playlist';
+import { SUB_UPDATE_PLAYLIST } from '../../db/playlists/subscription';
 
 const TITLE = 'רשימת פלייליסטים';
 
 const PlaylistDataGrid: React.FC = () => {
   const classes = useStyles();
-  const { playlists, songs } = useContext(AllSpoofyContext);
+  const { playlists, songs, setPlaylists } = useContext(AllSpoofyContext);
   const [currentPlaylist, setCurrentPlaylist] = React.useState<
     Playlist | undefined
   >(undefined);
@@ -41,7 +43,6 @@ const PlaylistDataGrid: React.FC = () => {
   });
 
   useEffect(() => {
-    console.log(currentPlaylist);
     methods.reset(defaultValues(currentPlaylist));
   }, [currentPlaylist]);
 
