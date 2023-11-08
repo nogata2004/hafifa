@@ -11,7 +11,6 @@ export const SUB_INSERT_PLAYLIST_SONG = gql`
           playlistId
         }
       }
-      relatedNodeId
     }
   }
 `;

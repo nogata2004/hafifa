@@ -22,6 +22,11 @@ interface Props {
   children?: JSX.Element;
 }
 
+interface PlaylistSong {
+  playlistId: string;
+  songId: string;
+}
+
 const MainPage: React.FC<Props> = ({ children }) => {
   const currentSong = useAppSelector((state) => state.song.value); // remove state typing - done
   const currentUser = useAppSelector((state) => state.user.value);
@@ -59,18 +64,15 @@ const MainPage: React.FC<Props> = ({ children }) => {
 
   useSubscription(SUB_INSERT_PLAYLIST_SONG, {
     onData: ({ data }) => {
-      const dataPlaylistSong: string[] = atob(data.data.listen.relatedNodeId)
-        .split('"')
-        .map(String);
-      const dataSongId: string = dataPlaylistSong[3];
-      const dataPlaylistId: string = dataPlaylistSong[1];
+      console.log(data.data.listen.relatedNode);
+      const newPlaylistSong: PlaylistSong = data.data.listen.relatedNode;
       const newSongsId = playlists
-        .find((playlist) => playlist.id === dataPlaylistId)
-        ?.songsID.push(dataSongId);
+        .find((playlist) => playlist.id === newPlaylistSong.playlistId)
+        ?.songsID.push(newPlaylistSong.songId);
 
       setPlaylists((prev) =>
         prev.map((playlist) => {
-          if (playlist.id === dataPlaylistId) {
+          if (playlist.id === newPlaylistSong.playlistId) {
             return { ...playlist, songsId: newSongsId };
           }
           return playlist;
@@ -84,8 +86,8 @@ const MainPage: React.FC<Props> = ({ children }) => {
       const listData: string[] = atob(data.data.listen.relatedNodeId)
         .split('"')
         .map(String);
-      const dataSongId: string = listData[3];
-      const dataPlaylistId: string = listData[1];
+      const dataSongId: string = listData[5];
+      const dataPlaylistId: string = listData[3];
       const currentPlaylist: Playlist = playlists.find(
         (playlist) => playlist.id === dataPlaylistId
       )!;
