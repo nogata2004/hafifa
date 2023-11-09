@@ -4,7 +4,6 @@ import { RootState } from './store';
 import Song from '../types/song';
 
 interface SongState {
-  // shouldnt be an interface if its just an object with one field - to do
   value: Song | undefined;
   songsList: Song[] | undefined;
 }

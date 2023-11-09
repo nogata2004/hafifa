@@ -5,6 +5,7 @@ import LogInPage from './pages/logInPage/logInPage';
 import MainPage from './pages/mainPage/mainPage';
 import {
   FAVORITE_TABLE_LABEL,
+  LOCATION_LABEL,
   MAIN_PAGE_LABEL,
   PLAYLIST_TABLE_LABEL,
   SONG_TABLE_LABEL,
@@ -48,6 +49,15 @@ const App: React.FC = () => {
 
         <Route
           path={routesMapper[FAVORITE_TABLE_LABEL]}
+          element={
+            <MainPage>
+              <FavoriteDataGrid />
+            </MainPage>
+          }
+        ></Route>
+
+        <Route
+          path={routesMapper[LOCATION_LABEL]}
           element={
             <MainPage>
               <FavoriteDataGrid />

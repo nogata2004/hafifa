@@ -4,6 +4,7 @@ import { RootState } from './store';
 import User from '../types/user';
 
 interface UserState {
+  // shouldnt be an interface if its just an object with one field - to do
   value: User | undefined;
 }
 
@@ -18,7 +19,6 @@ export const userSlice = createSlice({
     changeCurrentUserByValue: (state, inputUser: PayloadAction<User>) => {
       state.value = inputUser.payload;
     }, // Choose if u want to add logout, or remove the songslice second action. - done
-    //byValue - to do
     resetCurrentUser: (state) => {
       state.value = undefined;
     },

@@ -9,9 +9,8 @@ const useStyles = makeStyles({
     display: 'flex',
     flexDirection: 'column',
     padding: '5px',
-    height: 'fit-content', // check min-content - to do:
-    // fit-content הוא השילוב של תוכן מינימלי ו-max-content;
-    //אם יש מספיק מקום, הוא מגדיר כמה שיותר גודל, אחרת, הוא נופל בחזרה לגודל מינימלי שאינו כולל אלמנטים שעולים על גדותיו
+    height: 'fit-content', // check min-content - done:
+    // https://nikolasbarwicki.com/articles/min-max-fit-content-width
   },
 
   helloUser: {

@@ -44,7 +44,8 @@ const Controlers: React.FC<Props> = ({ isPlay, setIsPlay }) => {
       <Button
         onClick={moveForward}
         disabled={
-          currentSongsList.indexOf(currentSong!) === currentSongsList.length - 1
+          currentSongsList!.indexOf(currentSong!) ===
+          currentSongsList!.length - 1
         }
       >
         <img className={classes.slidesStopButtons} src={slideRight} />
