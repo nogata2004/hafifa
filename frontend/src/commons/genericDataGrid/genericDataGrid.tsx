@@ -11,6 +11,7 @@ import Song from '../../types/song';
 import { useAppSelector, useAppDispatch } from '../../redux/hooks';
 import {
   changeCurrentSongByValue,
+  changeCurrentSongsList,
   resetCurrentSong,
 } from '../../redux/SongSlice';
 import FavoriteButton from './favoriteButton/favoriteButton';
@@ -39,6 +40,7 @@ const GenericDataTable: React.FC<Props> = ({ filterSongs }) => {
     } else {
       const selectedSong: Song = songs.find((song) => song.id === params.id)!;
       dispatch(changeCurrentSongByValue(selectedSong));
+      dispatch(changeCurrentSongsList(filterSongs));
     }
   };
 
