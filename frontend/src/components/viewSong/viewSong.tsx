@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Typography, Slider } from '@mui/material';
 
 import useStyles from './viewSongStyle';
@@ -9,9 +9,8 @@ import { useControlers } from './controlers/useControlers';
 import Controlers from './controlers/controlers';
 
 const ViewSong: React.FC = () => {
-  // divide code to customHooks. - done (without the useEffect)
-  const [currentSeconds, setCurrentSeconds] = React.useState<number>(0); // react. delete - to do
-  const [isPlay, setIsPlay] = React.useState<boolean>(true); // same - to do
+  const [currentSeconds, setCurrentSeconds] = useState<number>(0);
+  const [isPlay, setIsPlay] = useState<boolean>(true);
   const { moveForward } = useControlers({ isPlay, setIsPlay });
   const classes = useStyles();
   const currentSong = useAppSelector((state) => state.song.value);
@@ -41,7 +40,6 @@ const ViewSong: React.FC = () => {
   }, [currentSong]);
 
   return (
-    // Divide comp into several new ones - done
     <div className={classes.body}>
       <div className={classes.appPart}>
         <Controlers isPlay={isPlay} setIsPlay={setIsPlay} />

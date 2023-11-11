@@ -36,11 +36,11 @@ const SideBar: React.FC = () => {
       <div className={classes.sideBar}>
         {Object.values(Mode).map(
           (
-            mode // remove filter after chaning modes enum - done
+            mode
           ) => (
             <ListItemButton
-              key={mode} // remove usage of key. also remove object entries, and remove filter - done
-              id={mode} // remove usage of key - done
+              key={mode}
+              // id={mode} // unneeded todo
               selected={window.location.pathname === routesMapper[mode]}
               onClick={() => changeRoute(mode)}
               className={classes.optionButton}

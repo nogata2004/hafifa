@@ -5,7 +5,7 @@ const useStyles = makeStyles({
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
-        maxHeight: '65vh', // % // why max ? - done
+        maxHeight: '65vh', // % // why max - should solve itself when u move VH upwards in domtree ? - todo
         textAlign: 'center',
         gap: '15px',
         alignItems: 'center',

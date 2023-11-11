@@ -29,11 +29,11 @@ export const useMainPage = (props: Props) => {
   const currentUser = useAppSelector((state) => state.user.value);
 
   useQuery(GET_ALL_SONGS, {
-    variables: { userId: currentUser?.id }, // ', in any case shouldnt be tring - done
+    variables: { userId: currentUser?.id },
     onCompleted: (data) => {
-      const allSongs: DBSong[] = data.allSongs.nodes; // better to type allSongs // create interface DBSong - done
+      const allSongs: DBSong[] = data.allSongs.nodes;
       const newSongs: Song[] = [];
-      allSongs.map((song: DBSong) => {
+      allSongs.map((song: DBSong) => { // fix map : todo (no need for push)
         const newSong: Song = {
           id: song.id,
           name: song.name,
@@ -42,31 +42,30 @@ export const useMainPage = (props: Props) => {
             id: song.artistByArtistId.id,
             name: song.artistByArtistId.name,
           },
-          isFavorite: song.favoritesBySongId.totalCount === 1, // david
+          isFavorite: song.favoritesBySongId.totalCount === 1,
         };
         newSongs.push(newSong);
       });
-      setSongs(newSongs); // this needs to be outside of iterator (the map)- done
+      setSongs(newSongs);
     },
   });
 
   useQuery(GET_PLAYLISTS_BY_USER, {
     variables: { userId: currentUser?.id },
     onCompleted: (data) => {
-      const allPlaylists: DBPlaylist[] = data.allPlaylists.nodes; // define type here - done
+      const allPlaylists: DBPlaylist[] = data.allPlaylists.nodes;
       const newPlaylists: Playlist[] = [];
-      allPlaylists.map((playlist: DBPlaylist) => {
-        // kanal interface - done
+      allPlaylists.map((playlist) => {
         const newPlaylist: Playlist = {
           id: playlist.id,
           name: playlist.name,
           songsID: playlist.playlistSongsByPlaylistId.nodes.map(
             (songs) => songs.songId
-          ), // remove the brackets and return -done
+          ), 
         };
-        newPlaylists.push(newPlaylist);
+        newPlaylists.push(newPlaylist); // same story as above todo
       });
-      setPlaylists(newPlaylists); // kanal - done
+      setPlaylists(newPlaylists);
     },
   });
 

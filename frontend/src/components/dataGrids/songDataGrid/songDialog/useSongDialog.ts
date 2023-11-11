@@ -15,16 +15,22 @@ interface Props {
     setArtists: React.Dispatch<React.SetStateAction<Artist[]>>;
     setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
+export enum DialogKeys {
+  name = 'name',
+  artist = 'artist',
+  duration = 'duration',
+}
 
 export const useSongDialog = (props: Props) => {
     const {setArtists, setOpen} = props;
     const [mutationCreateSong] = useMutation(CREATE_SONG);
     const { setSongs } = useContext(AllSpoofyContext);
 
+
     const defaultValues = {
-        name: '',
-        artist: null,
-        duration: '',
+        [DialogKeys.name]: '',
+        [DialogKeys.artist]: null,
+        [DialogKeys.duration]: '',
       };
     
       const methods = useForm({
@@ -40,7 +46,6 @@ export const useSongDialog = (props: Props) => {
       });
     
       const changeDurationInput = (durationInput: string) => {
-        // check if u can get a better type // there are datetime fns to translate time - to do
         const minutesAndSeconds: String[] = durationInput.split(':');
         return Number(minutesAndSeconds[0]) * 60 + Number(minutesAndSeconds[1]);
       };
@@ -53,7 +58,7 @@ export const useSongDialog = (props: Props) => {
             duration: changeDurationInput(data.duration),
           },
           onCompleted(data) {
-            const dataSong: DBSong = data.createSong.song; // typing haser - done
+            const dataSong: DBSong = data.createSong.song;
             const newSong: Song = {
               id: dataSong.id,
               name: dataSong.name,

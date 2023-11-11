@@ -11,8 +11,8 @@ import { createClient } from 'graphql-ws';
 
 // const defaultOptions: DefaultOptions = {
 //   watchQuery: {
-//     fetchPolicy: 'no-cache', // apollo fetchpolicy -to do
-//     errorPolicy: 'ignore', // apollo errorpolicy - to do
+//     fetchPolicy: 'no-cache', // apollo fetchpolicy -todo
+//     errorPolicy: 'ignore', // apollo errorpolicy - todo
 //   },
 //   query: {
 //     fetchPolicy: 'no-cache',

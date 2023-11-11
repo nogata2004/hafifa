@@ -18,17 +18,16 @@ const UserInfo: React.FC = () => {
   const dispatch = useAppDispatch();
 
   const moveToLoginPage = () => {
-    // move to login page* - done
     dispatch(resetCurrentUser());
     dispatch(resetCurrentSong());
-    navigate(routesMapper[lOG_IN_PAGE_LABEL]); // '/' put in route obj - done
+    navigate(routesMapper[lOG_IN_PAGE_LABEL]); // call the route enum : todo
   };
 
   return (
     <div className={classes.body}>
       <Typography className={classes.helloUser}>
         {currentUser!.firstName} {currentUser!.lastName} {HELLO}{' '}
-        {/* remove question marks - done */}
+        {/* use `${}`*/}
       </Typography>
 
       <div className={classes.buttons}>

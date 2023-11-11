@@ -1,5 +1,5 @@
 import { Context, createContext } from 'react';
-import AllSpoofyContext from '../../types/allSpoofyContext'; // '' - done
+import AllSpoofyContext from '../../types/allSpoofyContext';
 
 export const AllSpoofyContext: Context<AllSpoofyContext> = createContext<AllSpoofyContext>(
     {
@@ -8,4 +8,4 @@ export const AllSpoofyContext: Context<AllSpoofyContext> = createContext<AllSpoo
         playlists: [],
         setPlaylists: () => undefined
     }
-); // check if u can instantiate setSongs - done
+);

@@ -17,7 +17,7 @@ interface Props {
 }
 
 const MainPage: React.FC<Props> = ({ children }) => {
-  const currentSong = useAppSelector((state) => state.song.value); // remove state typing - done
+  const currentSong = useAppSelector((state) => state.song.value);
   const currentUser = useAppSelector((state) => state.user.value);
   const classes = useStyles();
   const navigate = useNavigate();
@@ -33,7 +33,6 @@ const MainPage: React.FC<Props> = ({ children }) => {
     <AllSpoofyContext.Provider
       value={{ songs, setSongs, playlists, setPlaylists }}
     >
-      {/* combine context - done */}
       {!currentUser ? (
         navigate(routesMapper[lOG_IN_PAGE_LABEL])
       ) : (
@@ -41,16 +40,12 @@ const MainPage: React.FC<Props> = ({ children }) => {
           <div className={classes.mainPart}>
             <UserInfo />
 
-            <div className={classes.table}>
-              {children}
-              {/* // routes // make a mapper ie: tableMapper[currentMode] - done */}
-            </div>
+            <div className={classes.table}>{children}</div>
 
             <SideBar />
           </div>
 
           {!!currentSong && <ViewSong />}
-          {/* better use !! -done */}
         </div>
       )}
     </AllSpoofyContext.Provider>

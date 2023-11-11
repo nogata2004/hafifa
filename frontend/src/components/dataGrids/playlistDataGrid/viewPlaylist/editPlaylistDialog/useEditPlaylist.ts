@@ -21,11 +21,12 @@ interface Props {
 
 export const useEditPlaylist = (props: Props) => {
   const { methods, setOpen, currentPlaylist, setCurrentPlaylist } = props;
-  const [mutationEditPlaylist] = useMutation(EDIT_PLAYLIST);
+  const [mutationEditPlaylist] = useMutation(EDIT_PLAYLIST); // todo rename
   const [mutationAddSongToPlaylist] = useMutation(ADD_SONG_TO_PLAYLIST);
   const [mutationDeleteSongPlaylist] = useMutation(DELETE_PLAYLIST_SONG);
 
   const actionEditPlaylist = (data: FieldValues) => {
+    // rename data to form/fields todo
     if (currentPlaylist.name !== data.name) {
       mutationEditPlaylist({
         variables: {
@@ -35,9 +36,10 @@ export const useEditPlaylist = (props: Props) => {
       });
     }
 
-    const newSongsId: string[] = data.inputSongs.map((song: Song) => song.id);
+    const newSongsId: string[] = data.inputSongs.map((song: Song) => song.id); // songIds todo
     if (currentPlaylist.songsID !== newSongsId) {
-      newSongsId.map((songId: string) => {
+      newSongsId.forEach((songId: string) => {
+        // foreach - done
         if (!currentPlaylist.songsID.includes(songId!)) {
           mutationAddSongToPlaylist({
             variables: {
@@ -47,7 +49,8 @@ export const useEditPlaylist = (props: Props) => {
           });
         }
       });
-      currentPlaylist.songsID.map((songId) => {
+      currentPlaylist.songsID.forEach((songId) => {
+        // make function of these loops
         if (!newSongsId.includes(songId)) {
           mutationDeleteSongPlaylist({
             variables: {

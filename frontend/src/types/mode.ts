@@ -1,5 +1,4 @@
-enum Mode { // enum items should be fully capitalized - done
-    // remove, eplace wit undefined - done
+enum Mode {
     SONG = 'שירים',
     PLAYLIST = 'פלייליסטים',
     FAVORITE = 'מועדפים',

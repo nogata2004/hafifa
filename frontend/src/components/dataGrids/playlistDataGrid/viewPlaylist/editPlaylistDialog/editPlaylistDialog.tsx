@@ -24,7 +24,7 @@ interface Props {
   >;
 }
 
-const EditPlaylistDialog: React.FC<Props> = ({
+const EditPlaylistDialog: React.FC<Props> = ({ // this is a button!!! todo
   currentPlaylist,
   methods,
   setCurrentPlaylist,
@@ -57,7 +57,7 @@ const EditPlaylistDialog: React.FC<Props> = ({
           <GenericTextField
             fieldTitle={NAME}
             errorsMasssege={methods.formState.errors.name?.message}
-            fieldName={'name'}
+            fieldName={'name'} // Keys enum todo
           />
 
           <GenericAutocomplete
@@ -65,7 +65,7 @@ const EditPlaylistDialog: React.FC<Props> = ({
             errorsMasssege={methods.formState.errors.inputSongs?.message}
             options={songs}
             isMulitple={true}
-            fieldName={'inputSongs'}
+            fieldName={'inputSongs'} // todo enum
           />
         </div>
       </GenericDialog>

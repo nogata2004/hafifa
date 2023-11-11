@@ -1,4 +1,4 @@
-const lOG_IN_PAGE_ROUTE = '/';
+const lOG_IN_PAGE_ROUTE = '/'; // PUT THESE IN ROUTES_ENUM todo
 const MAIN_PAGE_ROUTE = '/spoofy';
 const SONG_TABLE_ROUTE = '/songTable';
 const PLAYLIST_TABLE_ROUTE = '/playlistTable';

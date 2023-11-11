@@ -14,7 +14,7 @@ import {
 import { SONG_TABLE_LABEL, routesMapper } from '../../routes/routes';
 
 const TITLE = 'spoofy';
-const SELECT_LABEL = 'בחר משתמש להתחברות'; // select-label - done
+const SELECT_LABEL = 'בחר משתמש להתחברות';
 const BUTTON = 'התחבר';
 
 const LogInPage: React.FC = () => {
@@ -41,7 +41,7 @@ const LogInPage: React.FC = () => {
     if (!!currentUser) {
       navigate(routesMapper[SONG_TABLE_LABEL]);
     }
-    // make routes const (object) - done
+    // make routes const (object) - todo
   };
 
   const changeCurrentUser = (selectedUser: User) => {
@@ -55,7 +55,6 @@ const LogInPage: React.FC = () => {
       <Select
         className={classes.selectConect}
         defaultValue={SELECT_LABEL}
-        //label - done (did defaultValue)
       >
         <MenuItem id={SELECT_LABEL} value={SELECT_LABEL} disabled>
           {SELECT_LABEL}
@@ -75,7 +74,7 @@ const LogInPage: React.FC = () => {
 
       <Button
         onClick={moveToMainPage}
-        className={classes.buttonConnect} // typo - done
+        className={classes.buttonConnect}
       >
         {BUTTON}
       </Button>

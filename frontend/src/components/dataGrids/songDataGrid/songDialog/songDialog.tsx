@@ -6,7 +6,7 @@ import useStyles from '../../playlistDataGrid/playlistDialog/playlistDialogStyle
 import GenericTextField from '../../../../commons/genericTextField/genericTextField';
 import GenericAutocomplete from '../../../../commons/genericAutocomplete/genericAutocomplete';
 import Artist from '../../../../types/artist';
-import { useSongDialog } from './useSongDialog';
+import { DialogKeys, useSongDialog } from './useSongDialog';
 
 const SUBMIT_BUTTON_TEXT = 'צור שיר';
 const DIALOG_TITLE = 'יצירת שיר';
@@ -15,7 +15,6 @@ const NAME = 'שם';
 const ARTIST = 'זמר';
 const DURATION = 'משך שיר';
 
-// export to songDialogValidationSchema - done
 const SongDialog: React.FC = () => {
   const classes = useStyles();
   const [open, setOpen] = React.useState<boolean>(false);
@@ -23,7 +22,7 @@ const SongDialog: React.FC = () => {
   const { defaultValues, methods, addSong } = useSongDialog({
     setArtists,
     setOpen,
-  }); // custom hook -done
+  });
 
   return (
     <div>
@@ -42,8 +41,8 @@ const SongDialog: React.FC = () => {
         <div>
           <GenericTextField
             fieldTitle={NAME}
-            errorsMasssege={methods.formState.errors.name?.message}
-            fieldName={Object.keys(defaultValues)[0]} // remove brackets // these need to be variables, that are equal to the default values keys. - done
+            errorsMasssege={methods.formState.errors[DialogKeys.name]?.message}
+            fieldName={DialogKeys.name} // todo: use dialogkeys.
           />
 
           <GenericAutocomplete

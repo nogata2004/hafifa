@@ -10,7 +10,7 @@ const useStyles = makeStyles<boolean | undefined>({
     popover: {
         '& .css-3bmhjh-MuiPaper-root-MuiPopover-paper': {
             borderRadius: 0,
-            boxShadow: '0px 0px 0px 0px',
+            boxShadow: '0px 0px 0px 0px', // todo put 0
             border: (includePlaylist) => (
                 includePlaylist === false ?
                     '8px solid rgb(74, 191, 117)' :

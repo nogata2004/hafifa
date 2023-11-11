@@ -18,6 +18,7 @@ interface Props {
 }
 
 const ViewPlaylist: React.FC<Props> = ({
+  // todo: rename to playlist
   methods,
   currentPlaylist,
   setCurrentPlaylist,
@@ -27,6 +28,8 @@ const ViewPlaylist: React.FC<Props> = ({
 
   return (
     <div>
+      {' '}
+      {/* <></> todo! */}
       <div className={classes.title}>
         <EditPlaylistDialog
           currentPlaylist={currentPlaylist}
@@ -38,9 +41,8 @@ const ViewPlaylist: React.FC<Props> = ({
           {currentPlaylist.name}
         </Typography>
       </div>
-
       <GenericDataTable
-        filterSongs={songs.filter((song) =>
+        songs={songs.filter((song) =>
           currentPlaylist.songsID.includes(song.id)
         )}
       />

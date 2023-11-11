@@ -6,7 +6,7 @@ import useStyles from '../playlistDataGrid/playlistDataGridStyle';
 import { AllSpoofyContext } from '../../db/context';
 import SongDialog from './songDialog/songDialog';
 
-const TITLE = 'רשימת שירים'; // just title - done
+const TITLE = 'רשימת שירים';
 
 const SongDataGrid: React.FC = () => {
   const classes = useStyles();
@@ -16,7 +16,7 @@ const SongDataGrid: React.FC = () => {
     <div className={classes.body}>
       <Typography className={classes.title}>{TITLE}</Typography>
 
-      <GenericDataTable filterSongs={songs} />
+      <GenericDataTable songs={songs} />
 
       <SongDialog />
     </div>

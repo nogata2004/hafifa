@@ -18,7 +18,6 @@ export const songSlice = createSlice({
   initialState,
   reducers: {
     changeCurrentSongByValue: (state, inputSong: PayloadAction<Song>) => {
-      // remove undefined, see also in user - done
       state.value = inputSong.payload;
     },
     changeCurrentSongsList: (state, inputSongs: PayloadAction<Song[]>) => {

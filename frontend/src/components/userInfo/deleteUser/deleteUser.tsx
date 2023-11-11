@@ -22,7 +22,7 @@ const DeleteUser: React.FC = () => {
   const [open, setOpen] = React.useState<boolean>(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [mutationDeleteUser] = useMutation(DELETE_USER); // rename - done
+  const [mutationDeleteUser] = useMutation(DELETE_USER); // remove 'mutation' - todo
   const currentUser = useAppSelector((state) => state.user.value);
 
   const deleteUser = () => {
@@ -32,7 +32,7 @@ const DeleteUser: React.FC = () => {
       },
     });
     dispatch(resetCurrentUser());
-    navigate(routesMapper[lOG_IN_PAGE_LABEL]); // route - done
+    navigate(routesMapper[lOG_IN_PAGE_LABEL]); // route enumm- todo
   };
 
   return (

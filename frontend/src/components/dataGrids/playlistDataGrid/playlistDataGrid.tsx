@@ -16,7 +16,7 @@ const TITLE = 'רשימת פלייליסטים';
 
 const PlaylistDataGrid: React.FC = () => {
   const classes = useStyles();
-  const { playlists, songs, setPlaylists } = useContext(AllSpoofyContext);
+  const { playlists, songs, setPlaylists } = useContext(AllSpoofyContext); // unused // todo is necessary playlists in context
   const [currentPlaylist, setCurrentPlaylist] = React.useState<
     Playlist | undefined
   >(undefined);
@@ -48,7 +48,7 @@ const PlaylistDataGrid: React.FC = () => {
 
   return (
     <div className={classes.body}>
-      <Typography className={classes.title}>{TITLE}</Typography>
+      <Typography className={classes.title}>{TITLE}</Typography> {/*todo, extract upwards in tree*/}
 
       <div className={classes.tables}>
         {playlists.map((playlist) => (

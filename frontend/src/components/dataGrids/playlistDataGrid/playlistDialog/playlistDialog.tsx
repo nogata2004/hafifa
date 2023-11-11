@@ -55,7 +55,7 @@ const PlaylistDialog: React.FC<Props> = ({ methods, setCurrentPlaylist }) => {
           <GenericTextField
             fieldTitle={NAME}
             errorsMasssege={methods.formState.errors.name?.message}
-            fieldName={'name'}
+            fieldName={'name'} // todo dialogkeys
           />
 
           <GenericAutocomplete

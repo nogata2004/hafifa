@@ -5,24 +5,19 @@ import GenericDataTable from '../../../commons/genericDataGrid/genericDataGrid';
 import useStyles from '../playlistDataGrid/playlistDataGridStyle';
 import { AllSpoofyContext } from '../../db/context';
 
-
 const TITLE = 'רשימת מועדפים';
 
 const FavoriteDataGrid: React.FC = () => {
-    const classes = useStyles();
-    const { songs } = useContext(AllSpoofyContext);
+  const classes = useStyles();
+  const { songs } = useContext(AllSpoofyContext);
 
-    return (
-        <div className={classes.body}>
-            <Typography className={classes.title}>
-                {TITLE}
-            </Typography>
+  return (
+    <div className={classes.body}>
+      <Typography className={classes.title}>{TITLE}</Typography>
 
-            <GenericDataTable
-                filterSongs={songs.filter((song) => (song.isFavorite))}
-            />
-        </div>
-    );
+      <GenericDataTable songs={songs.filter((song) => song.isFavorite)} />
+    </div>
+  );
 };
 
 export default FavoriteDataGrid;

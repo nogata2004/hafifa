@@ -20,15 +20,13 @@ const App: React.FC = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route
-          path={routesMapper[lOG_IN_PAGE_LABEL]}
-          element={<LogInPage />}
-        ></Route>
-        <Route
-          path={routesMapper[MAIN_PAGE_LABEL]}
-          element={<MainPage />}
-        ></Route>
+        <Route path={routesMapper[lOG_IN_PAGE_LABEL]} element={<LogInPage />} />
+      </Routes>
 
+      {/* <MainPage> */}
+      <Routes>
+        <Route path={routesMapper[MAIN_PAGE_LABEL]} element={<MainPage />} />
+        {/* remove boilerplate mainpage todo, also remove the routes closer tags - done*/}
         <Route
           path={routesMapper[SONG_TABLE_LABEL]}
           element={
@@ -36,7 +34,7 @@ const App: React.FC = () => {
               <SongDataGrid />
             </MainPage>
           }
-        ></Route>
+        />
 
         <Route
           path={routesMapper[PLAYLIST_TABLE_LABEL]}
@@ -45,7 +43,7 @@ const App: React.FC = () => {
               <PlaylistDataGrid />
             </MainPage>
           }
-        ></Route>
+        />
 
         <Route
           path={routesMapper[FAVORITE_TABLE_LABEL]}
@@ -54,7 +52,7 @@ const App: React.FC = () => {
               <FavoriteDataGrid />
             </MainPage>
           }
-        ></Route>
+        />
 
         <Route
           path={routesMapper[LOCATION_LABEL]}
@@ -63,8 +61,9 @@ const App: React.FC = () => {
               <FavoriteDataGrid />
             </MainPage>
           }
-        ></Route>
+        />
       </Routes>
+      {/* </MainPage> */}
     </BrowserRouter>
   );
 };

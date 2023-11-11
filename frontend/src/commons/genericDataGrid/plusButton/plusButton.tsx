@@ -20,11 +20,11 @@ interface Props {
 const PlusButton: React.FC<Props> = ({ songId, songName }) => {
     const [open, setOpen] = React.useState<boolean>(false);
     const { playlists } = useContext(AllSpoofyContext);
-    const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(null);
-    const [includePlaylist, setIncludePlaylist] = React.useState<boolean | undefined>(undefined);
+    const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(null); // anchorEl use with ref todo
+    const [includePlaylist, setIncludePlaylist] = React.useState<boolean | undefined>(undefined); // rename todo // change type frmo bool to enum
     const classes = useStyles(includePlaylist);
 
-    const plusClicked = (event: React.MouseEvent<HTMLButtonElement>) => {
+    const plusClicked = (event: React.MouseEvent<HTMLButtonElement>) => { // rename clickPlus todo
         event.stopPropagation();
         setOpen(true);
         setAnchorEl(event.currentTarget);
@@ -46,10 +46,8 @@ const PlusButton: React.FC<Props> = ({ songId, songName }) => {
 
             <Popover
                 open={open}
-                keepMounted
                 anchorEl={anchorEl}
                 onClose={handleClose}
-                aria-describedby='alert-dialog-new-song'
                 transformOrigin={{
                     vertical: 'top',
                     horizontal: 'right',
@@ -60,7 +58,7 @@ const PlusButton: React.FC<Props> = ({ songId, songName }) => {
                 }}
                 className={classes.popover}
             >
-                <Typography
+                <Typography // create popper content todo
                     className={classes.popoverTitle}
                 >
                     {ADD_PLAYLIST_TITLE}
@@ -81,7 +79,7 @@ const PlusButton: React.FC<Props> = ({ songId, songName }) => {
                 <Typography
                     className={classes.addedMassege}
                 >
-                    {includePlaylist === true
+                    {includePlaylist === true // mapper todo
                         ? `${SONG_TEXT} ${songName} ${ERROR_TEXT}`
                         : includePlaylist === false &&
                          `${SONG_TEXT} ${songName} ${COMPLETE_TEXT}`
