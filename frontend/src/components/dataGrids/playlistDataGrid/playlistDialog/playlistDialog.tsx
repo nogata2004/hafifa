@@ -9,6 +9,7 @@ import { AllSpoofyContext } from '../../../db/context';
 import GenericAutocomplete from '../../../../commons/genericAutocomplete/genericAutocomplete';
 import { usePlaylistDialog } from './usePlaylistDialog';
 import Playlist from '../../../../types/playlist';
+import { PlaylistKeys } from '../playlistDataGrid';
 
 const NAME = 'שם';
 const SONGS = 'שירים';
@@ -54,16 +55,20 @@ const PlaylistDialog: React.FC<Props> = ({ methods, setCurrentPlaylist }) => {
         <div>
           <GenericTextField
             fieldTitle={NAME}
-            errorsMasssege={methods.formState.errors.name?.message}
-            fieldName={'name'} // todo dialogkeys
+            errorsMasssege={
+              methods.formState.errors[PlaylistKeys.NAME]?.message
+            }
+            fieldName={PlaylistKeys.NAME} // done dialogkeys
           />
 
           <GenericAutocomplete
             fieldTitle={SONGS}
-            errorsMasssege={methods.formState.errors.inputSongs?.message}
+            errorsMasssege={
+              methods.formState.errors[PlaylistKeys.INPOUT_SONG]?.message
+            }
             options={songs}
             isMulitple={true}
-            fieldName={'inputSongs'}
+            fieldName={PlaylistKeys.INPOUT_SONG}
           />
         </div>
       </GenericDialog>

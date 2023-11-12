@@ -8,5 +8,5 @@ export const playlistDialogValidationSchema = yup.object({
     .string()
     .matches(/^[a-z, א-ת]+$/, TYPE_NAME_ERROR)
     .required(REQUIRED_ERROR),
-  inputSongs: yup.array().of(yup.object()).min(0),
+  songs: yup.array().of(yup.object()).min(0),
 });

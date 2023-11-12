@@ -2,21 +2,24 @@ import React, { useContext, useEffect } from 'react';
 import { Typography } from '@mui/material';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
-import { useSubscription } from '@apollo/client';
 
 import useStyles from './playlistDataGridStyle';
 import PlaylistItem from './viewPlaylist/playlistItem';
 import { AllSpoofyContext } from '../../db/context';
 import PlaylistDialog from './playlistDialog/playlistDialog';
-import { playlistDialogValidationSchema } from './playlistSchema';
+import { playlistDialogValidationSchema } from './validationSchema';
 import Playlist from '../../../types/playlist';
-import { SUB_UPDATE_PLAYLIST } from '../../db/playlists/subscription';
 
 const TITLE = 'רשימת פלייליסטים';
 
+export enum PlaylistKeys {
+  NAME = 'name',
+  INPOUT_SONG = 'songs',
+}
+
 const PlaylistDataGrid: React.FC = () => {
   const classes = useStyles();
-  const { playlists, songs, setPlaylists } = useContext(AllSpoofyContext); // unused // todo is necessary playlists in context
+  const { playlists, songs } = useContext(AllSpoofyContext); // unused - done // todo is necessary playlists in context
   const [currentPlaylist, setCurrentPlaylist] = React.useState<
     Playlist | undefined
   >(undefined);
@@ -24,15 +27,15 @@ const PlaylistDataGrid: React.FC = () => {
   const defaultValues = (playlist: Playlist | undefined) => {
     if (!!playlist) {
       return {
-        name: playlist.name,
-        inputSongs: playlist.songsID.map((songId) =>
+        [PlaylistKeys.NAME]: playlist.name,
+        [PlaylistKeys.INPOUT_SONG]: playlist.songsID.map((songId) =>
           songs.find((song) => song.id === songId)
         ),
       };
     } else {
       return {
-        name: '',
-        inputSongs: [],
+        [PlaylistKeys.NAME]: '',
+        [PlaylistKeys.INPOUT_SONG]: [],
       };
     }
   };

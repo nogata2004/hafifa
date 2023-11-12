@@ -88,7 +88,7 @@ const PlusButton: React.FC<Props> = ({ songId, songName }) => {
 
         <Typography className={classes.addedMassege}>
           {PlaylistModeMapper[currentPlaylistMode]}
-          {/* mapper todo */}
+          {/* mapper done */}
         </Typography>
       </Popover>
     </div>

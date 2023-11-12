@@ -10,6 +10,7 @@ import GenericAutocomplete from '../../../../../commons/genericAutocomplete/gene
 import GenericTextField from '../../../../../commons/genericTextField/genericTextField';
 import { useEditPlaylist } from './useEditPlaylist';
 import { AllSpoofyContext } from '../../../../db/context';
+import { PlaylistKeys } from '../../playlistDataGrid';
 
 const NAME = 'שם';
 const SONGS = 'שירים';
@@ -57,16 +58,20 @@ const EditPlaylistButton: React.FC<Props> = ({
         <div>
           <GenericTextField
             fieldTitle={NAME}
-            errorsMasssege={methods.formState.errors.name?.message}
-            fieldName={'name'} // Keys enum todo
+            errorsMasssege={
+              methods.formState.errors[PlaylistKeys.NAME]?.message
+            }
+            fieldName={PlaylistKeys.NAME} // Keys enum todo
           />
 
           <GenericAutocomplete
             fieldTitle={SONGS}
-            errorsMasssege={methods.formState.errors.inputSongs?.message}
+            errorsMasssege={
+              methods.formState.errors[PlaylistKeys.INPOUT_SONG]?.message
+            }
             options={songs}
             isMulitple={true}
-            fieldName={'inputSongs'} // todo enum
+            fieldName={PlaylistKeys.INPOUT_SONG} // todo enum
           />
         </div>
       </GenericDialog>

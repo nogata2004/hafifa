@@ -19,7 +19,7 @@ const SongDialog: React.FC = () => {
   const classes = useStyles();
   const [open, setOpen] = React.useState<boolean>(false);
   const [artists, setArtists] = useState<Artist[]>([]);
-  const { defaultValues, methods, addSong } = useSongDialog({
+  const { methods, addSong } = useSongDialog({
     setArtists,
     setOpen,
   });
@@ -41,22 +41,26 @@ const SongDialog: React.FC = () => {
         <div>
           <GenericTextField
             fieldTitle={NAME}
-            errorsMasssege={methods.formState.errors[DialogKeys.name]?.message}
-            fieldName={DialogKeys.name} // todo: use dialogkeys.
+            errorsMasssege={methods.formState.errors[DialogKeys.NAME]?.message}
+            fieldName={DialogKeys.NAME} // done: use dialogkeys.
           />
 
           <GenericAutocomplete
             fieldTitle={ARTIST}
-            errorsMasssege={methods.formState.errors.artist?.message}
+            errorsMasssege={
+              methods.formState.errors[DialogKeys.ARTIST]?.message
+            }
             options={artists}
             isMulitple={false}
-            fieldName={Object.keys(defaultValues)[1]}
+            fieldName={DialogKeys.ARTIST}
           />
 
           <GenericTextField
             fieldTitle={DURATION}
-            errorsMasssege={methods.formState.errors.duration?.message}
-            fieldName={Object.keys(defaultValues)[2]}
+            errorsMasssege={
+              methods.formState.errors[DialogKeys.DURATION]?.message
+            }
+            fieldName={DialogKeys.DURATION}
           />
         </div>
       </GenericDialog>
