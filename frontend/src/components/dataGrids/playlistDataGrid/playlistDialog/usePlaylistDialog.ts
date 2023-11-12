@@ -15,12 +15,12 @@ interface Props {
 export const usePlaylistDialog = (props: Props) => {
   const { methods, setOpen } = props;
   const currentUser = useAppSelector((state) => state.user.value);
-  const [mutationCreatePlaylist] = useMutation(CREATE_PLAYLIST); // todo mutation name
-  const [mutationAddSongToPlaylist] = useMutation(ADD_SONG_TO_PLAYLIST);
+  const [createPlaylist] = useMutation(CREATE_PLAYLIST); // done mutation name
+  const [addSongToPlaylist] = useMutation(ADD_SONG_TO_PLAYLIST);
 
   const actionAddPlaylist = (data: FieldValues) => {
     // todo rename data to form or fields
-    mutationCreatePlaylist({
+    createPlaylist({
       variables: {
         name: data.name,
         userId: currentUser!.id,
@@ -31,7 +31,7 @@ export const usePlaylistDialog = (props: Props) => {
 
         data.inputSongs.forEach((song: Song) => {
           // flrech - done
-          mutationAddSongToPlaylist({
+          addSongToPlaylist({
             variables: {
               playlistId: dataPlaylist.id,
               songId: song.id,

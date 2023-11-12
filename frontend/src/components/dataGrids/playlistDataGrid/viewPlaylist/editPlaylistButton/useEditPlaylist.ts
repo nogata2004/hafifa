@@ -21,14 +21,14 @@ interface Props {
 
 export const useEditPlaylist = (props: Props) => {
   const { methods, setOpen, currentPlaylist, setCurrentPlaylist } = props;
-  const [mutationEditPlaylist] = useMutation(EDIT_PLAYLIST); // todo rename
-  const [mutationAddSongToPlaylist] = useMutation(ADD_SONG_TO_PLAYLIST);
-  const [mutationDeleteSongPlaylist] = useMutation(DELETE_PLAYLIST_SONG);
+  const [editPlaylist] = useMutation(EDIT_PLAYLIST); // done rename
+  const [addSongToPlaylist] = useMutation(ADD_SONG_TO_PLAYLIST);
+  const [deleteSongPlaylist] = useMutation(DELETE_PLAYLIST_SONG);
 
   const actionEditPlaylist = (form: FieldValues) => {
     // rename data to form/fields - done
     if (currentPlaylist.name !== form.name) {
-      mutationEditPlaylist({
+      editPlaylist({
         variables: {
           id: currentPlaylist.id,
           name: form.name,
@@ -41,7 +41,7 @@ export const useEditPlaylist = (props: Props) => {
       newSongsId.forEach((songId: string) => {
         // foreach - done
         if (!currentPlaylist.songsID.includes(songId!)) {
-          mutationAddSongToPlaylist({
+          addSongToPlaylist({
             variables: {
               playlistId: currentPlaylist.id,
               songId: songId,
@@ -52,7 +52,7 @@ export const useEditPlaylist = (props: Props) => {
       currentPlaylist.songsID.forEach((songId) => {
         // make function of these loops
         if (!newSongsId.includes(songId)) {
-          mutationDeleteSongPlaylist({
+          deleteSongPlaylist({
             variables: {
               playlistId: currentPlaylist.id,
               songId: songId,

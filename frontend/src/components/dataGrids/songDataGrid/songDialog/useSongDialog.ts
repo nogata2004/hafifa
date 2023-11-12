@@ -24,7 +24,7 @@ export enum DialogKeys {
 
 export const useSongDialog = (props: Props) => {
   const { setArtists, setOpen } = props;
-  const [mutationCreateSong] = useMutation(CREATE_SONG);
+  const [createSong] = useMutation(CREATE_SONG);
   const { setSongs } = useContext(AllSpoofyContext);
 
   const defaultValues = {
@@ -51,7 +51,7 @@ export const useSongDialog = (props: Props) => {
   };
 
   const addSong = (data: FieldValues) => {
-    mutationCreateSong({
+    createSong({
       variables: {
         name: data.name,
         artistId: data.artist.id,

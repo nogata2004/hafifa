@@ -22,11 +22,11 @@ const DeleteUser: React.FC = () => {
   const [open, setOpen] = React.useState<boolean>(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [mutationDeleteUser] = useMutation(DELETE_USER); // remove 'mutation' - todo
+  const [deleteUser] = useMutation(DELETE_USER); // remove 'mutation' - done
   const currentUser = useAppSelector((state) => state.user.value);
 
-  const deleteUser = () => {
-    mutationDeleteUser({
+  const deleteCurrentUser = () => {
+    deleteUser({
       variables: {
         id: currentUser!.id,
       },
@@ -59,7 +59,10 @@ const DeleteUser: React.FC = () => {
             {CANCEL}
           </Button>
 
-          <Button className={classes.deleteUserButton} onClick={deleteUser}>
+          <Button
+            className={classes.deleteUserButton}
+            onClick={deleteCurrentUser}
+          >
             {DELETE_USER_TEXT}
           </Button>
         </DialogActions>

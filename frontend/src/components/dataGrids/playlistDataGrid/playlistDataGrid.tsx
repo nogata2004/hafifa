@@ -19,7 +19,8 @@ export enum PlaylistKeys {
 
 const PlaylistDataGrid: React.FC = () => {
   const classes = useStyles();
-  const { playlists, songs } = useContext(AllSpoofyContext); // unused - done // todo is necessary playlists in context
+  const { playlists, songs } = useContext(AllSpoofyContext); // unused - done // done is necessary playlists in context -done:
+  // needed in: plusButton in deta grid, playlistpage
   const [currentPlaylist, setCurrentPlaylist] = React.useState<
     Playlist | undefined
   >(undefined);

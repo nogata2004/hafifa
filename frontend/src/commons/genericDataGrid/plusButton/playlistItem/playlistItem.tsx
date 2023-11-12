@@ -20,14 +20,14 @@ const PlaylistItem: React.FC<Props> = ({
   setCurrentPlaylistMode,
 }) => {
   const classes = useStyles();
-  const [mutationAddSongToPlaylist] = useMutation(ADD_SONG_TO_PLAYLIST);
+  const [addSongToPlaylist] = useMutation(ADD_SONG_TO_PLAYLIST);
   const { playlists, setPlaylists } = useContext(AllSpoofyContext);
 
   const addToPlaylist = (currentPlaylist: Playlist) => {
     if (currentPlaylist.songsID.includes(songId)) {
       setCurrentPlaylistMode(PlaylistMode.EXIST);
     } else {
-      mutationAddSongToPlaylist({
+      addSongToPlaylist({
         variables: {
           playlistId: currentPlaylist.id,
           songId: songId,
