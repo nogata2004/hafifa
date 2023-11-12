@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useQuery } from '@apollo/client';
 import { Button, Select, MenuItem, Typography } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 import useStyles from './logInPageStyle';
-import { useNavigate } from 'react-router-dom';
 import { GET_ALL_USERS } from '../../components/db/users/query';
 import User from '../../types/user';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
@@ -11,7 +11,7 @@ import {
   changeCurrentUserByValue,
   resetCurrentUser,
 } from '../../redux/UserSlice';
-import { SONG_TABLE_LABEL, routesMapper } from '../../routes/routes';
+import { routeMapper } from '../../routes/routes';
 
 const TITLE = 'spoofy';
 const SELECT_LABEL = 'בחר משתמש להתחברות';
@@ -39,9 +39,9 @@ const LogInPage: React.FC = () => {
 
   const moveToMainPage = () => {
     if (!!currentUser) {
-      navigate(routesMapper[SONG_TABLE_LABEL]);
+      navigate(routeMapper.SONG);
     }
-    // make routes const (object) - todo
+    // make routes const (object) - done
   };
 
   const changeCurrentUser = (selectedUser: User) => {
@@ -52,10 +52,7 @@ const LogInPage: React.FC = () => {
     <div className={classes.body}>
       <Typography className={classes.spoofyText}>{TITLE}</Typography>
 
-      <Select
-        className={classes.selectConect}
-        defaultValue={SELECT_LABEL}
-      >
+      <Select className={classes.selectConect} defaultValue={SELECT_LABEL}>
         <MenuItem id={SELECT_LABEL} value={SELECT_LABEL} disabled>
           {SELECT_LABEL}
         </MenuItem>
@@ -72,10 +69,7 @@ const LogInPage: React.FC = () => {
         ))}
       </Select>
 
-      <Button
-        onClick={moveToMainPage}
-        className={classes.buttonConnect}
-      >
+      <Button onClick={moveToMainPage} className={classes.buttonConnect}>
         {BUTTON}
       </Button>
     </div>

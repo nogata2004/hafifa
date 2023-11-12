@@ -10,7 +10,7 @@ import Playlist from '../../types/playlist';
 import { useAppSelector } from '../../redux/hooks';
 import { useMainPage } from './useMainPage';
 import { useNavigate } from 'react-router-dom';
-import { lOG_IN_PAGE_LABEL, routesMapper } from '../../routes/routes';
+import { routeMapper } from '../../routes/routes';
 
 interface Props {
   children?: JSX.Element;
@@ -34,7 +34,7 @@ const MainPage: React.FC<Props> = ({ children }) => {
       value={{ songs, setSongs, playlists, setPlaylists }}
     >
       {!currentUser ? (
-        navigate(routesMapper[lOG_IN_PAGE_LABEL])
+        navigate(routeMapper.LOGIN)
       ) : (
         <div className={classes.body}>
           <div className={classes.mainPart}>

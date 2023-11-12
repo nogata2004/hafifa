@@ -3,11 +3,7 @@ import { ListItemButton, Typography } from '@mui/material';
 
 import useStyles from './sideBarStyle';
 import spoofyLogo from '../../pictures/spoofyLogo.png';
-import {
-  MAIN_PAGE_LABEL,
-  routeMapper,
-  routesMapper,
-} from '../../routes/routes';
+import { routeMapper } from '../../routes/routes';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../../redux/hooks';
 import { resetCurrentSong } from '../../redux/SongSlice';

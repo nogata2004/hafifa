@@ -6,7 +6,7 @@ import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import DeleteUser from './deleteUser/deleteUser';
 import { resetCurrentUser } from '../../redux/UserSlice';
 import { resetCurrentSong } from '../../redux/SongSlice';
-import { lOG_IN_PAGE_LABEL, routesMapper } from '../../routes/routes';
+import { routeMapper } from '../../routes/routes';
 
 const HELLO = ',היי';
 const LOG_OUT = 'התנתקות';
@@ -20,14 +20,14 @@ const UserInfo: React.FC = () => {
   const moveToLoginPage = () => {
     dispatch(resetCurrentUser());
     dispatch(resetCurrentSong());
-    navigate(routesMapper[lOG_IN_PAGE_LABEL]); // call the route enum : todo
+    navigate(routeMapper.LOGIN); // call the route enum : done
   };
 
   return (
     <div className={classes.body}>
       <Typography className={classes.helloUser}>
-        {currentUser!.firstName} {currentUser!.lastName} {HELLO}{' '}
-        {/* use `${}`*/}
+        {`${currentUser!.firstName} ${currentUser!.lastName} ${HELLO} `}
+        {/* use `${}` - done*/}
       </Typography>
 
       <div className={classes.buttons}>
