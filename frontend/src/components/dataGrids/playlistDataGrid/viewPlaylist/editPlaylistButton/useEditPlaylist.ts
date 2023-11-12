@@ -36,9 +36,9 @@ export const useEditPlaylist = (props: Props) => {
       });
     }
 
-    const newSongsId: string[] = form.inputSongs.map((song: Song) => song.id); // songIds todo
-    if (currentPlaylist.songsID !== newSongsId) {
-      newSongsId.forEach((songId: string) => {
+    const newSongIds: string[] = form.inputSongs.map((song: Song) => song.id); // songIds done
+    if (currentPlaylist.songsID !== newSongIds) {
+      newSongIds.forEach((songId: string) => {
         // foreach - done
         if (!currentPlaylist.songsID.includes(songId!)) {
           addSongToPlaylist({
@@ -51,7 +51,7 @@ export const useEditPlaylist = (props: Props) => {
       });
       currentPlaylist.songsID.forEach((songId) => {
         // make function of these loops
-        if (!newSongsId.includes(songId)) {
+        if (!newSongIds.includes(songId)) {
           deleteSongPlaylist({
             variables: {
               playlistId: currentPlaylist.id,

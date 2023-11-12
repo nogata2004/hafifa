@@ -29,7 +29,7 @@ const PlaylistItem: React.FC<Props> = ({
   return (
     <>
       {' '}
-      {/* <></> todo! */}
+      {/* <></> done! */}
       <div className={classes.title}>
         <EditPlaylistButton
           currentPlaylist={currentPlaylist}

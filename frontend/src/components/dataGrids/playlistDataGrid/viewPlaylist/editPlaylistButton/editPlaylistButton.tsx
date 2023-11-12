@@ -61,7 +61,7 @@ const EditPlaylistButton: React.FC<Props> = ({
             errorsMasssege={
               methods.formState.errors[PlaylistKeys.NAME]?.message
             }
-            fieldName={PlaylistKeys.NAME} // Keys enum todo
+            fieldName={PlaylistKeys.NAME} // Keys enum done
           />
 
           <GenericAutocomplete
@@ -71,7 +71,7 @@ const EditPlaylistButton: React.FC<Props> = ({
             }
             options={songs}
             isMulitple={true}
-            fieldName={PlaylistKeys.INPOUT_SONG} // todo enum
+            fieldName={PlaylistKeys.INPOUT_SONG} // done enum
           />
         </div>
       </GenericDialog>

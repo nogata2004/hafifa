@@ -53,7 +53,7 @@ const PlaylistDataGrid: React.FC = () => {
   return (
     <div className={classes.body}>
       <Typography className={classes.title}>{TITLE}</Typography>{' '}
-      {/*todo, extract upwards in tree*/}
+      {/*todo, extract upwards in tree - לעשות קומפננטה גנרית נוספת שמכילה את הכותרת ואז שולחת למודים*/}
       <div className={classes.tables}>
         {playlists.map((playlist) => (
           <div key={playlist.id}>
