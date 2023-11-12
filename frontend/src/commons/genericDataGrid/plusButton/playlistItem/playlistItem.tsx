@@ -6,17 +6,18 @@ import useStyles from './playlistItemStyle';
 import { ADD_SONG_TO_PLAYLIST } from '../../../../components/db/playlistSong/mutation';
 import { AllSpoofyContext } from '../../../../components/db/context';
 import Playlist from '../../../../types/playlist';
+import { PlaylistMode } from '../PlusButton';
 
 interface Props {
   songId: string;
   currentPlaylist: Playlist;
-  setIncludePlaylist: React.Dispatch<React.SetStateAction<boolean | undefined>>;
+  setCurrentPlaylistMode: React.Dispatch<React.SetStateAction<PlaylistMode>>;
 }
 
 const PlaylistItem: React.FC<Props> = ({
   songId,
   currentPlaylist,
-  setIncludePlaylist,
+  setCurrentPlaylistMode,
 }) => {
   const classes = useStyles();
   const [mutationAddSongToPlaylist] = useMutation(ADD_SONG_TO_PLAYLIST);
@@ -24,7 +25,7 @@ const PlaylistItem: React.FC<Props> = ({
 
   const addToPlaylist = (currentPlaylist: Playlist) => {
     if (currentPlaylist.songsID.includes(songId)) {
-      setIncludePlaylist(true);
+      setCurrentPlaylistMode(PlaylistMode.EXIST);
     } else {
       mutationAddSongToPlaylist({
         variables: {
@@ -42,7 +43,7 @@ const PlaylistItem: React.FC<Props> = ({
               return playlist;
             })
           );
-          setIncludePlaylist(false);
+          setCurrentPlaylistMode(PlaylistMode.NOT_EXIST);
         },
       });
     }

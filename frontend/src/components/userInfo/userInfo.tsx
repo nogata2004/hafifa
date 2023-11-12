@@ -25,18 +25,18 @@ const UserInfo: React.FC = () => {
 
   return (
     <div className={classes.body}>
-      <Typography className={classes.helloUser}>
+      {/* <Typography className={classes.helloUser}>
         {`${currentUser!.firstName} ${currentUser!.lastName} ${HELLO} `}
         {/* use `${}` - done*/}
-      </Typography>
+      {/* </Typography> */}
 
-      <div className={classes.buttons}>
+      {/* <div className={classes.buttons}>
         <DeleteUser />
 
         <Button onClick={moveToLoginPage} className={classes.logOut}>
           {LOG_OUT}
         </Button>
-      </div>
+      </div> */}
     </div>
   );
 };

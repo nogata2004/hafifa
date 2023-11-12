@@ -3,7 +3,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import { UseFormReturn } from 'react-hook-form';
 import React, { useContext } from 'react';
 
-import useStyles from './editPlaylistDialogStyle';
+import useStyles from './editPlaylistButtonStyle';
 import Playlist from '../../../../../types/playlist';
 import GenericDialog from '../../../../../commons/genericDialog/genericDialog';
 import GenericAutocomplete from '../../../../../commons/genericAutocomplete/genericAutocomplete';
@@ -24,7 +24,8 @@ interface Props {
   >;
 }
 
-const EditPlaylistDialog: React.FC<Props> = ({ // this is a button!!! todo
+const EditPlaylistButton: React.FC<Props> = ({
+  // this is a button!!! done
   currentPlaylist,
   methods,
   setCurrentPlaylist,
@@ -73,4 +74,4 @@ const EditPlaylistDialog: React.FC<Props> = ({ // this is a button!!! todo
   );
 };
 
-export default EditPlaylistDialog;
+export default EditPlaylistButton;

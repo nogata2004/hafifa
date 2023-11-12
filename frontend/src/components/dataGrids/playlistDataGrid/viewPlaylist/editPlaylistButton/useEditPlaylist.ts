@@ -25,18 +25,18 @@ export const useEditPlaylist = (props: Props) => {
   const [mutationAddSongToPlaylist] = useMutation(ADD_SONG_TO_PLAYLIST);
   const [mutationDeleteSongPlaylist] = useMutation(DELETE_PLAYLIST_SONG);
 
-  const actionEditPlaylist = (data: FieldValues) => {
-    // rename data to form/fields todo
-    if (currentPlaylist.name !== data.name) {
+  const actionEditPlaylist = (form: FieldValues) => {
+    // rename data to form/fields - done
+    if (currentPlaylist.name !== form.name) {
       mutationEditPlaylist({
         variables: {
           id: currentPlaylist.id,
-          name: data.name,
+          name: form.name,
         },
       });
     }
 
-    const newSongsId: string[] = data.inputSongs.map((song: Song) => song.id); // songIds todo
+    const newSongsId: string[] = form.inputSongs.map((song: Song) => song.id); // songIds todo
     if (currentPlaylist.songsID !== newSongsId) {
       newSongsId.forEach((songId: string) => {
         // foreach - done

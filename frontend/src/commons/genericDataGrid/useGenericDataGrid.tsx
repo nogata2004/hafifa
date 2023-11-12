@@ -2,7 +2,7 @@ import { GridColDef } from '@mui/x-data-grid-pro';
 import { ClassNameMap } from '@mui/material';
 
 import { durationFormat } from '../../functions/durationFormat';
-import PlusButton from './plusButton/plusButton';
+import PlusButton from './plusButton/PlusButton';
 import FavoriteButton from './favoriteButton/favoriteButton';
 import Song from '../../types/song';
 

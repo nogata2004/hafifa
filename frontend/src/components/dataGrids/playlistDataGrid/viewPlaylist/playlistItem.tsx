@@ -3,11 +3,11 @@ import { Typography } from '@mui/material';
 import { UseFormReturn } from 'react-hook-form';
 import React from 'react';
 
-import useStyles from './viewPlaylistStyle';
+import useStyles from './playlistItemStyle';
 import GenericDataTable from '../../../../commons/genericDataGrid/genericDataGrid';
 import { AllSpoofyContext } from '../../../db/context';
 import Playlist from '../../../../types/playlist';
-import EditPlaylistDialog from './editPlaylistDialog/editPlaylistDialog';
+import EditPlaylistButton from './editPlaylistButton/editPlaylistButton';
 
 interface Props {
   methods: UseFormReturn<any, any, undefined>;
@@ -17,8 +17,8 @@ interface Props {
   >;
 }
 
-const ViewPlaylist: React.FC<Props> = ({
-  // todo: rename to playlist
+const PlaylistItem: React.FC<Props> = ({
+  // done (without the folder): rename to playlist
   methods,
   currentPlaylist,
   setCurrentPlaylist,
@@ -27,11 +27,11 @@ const ViewPlaylist: React.FC<Props> = ({
   const { songs } = useContext(AllSpoofyContext);
 
   return (
-    <div>
+    <>
       {' '}
       {/* <></> todo! */}
       <div className={classes.title}>
-        <EditPlaylistDialog
+        <EditPlaylistButton
           currentPlaylist={currentPlaylist}
           methods={methods}
           setCurrentPlaylist={setCurrentPlaylist}
@@ -46,8 +46,8 @@ const ViewPlaylist: React.FC<Props> = ({
           currentPlaylist.songsID.includes(song.id)
         )}
       />
-    </div>
+    </>
   );
 };
 
-export default ViewPlaylist;
+export default PlaylistItem;

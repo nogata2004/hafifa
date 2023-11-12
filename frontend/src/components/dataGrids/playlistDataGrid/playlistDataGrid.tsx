@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import { useSubscription } from '@apollo/client';
 
 import useStyles from './playlistDataGridStyle';
-import ViewPlaylist from './viewPlaylist/viewPlaylist';
+import PlaylistItem from './viewPlaylist/playlistItem';
 import { AllSpoofyContext } from '../../db/context';
 import PlaylistDialog from './playlistDialog/playlistDialog';
 import { playlistDialogValidationSchema } from './playlistSchema';
@@ -48,12 +48,12 @@ const PlaylistDataGrid: React.FC = () => {
 
   return (
     <div className={classes.body}>
-      <Typography className={classes.title}>{TITLE}</Typography> {/*todo, extract upwards in tree*/}
-
+      <Typography className={classes.title}>{TITLE}</Typography>{' '}
+      {/*todo, extract upwards in tree*/}
       <div className={classes.tables}>
         {playlists.map((playlist) => (
           <div key={playlist.id}>
-            <ViewPlaylist
+            <PlaylistItem
               methods={methods}
               currentPlaylist={playlist}
               setCurrentPlaylist={setCurrentPlaylist}
@@ -61,7 +61,6 @@ const PlaylistDataGrid: React.FC = () => {
           </div>
         ))}
       </div>
-
       <PlaylistDialog
         methods={methods}
         setCurrentPlaylist={setCurrentPlaylist}
