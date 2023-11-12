@@ -3,25 +3,40 @@ import { ListItemButton, Typography } from '@mui/material';
 
 import useStyles from './sideBarStyle';
 import spoofyLogo from '../../pictures/spoofyLogo.png';
-import Mode from '../../types/mode';
-import { MAIN_PAGE_LABEL, routesMapper } from '../../routes/routes';
+import {
+  MAIN_PAGE_LABEL,
+  routeMapper,
+  routesMapper,
+} from '../../routes/routes';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../../redux/hooks';
 import { resetCurrentSong } from '../../redux/SongSlice';
 
 const LOGO_TEXT = 'spoofy';
 
+interface Mode {
+  text: string;
+  path: routeMapper;
+}
+
+const modes: Mode[] = [
+  { text: 'שירים', path: routeMapper.SONG },
+  { text: 'פלייליסטים', path: routeMapper.PLAYLIST },
+  { text: 'מועדפים', path: routeMapper.FAVORITE },
+  { text: 'מיקום', path: routeMapper.LOCATION },
+];
+
 const SideBar: React.FC = () => {
   const classes = useStyles();
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
-  const changeRoute = (selectedMode: Mode) => {
+  const changeRoute = (selectedPath: string) => {
     dispatch(resetCurrentSong());
-    if (window.location.pathname === routesMapper[selectedMode]) {
-      navigate(routesMapper[MAIN_PAGE_LABEL]);
+    if (window.location.pathname === selectedPath) {
+      navigate(routeMapper.MAIN_PAGE);
     } else {
-      navigate(routesMapper[selectedMode]);
+      navigate(selectedPath);
     }
   };
 
@@ -34,21 +49,16 @@ const SideBar: React.FC = () => {
       </div>
 
       <div className={classes.sideBar}>
-        {Object.values(Mode).map(
-          (
-            mode
-          ) => (
-            <ListItemButton
-              key={mode}
-              // id={mode} // unneeded todo
-              selected={window.location.pathname === routesMapper[mode]}
-              onClick={() => changeRoute(mode)}
-              className={classes.optionButton}
-            >
-              {mode}
-            </ListItemButton>
-          )
-        )}
+        {modes.map((mode) => (
+          <ListItemButton
+            key={mode.text}
+            selected={window.location.pathname === mode.path}
+            onClick={() => changeRoute(mode.path)}
+            className={classes.optionButton}
+          >
+            {mode.text}
+          </ListItemButton>
+        ))}
       </div>
     </div>
   );

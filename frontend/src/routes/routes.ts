@@ -7,10 +7,10 @@ const LOCATION_ROUTE = '/location';
 
 export const lOG_IN_PAGE_LABEL = 'logIn';
 export const MAIN_PAGE_LABEL = 'mainPage';
-export const SONG_TABLE_LABEL = 'שירים';
-export const PLAYLIST_TABLE_LABEL = 'פלייליסטים';
-export const FAVORITE_TABLE_LABEL = 'מועדפים';
-export const LOCATION_LABEL = 'מיקום';
+export const SONG_TABLE_LABEL = 'songs';
+export const PLAYLIST_TABLE_LABEL = 'playlists';
+export const FAVORITE_TABLE_LABEL = 'favorites';
+export const LOCATION_LABEL = 'location';
 
 export const routesMapper = {
   [lOG_IN_PAGE_LABEL]: lOG_IN_PAGE_ROUTE,
@@ -20,3 +20,12 @@ export const routesMapper = {
   [FAVORITE_TABLE_LABEL]: FAVORITE_TABLE_ROUTE,
   [LOCATION_LABEL]: LOCATION_ROUTE,
 };
+
+export enum routeMapper {
+  LOGIN = lOG_IN_PAGE_ROUTE,
+  MAIN_PAGE = MAIN_PAGE_ROUTE,
+  SONG = SONG_TABLE_ROUTE,
+  PLAYLIST = PLAYLIST_TABLE_ROUTE,
+  FAVORITE = FAVORITE_TABLE_ROUTE,
+  LOCATION = LOCATION_ROUTE,
+}

@@ -32,9 +32,9 @@ export const useMainPage = (props: Props) => {
     variables: { userId: currentUser?.id },
     onCompleted: (data) => {
       const allSongs: DBSong[] = data.allSongs.nodes;
-      const newSongs: Song[] = [];
-      allSongs.map((song: DBSong) => { // fix map : todo (no need for push)
-        const newSong: Song = {
+      // fix map : (no need for push) - done
+      const newSongs: Song[] = allSongs.map((song: DBSong) => {
+        return {
           id: song.id,
           name: song.name,
           duration: song.duration,
@@ -44,7 +44,6 @@ export const useMainPage = (props: Props) => {
           },
           isFavorite: song.favoritesBySongId.totalCount === 1,
         };
-        newSongs.push(newSong);
       });
       setSongs(newSongs);
     },
@@ -54,16 +53,15 @@ export const useMainPage = (props: Props) => {
     variables: { userId: currentUser?.id },
     onCompleted: (data) => {
       const allPlaylists: DBPlaylist[] = data.allPlaylists.nodes;
-      const newPlaylists: Playlist[] = [];
-      allPlaylists.map((playlist) => {
-        const newPlaylist: Playlist = {
+      // same story as above - done
+      const newPlaylists: Playlist[] = allPlaylists.map((playlist) => {
+        return {
           id: playlist.id,
           name: playlist.name,
           songsID: playlist.playlistSongsByPlaylistId.nodes.map(
             (songs) => songs.songId
-          ), 
+          ),
         };
-        newPlaylists.push(newPlaylist); // same story as above todo
       });
       setPlaylists(newPlaylists);
     },
@@ -128,7 +126,7 @@ export const useMainPage = (props: Props) => {
           (songId) => songId !== dataSongId
         ),
       };
-      
+
       setPlaylists((prev) =>
         prev.map((playlist) => {
           if (playlist.id === dataPlaylistId) {
