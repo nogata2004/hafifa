@@ -33,22 +33,21 @@ const MainPage: React.FC<Props> = ({ children }) => {
     <AllSpoofyContext.Provider
       value={{ songs, setSongs, playlists, setPlaylists }}
     >
-      {/* {!currentUser ? (
+      {!currentUser ? (
         navigate(routeMapper.LOGIN)
-      ) : ( */}
+      ) : (
+        <div className={classes.body}>
+          <div className={classes.mainPart}>
+            <UserInfo />
 
-      <div className={classes.body}>
-        <div className={classes.mainPart}>
-          <UserInfo />
+            <div className={classes.table}>{children}</div>
 
-          <div className={classes.table}>{children}</div>
+            <SideBar />
+          </div>
 
-          <SideBar />
+          {!!currentSong && <ViewSong />}
         </div>
-
-        {!!currentSong && <ViewSong />}
-      </div>
-      {/* )} */}
+      )}
     </AllSpoofyContext.Provider>
   );
 };
