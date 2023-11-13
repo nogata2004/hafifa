@@ -1,5 +1,3 @@
-import { useContext } from 'react';
-
 const UserMap: React.FC = () => {
   //   const classes = useStyles();
 
