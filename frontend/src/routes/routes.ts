@@ -5,7 +5,7 @@ const PLAYLIST_TABLE_ROUTE = '/playlistTable';
 const FAVORITE_TABLE_ROUTE = '/favoriteTable';
 const LOCATION_ROUTE = '/location';
 
-export enum routeMapper {
+export enum RouteMapper {
   LOGIN = lOG_IN_PAGE_ROUTE,
   MAIN_PAGE = MAIN_PAGE_ROUTE,
   SONG = SONG_TABLE_ROUTE,

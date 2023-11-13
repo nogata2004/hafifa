@@ -10,7 +10,8 @@ import Playlist from '../../types/playlist';
 import { useAppSelector } from '../../redux/hooks';
 import { useMainPage } from './useMainPage';
 import { useNavigate } from 'react-router-dom';
-import { routeMapper } from '../../routes/routes';
+import { RouteMapper } from '../../routes/routes';
+import DataGrids from '../../components/dataGrids/dataGrids';
 
 interface Props {
   children?: JSX.Element;
@@ -33,21 +34,23 @@ const MainPage: React.FC<Props> = ({ children }) => {
     <AllSpoofyContext.Provider
       value={{ songs, setSongs, playlists, setPlaylists }}
     >
-      {!currentUser ? (
-        navigate(routeMapper.LOGIN)
-      ) : (
-        <div className={classes.body}>
-          <div className={classes.mainPart}>
-            <UserInfo />
+      {/* {!currentUser ? (
+        navigate(RouteMapper.LOGIN)
+      ) : ( */}
+      <div className={classes.body}>
+        <div className={classes.mainPart}>
+          <UserInfo />
 
-            <div className={classes.table}>{children}</div>
-
-            <SideBar />
+          <div className={classes.table}>
+            {!!children && <DataGrids children={children} />}
           </div>
 
-          {!!currentSong && <ViewSong />}
+          <SideBar />
         </div>
-      )}
+
+        {!!currentSong && <ViewSong />}
+      </div>
+      {/* )} */}
     </AllSpoofyContext.Provider>
   );
 };

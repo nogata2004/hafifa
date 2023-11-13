@@ -6,7 +6,7 @@ import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import DeleteUser from './deleteUser/deleteUser';
 import { resetCurrentUser } from '../../redux/UserSlice';
 import { resetCurrentSong } from '../../redux/SongSlice';
-import { routeMapper } from '../../routes/routes';
+import { RouteMapper } from '../../routes/routes';
 
 const HELLO = ',היי';
 const LOG_OUT = 'התנתקות';
@@ -20,7 +20,7 @@ const UserInfo: React.FC = () => {
   const moveToLoginPage = () => {
     dispatch(resetCurrentUser());
     dispatch(resetCurrentSong());
-    navigate(routeMapper.LOGIN); // call the route enum : done
+    navigate(RouteMapper.LOGIN); // call the route enum : done
   };
 
   return (

@@ -5,7 +5,7 @@ const TYPE_NAME_ERROR = 'שדה הכרחי מורכב מאותיות בלבד';
 const TYPE_DURATION_ERROR = 'שדה הכרחי חייב להיות בפורמט: mm:ss';
 
 export const songDialogValidationSchema = yup.object({
-  // todo: rename filename to validation schema
+  // done: rename filename to validation schema
   name: yup
     .string()
     .matches(/^[a-z, א-ת]+$/, TYPE_NAME_ERROR)

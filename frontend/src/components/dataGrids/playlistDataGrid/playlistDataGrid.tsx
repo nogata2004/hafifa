@@ -1,5 +1,4 @@
 import React, { useContext, useEffect } from 'react';
-import { Typography } from '@mui/material';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 
@@ -9,8 +8,6 @@ import { AllSpoofyContext } from '../../db/context';
 import PlaylistDialog from './playlistDialog/playlistDialog';
 import { playlistDialogValidationSchema } from './validationSchema';
 import Playlist from '../../../types/playlist';
-
-const TITLE = 'רשימת פלייליסטים';
 
 export enum PlaylistKeys {
   NAME = 'name',
@@ -52,8 +49,7 @@ const PlaylistDataGrid: React.FC = () => {
 
   return (
     <div className={classes.body}>
-      <Typography className={classes.title}>{TITLE}</Typography>{' '}
-      {/*todo, extract upwards in tree - לעשות קומפננטה גנרית נוספת שמכילה את הכותרת ואז שולחת למודים*/}
+      {/*done, extract upwards in tree - לעשות קומפננטה גנרית נוספת שמכילה את הכותרת ואז שולחת למודים*/}
       <div className={classes.tables}>
         {playlists.map((playlist) => (
           <div key={playlist.id}>

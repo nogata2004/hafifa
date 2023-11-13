@@ -11,7 +11,7 @@ import {
   changeCurrentUserByValue,
   resetCurrentUser,
 } from '../../redux/UserSlice';
-import { routeMapper } from '../../routes/routes';
+import { RouteMapper } from '../../routes/routes';
 
 const TITLE = 'spoofy';
 const SELECT_LABEL = 'בחר משתמש להתחברות';
@@ -39,7 +39,7 @@ const LogInPage: React.FC = () => {
 
   const moveToMainPage = () => {
     if (!!currentUser) {
-      navigate(routeMapper.SONG);
+      navigate(RouteMapper.SONG);
     }
     // make routes const (object) - done
   };

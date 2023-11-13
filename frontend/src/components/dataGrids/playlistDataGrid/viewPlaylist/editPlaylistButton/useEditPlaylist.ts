@@ -36,7 +36,7 @@ export const useEditPlaylist = (props: Props) => {
       });
     }
 
-    const newSongIds: string[] = form.inputSongs.map((song: Song) => song.id); // songIds done
+    const newSongIds: string[] = form.songs.map((song: Song) => song.id); // songIds done
     if (currentPlaylist.songsID !== newSongIds) {
       newSongIds.forEach((songId: string) => {
         // foreach - done

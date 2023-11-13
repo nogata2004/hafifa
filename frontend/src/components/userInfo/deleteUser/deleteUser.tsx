@@ -11,7 +11,7 @@ import useStyles from './deleteUserStyle';
 import { resetCurrentUser } from '../../../redux/UserSlice';
 import { DELETE_USER } from '../../db/users/mutation';
 import { useAppSelector } from '../../../redux/hooks';
-import { routeMapper } from '../../../routes/routes';
+import { RouteMapper } from '../../../routes/routes';
 
 const DELETE_USER_TEXT = 'מחק חשבון';
 const CANCEL = 'ביטול';
@@ -32,7 +32,7 @@ const DeleteUser: React.FC = () => {
       },
     });
     dispatch(resetCurrentUser());
-    navigate(routeMapper.LOGIN); // route enumm- done
+    navigate(RouteMapper.LOGIN); // route enumm- done
   };
 
   return (

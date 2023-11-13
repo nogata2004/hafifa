@@ -18,19 +18,19 @@ export const usePlaylistDialog = (props: Props) => {
   const [createPlaylist] = useMutation(CREATE_PLAYLIST); // done mutation name
   const [addSongToPlaylist] = useMutation(ADD_SONG_TO_PLAYLIST);
 
-  const actionAddPlaylist = (data: FieldValues) => {
-    // todo rename data to form or fields
+  const actionAddPlaylist = (form: FieldValues) => {
+    // done rename data to form or fields
     createPlaylist({
       variables: {
-        name: data.name,
+        name: form.name,
         userId: currentUser!.id,
       },
-      onCompleted(dataCreatePlaylist) {
-        // rename to data todo
-        const dataPlaylist = dataCreatePlaylist.createPlaylist.playlist;
-
-        data.inputSongs.forEach((song: Song) => {
-          // flrech - done
+      onCompleted(data) {
+        // rename to data done
+        const dataPlaylist = data.createPlaylist.playlist;
+        console.log('in');
+        form.songs.forEach((song: Song) => {
+          // forech - done
           addSongToPlaylist({
             variables: {
               playlistId: dataPlaylist.id,

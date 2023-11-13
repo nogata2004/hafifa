@@ -3,7 +3,7 @@ import { ListItemButton, Typography } from '@mui/material';
 
 import useStyles from './sideBarStyle';
 import spoofyLogo from '../../pictures/spoofyLogo.png';
-import { routeMapper } from '../../routes/routes';
+import { RouteMapper } from '../../routes/routes';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../../redux/hooks';
 import { resetCurrentSong } from '../../redux/SongSlice';
@@ -12,14 +12,14 @@ const LOGO_TEXT = 'spoofy';
 
 interface Mode {
   text: string;
-  path: routeMapper;
+  path: RouteMapper;
 }
 
 const modes: Mode[] = [
-  { text: 'שירים', path: routeMapper.SONG },
-  { text: 'פלייליסטים', path: routeMapper.PLAYLIST },
-  { text: 'מועדפים', path: routeMapper.FAVORITE },
-  { text: 'מיקום', path: routeMapper.LOCATION },
+  { text: 'שירים', path: RouteMapper.SONG },
+  { text: 'פלייליסטים', path: RouteMapper.PLAYLIST },
+  { text: 'מועדפים', path: RouteMapper.FAVORITE },
+  { text: 'מיקום', path: RouteMapper.LOCATION },
 ];
 
 const SideBar: React.FC = () => {
@@ -30,7 +30,7 @@ const SideBar: React.FC = () => {
   const changeRoute = (selectedPath: string) => {
     dispatch(resetCurrentSong());
     if (window.location.pathname === selectedPath) {
-      navigate(routeMapper.MAIN_PAGE);
+      navigate(RouteMapper.MAIN_PAGE);
     } else {
       navigate(selectedPath);
     }

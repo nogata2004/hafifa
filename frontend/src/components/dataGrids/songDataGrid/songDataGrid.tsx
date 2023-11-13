@@ -1,12 +1,9 @@
 import React, { useContext } from 'react';
-import { Typography } from '@mui/material';
 
 import GenericDataTable from '../../../commons/genericDataGrid/genericDataGrid';
 import useStyles from '../playlistDataGrid/playlistDataGridStyle';
 import { AllSpoofyContext } from '../../db/context';
 import SongDialog from './songDialog/songDialog';
-
-const TITLE = 'רשימת שירים';
 
 const SongDataGrid: React.FC = () => {
   const classes = useStyles();
@@ -14,8 +11,6 @@ const SongDataGrid: React.FC = () => {
 
   return (
     <div className={classes.body}>
-      <Typography className={classes.title}>{TITLE}</Typography>
-
       <GenericDataTable songs={songs} />
 
       <SongDialog />
